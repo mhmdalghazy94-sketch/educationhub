@@ -3,153 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة المعرفة العلمية - الصفحة الرئيسية</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>موقع العلوم التعليمي - الموسوعة الشاملة</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- شريط التنقل العلوي المحسن -->
-    <header class="navbar">
-        <button id="sidebar-toggle" class="menu-icon" aria-label="فتح القائمة الجانبية">
-            <i class="fas fa-bars"></i>
-        </button>
-        <a href="#" class="navbar-brand">
-            <i class="fas fa-graduation-cap"></i> بوابة المعرفة العلمية
-        </a>
+    <header>
+        <div class="container">
+            <h1>موقع العلوم التعليمي</h1>
+            <p>موسوعة شاملة للعلوم بمختلف تخصصاتها</p>
+        </div>
     </header>
-    <!-- القائمة الجانبية المحسنة -->
-    <aside id="hidden-sidebar" class="hidden-sidebar">
-        <div class="sidebar-header">
-            <h3><i class="fas fa-compass"></i> قائمة التنقل</h3>
-            <button class="close-sidebar">&times;</button>
-        </div>
-        <ul>
-            <li><a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a></li>
-            <li>
-                <p class="dropdown-toggle">
-                    <span><i class="fas fa-book"></i> قسم الأبحاث</span>
-                    <i class="fas fa-chevron-down"></i>
-                </p>
-                <ul class="submenu">
-                    <li>
-                        <p class="dropdown-toggle">
-                            <span>بداية العلم</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </p>
-                        <ul class="submenu-inner">
-                            <li><a href="page5.html">العلم</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <p class="dropdown-toggle">
-                            <span>علوم اللغة العربية</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </p>
-                        <ul class="submenu-inner">
-                            <li><a href="arabic/nahw.html">علم النحو</a></li>
-                            <li><a href="arabic/sarf.html">علم الصرف</a></li>
-                            <li><a href="arabic/emlaa.html">علم الإملاء</a></li>
-                            <li><a href="arabic/maani.html">علم المعاني</a></li>
-                            <li><a href="arabic/khat.html">علم الخط العربي</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <p class="dropdown-toggle">
-                            <span>علوم القرآن الكريم</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </p>
-                        <ul class="submenu-inner">
-                            <li><a href="quran/mojezat.html">علم المعجز القران</a></li>
-                            <li><a href="quran/nozool.html">علم النزول</a></li>
-                            <li><a href="quran/nasikh.html">علم الناسخ والمنسوخ</a></li>
-                            <li><a href="quran/tajweed.html">علم التجويد</a></li>
-                            <li><a href="quran/qiraat.html">علم القراءات</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="file:///storage/emulated/0/abc/setting/setting.html"><i class="fas fa-cog"></i> الإعدادات</a></li>
-            <li><a href="achievements.html"><i class="fas fa-trophy"></i> الإنجازات</a></li>
-        </ul>
+    
+    <main class="container">
+        <section class="welcome-section">
+            <h2>مرحباً بكم في موسوعة العلوم الشاملة</h2>
+            <p>اختر من القائمة أعلاه مجال العلم الذي ترغب في استكشافه</p>
+        </section>
         
-        <div class="sidebar-progress">
-            <h4>تقدمك اليوم</h4>
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
-            <p>65% مكتمل</p>
-        </div>
-    </aside>
-
-    <!-- طبقة التعتيم -->
-    <div class="overlay" id="overlay"></div>
-
-    <!-- المحتوى الرئيسي المحسن -->
-    <div class="container">
-        <main class="main-content">
-            <!-- قسم البطل -->
-            <section class="hero-section fade-in">
-                <h1>مرحباً بك في بوابة المعرفة العلمية</h1>
-                <p>استكشف عالم المعرفة الواسع وتعمق في العلوم المختلفة مع منصة التعلم الذاتي المتكاملة</p>
-                <a href="#" class="hero-btn">ابدأ رحلتك التعليمية</a>
-            </section>
-
-            <!-- شريط البحث -->
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="ابحث في المحتوى العلمي...">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
-
-            <!-- شبكة البطاقات -->
-            <div class="cards-grid">
-                <div class="card fade-in">
-                    <div class="card-icon">💡</div>
-                    <h2>معلومة اليوم</h2>
-                    <p>المحيط الهادئ هو أكبر محيط على وجه الأرض، ويحتوي على أعمق نقطة معروفة في قشرة الأرض، وهي خندق ماريانا.</p>
-                    <a href="#" class="card-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+        <div class="science-categories">
+            
+            <div class="category-card" id="elm">
+                <div class="category-header" style="background: linear-gradient(135deg, #2c672c, #4a814a);">
+                    <i class="fas fa-mosque"></i>
+                    <h3>بداية العلم</h3>
                 </div>
-                
-                <div class="card fade-in">
-                    <div class="notification-badge">!</div>
-                    <div class="card-icon">🎁</div>
-                    <h2>الهدية اليومية</h2>
-                    <p>تهانينا! لقد ربحت دورة مجانية في أساسيات البرمجة. اضغط للمطالبة بهديتك!</p>
-                    <a href="#" class="card-link">المطالبة بالهدية <i class="fas fa-arrow-left"></i></a>
-                </div>
-                
-                <div class="card fade-in">
-                    <div class="card-icon">⏳</div>
-                    <h2>آخر ما تم فتحه</h2>
-                    <ul>
-                        <li><a href="quran/tajweed.html">علم التجويد</a></li>
-                        <li><a href="arabic/nahw.html">علم النحو</a></li>
-                        <li><a href="page5.html">العلم (بداية العلم)</a></li>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="quran_sciences.html">المقدمة والتأسيس المفاهيمي</a></li>
+                        <li><a href="hadith_sciences.html">المفهوم الاسلامي للعلم</a></li>
+                        <li><a href="fiqh_sciences.html">الفلسفة والابستومولوجيا</a></li>
+                        <li><a href="aqeedah_sciences.html">الأخلاقيات والمسؤولية</a></li>
+                        <li><a href="spiritual_sciences.html">العلم والمجتمع</a></li>
+                        <li><a href="dawah_sciences.html">علوم الدعوة والتربية</a></li>
+                        <li><a href="civilization_sciences.html">الاقتصاد والسياسة</a></li>
+                        <li><a href="applied_islamic_sciences.html">التطبيقات والعلاقات</a></li>
+                        <li><a href="civilization_sciences.html">التصنيفات والتخصصات</a></li>
+                        <li><a href="civilization_sciences.html">الاتصال والتثقيف</a></li>
+                        <li><a href="civilization_sciences.html">الابداع والنفسي</a></li>
+                        <li><a href="civilization_sciences.html">العلاقات المتعددة</a></li>
+                        <li><a href="civilization_sciences.html">المستقبل والتحديات</a></li>
                     </ul>
-                    <a href="#" class="card-link">عرض الكل <i class="fas fa-arrow-left"></i></a>
-                </div>
-                
-                <div class="card fade-in">
-                    <div class="card-icon">📊</div>
-                    <h2>إحصائيات التعلم</h2>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <span>الدورات المكتملة:</span>
-                            <strong>5</strong>
-                        </div>
-                        <div class="stat-item">
-                            <span>الساعات المستغرقة:</span>
-                            <strong>45 ساعة</strong>
-                        </div>
-                        <div class="stat-item">
-                            <span>المقالات المقروءة:</span>
-                            <strong>120</strong>
-                        </div>
-                    </div>
-                    <a href="#" class="card-link">عرض تفاصيل <i class="fas fa-arrow-left"></i></a>
                 </div>
             </div>
-        </main>
-    </div>
+            
+            <!-- العلوم الشرعية والإسلامية -->
+            <div class="category-card" id="islamic-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #2c5b2c, #4a914a);">
+                    <i class="fas fa-mosque"></i>
+                    <h3>العلوم الشرعية والإسلامية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="quran_sciences.html">علوم القرآن الكريم</a></li>
+                        <li><a href="hadith_sciences.html">علوم الحديث الشريف</a></li>
+                        <li><a href="fiqh_sciences.html">العلوم الفقهية</a></li>
+                        <li><a href="aqeedah_sciences.html">العلوم العقدية</a></li>
+                        <li><a href="spiritual_sciences.html">العلوم الروحية والأخلاقية</a></li>
+                        <li><a href="dawah_sciences.html">علوم الدعوة والتربية</a></li>
+                        <li><a href="civilization_sciences.html">العلوم الحضارية الإسلامية</a></li>
+                        <li><a href="applied_islamic_sciences.html">العلوم الشرعية التطبيقية</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- علوم اللغة العربية -->
+            <div class="category-card" id="arabic-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #8B4513, #CD853F);">
+                    <i class="fas fa-language"></i>
+                    <h3>علوم اللغة العربية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="morphology_syntax.html">علوم الأساس (الصرف والنحو)</a></li>
+                        <li><a href="phonetics_sciences.html">علوم الأصوات والصوتيات</a></li>
+                        <li><a href="rhetoric_sciences.html">علوم البلاغة والأسلوب</a></li>
+                        <li><a href="vocabulary_sciences.html">علوم المفردات والمعاجم</a></li>
+                        <li><a href="literature_sciences.html">علوم الأدب والتراث</a></li>
+                        <li><a href="writing_sciences.html">علوم الكتابة والخط</a></li>
+                        <li><a href="research_sciences.html">علوم البحث والمنهج</a></li>
+                        <li><a href="applied_arabic_sciences.html">علوم تطبيقية معاصرة</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- العلوم الرياضية والحسابية -->
+            <div class="category-card" id="math-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #2c3e50, #4a6491);">
+                    <i class="fas fa-calculator"></i>
+                    <h3>العلوم الرياضية والحسابية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="basic_math.html">العلوم الرياضية الأساسية</a></li>
+                        <li><a href="statistics_probability.html">الإحصاء والاحتمالات</a></li>
+                        <li><a href="applied_math.html">الرياضيات التطبيقية</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- علوم الحاسوب والتقنية -->
+            <div class="category-card" id="computer-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #3498db, #2c3e50);">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>علوم الحاسوب والتقنية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="theoretical_cs.html">علوم الحاسوب النظرية</a></li>
+                        <li><a href="programming.html">برمجة وتطوير البرمجيات</a></li>
+                        <li><a href="databases.html">قواعد البيانات وأنظمة المعلومات</a></li>
+                        <li><a href="networks_security.html">شبكات الحاسوب والأمن</a></li>
+                        <li><a href="ai_ml.html">الذكاء الاصطناعي وتعلم الآلة</a></li>
+                        <li><a href="graphics_multimedia.html">الرسوميات والوسائط المتعددة</a></li>
+                        <li><a href="web_dev.html">تطوير التطبيقات والويب</a></li>
+                        <li><a href="os_computer_eng.html">أنظمة التشغيل وهندسة الحاسوب</a></li>
+                        <li><a href="cloud_computing.html">الحوسبة السحابية والمتقدمة</a></li>
+                        <li><a href="big_data.html">علوم البيانات الضخمة</a></li>
+                        <li><a href="software_tools.html">التقنيات والأدوات البرمجية</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- العلوم الفيزيائية -->
+            <div class="category-card" id="physics-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #8e44ad, #9b59b6);">
+                    <i class="fas fa-atom"></i>
+                    <h3>العلوم الفيزيائية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="basic_physics.html">الفيزياء الأساسية والنظرية</a></li>
+                        <li><a href="particle_physics.html">فيزياء الجسيمات والطاقة</a></li>
+                        <li><a href="material_physics.html">فيزياء المواد والمادة المكثفة</a></li>
+                        <li><a href="astrophysics.html">فيزياء الفلك والفضاء</a></li>
+                        <li><a href="wave_physics.html">فيزياء الموجات والاهتزازات</a></li>
+                        <li><a href="applied_physics.html">الفروع التطبيقية والمتقدمة</a></li>
+                        <li><a href="mathematical_physics.html">الفيزياء الرياضية والحسابية</a></li>
+                        <li><a href="modern_physics.html">فروع متخصصة حديثة</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- العلوم الكيميائية -->
+            <div class="category-card" id="chemistry-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">
+                    <i class="fas fa-flask"></i>
+                    <h3>العلوم الكيميائية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="basic_chemistry.html">الكيمياء الأساسية والتقليدية</a></li>
+                        <li><a href="specialized_chemistry.html">الكيمياء التخصصية والدقيقة</a></li>
+                        <li><a href="applied_chemistry.html">الكيمياء التطبيقية والبيئية</a></li>
+                        <li><a href="analytical_chemistry.html">الكيمياء التحليلية والتقنيات</a></li>
+                        <li><a href="biochemistry.html">الكيمياء الحيوية والطبية</a></li>
+                        <li><a href="energy_chemistry.html">كيمياء الطاقة والمواد</a></li>
+                        <li><a href="theoretical_chemistry.html">الكيمياء النظرية والحسابية</a></li>
+                        <li><a href="green_chemistry.html">الكيمياء الخضراء والمستدامة</a></li>
+                        <li><a href="electro_chemistry.html">الكيمياء الكهربائية والمغناطيسية</a></li>
+                        <li><a href="specialized_chem.html">فروع كيميائية متخصصة</a></li>
+                        <li><a href="measurement_chemistry.html">كيمياء القياس والجودة</a></li>
+                        <li><a href="educational_chemistry.html">الكيمياء التعليمية</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- علوم الفلك والفضاء -->
+            <div class="category-card" id="astronomy-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #1a237e, #303f9f);">
+                    <i class="fas fa-star"></i>
+                    <h3>علوم الفلك والفضاء</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="basic_astronomy.html">علوم الفلك الأساسية</a></li>
+                        <li><a href="main_astronomy.html">فروع الفلك الرئيسية</a></li>
+                        <li><a href="planetary_science.html">علوم الكواكب والأجرام</a></li>
+                        <li><a href="stellar_science.html">علوم النجوم والأنظمة النجمية</a></li>
+                        <li><a href="galactic_science.html">علوم المجرات والكون</a></li>
+                        <li><a href="space_science.html">علوم الفضاء والملاحة</a></li>
+                        <li><a href="astronomy_tools.html">التقنيات والأدوات الفلكية</a></li>
+                        <li><a href="earth_space.html">علوم الفضاء المتعلقة بالأرض</a></li>
+                        <li><a href="specialized_astrophysics.html">علوم الفيزياء الفلكية المتخصصة</a></li>
+                        <li><a href="space_exploration.html">علوم استكشاف الفضاء</a></li>
+                        <li><a href="specialized_astronomy.html">فروع فلكية متخصصة</a></li>
+                        <li><a href="data_astronomy.html">علوم البيانات والمعالجة</a></li>
+                        <li><a href="measurement_astronomy.html">علوم القياسات والزمن</a></li>
+                        <li><a href="space_biology.html">علوم الفضاء الحيوية</a></li>
+                        <li><a href="astronomy_applications.html">تطبيقات وخدمات فلكية</a></li>
+                        <li><a href="research_astronomy.html">علوم البحث والاكتشاف</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- علوم الأرض والجيولوجيا -->
+            <div class="category-card" id="earth-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #795548, #8d6e63);">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>علوم الأرض والجيولوجيا</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="basic_earth_science.html">علوم الأرض الأساسية</a></li>
+                        <li><a href="rocks_minerals.html">علوم الصخور والمعادن</a></li>
+                        <li><a href="structural_geology.html">الجيولوجيا التركيبية والطباقية</a></li>
+                        <li><a href="dynamic_geology.html">الجيولوجيا الديناميكية</a></li>
+                        <li><a href="historical_geology.html">الجيولوجيا التاريخية والحفريات</a></li>
+                        <li><a href="water_sciences.html">علوم المياه والجيولوجيا المائية</a></li>
+                        <li><a href="economic_geology.html">الجيولوجيا الاقتصادية والتطبيقية</a></li>
+                        <li><a href="geophysics.html">الجيولوجيا الجيوفيزيائية</a></li>
+                        <li><a href="geographic_geology.html">الجيولوجيا الجغرافية والخرائط</a></li>
+                        <li><a href="ocean_meteorology.html">علوم المحيطات والأرصاد</a></li>
+                        <li><a href="environmental_geology.html">الجيولوجيا البيئية</a></li>
+                        <li><a href="geological_techniques.html">تقنيات وأساليب جيولوجية</a></li>
+                        <li><a href="specialized_geology.html">فروع جيولوجية متخصصة</a></li>
+                        <li><a href="statistical_geology.html">الجيولوجيا الإحصائية والرياضية</a></li>
+                        <li><a href="modern_geology.html">تطبيقات جيولوجية حديثة</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- علوم الحياة والأحياء -->
+            <div class="category-card" id="life-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #388e3c, #4caf50);">
+                    <i class="fas fa-dna"></i>
+                    <h3>علوم الحياة والأحياء</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="basic_biology.html">العلوم البيولوجية الأساسية</a></li>
+                        <li><a href="genetics.html">علوم الوراثة والجينات</a></li>
+                        <li><a href="microbiology.html">علوم الأحياء الدقيقة</a></li>
+                        <li><a href="immunology.html">علوم المناعة والأمراض</a></li>
+                        <li><a href="botany.html">علوم النبات</a></li>
+                        <li><a href="zoology.html">علوم الحيوان</a></li>
+                        <li><a href="ecology.html">علوم البيئة والتنوع الحيوي</a></li>
+                        <li><a href="taxonomy_evolution.html">علوم التصنيف والتطور</a></li>
+                        <li><a href="applied_biology.html">علوم الأحياء التطبيقية</a></li>
+                        <li><a href="medical_biology.html">علوم الأحياء الطبية</a></li>
+                        <li><a href="neuroscience.html">علوم الأعصاب</a></li>
+                        <li><a href="advanced_biology.html">علوم الأحياء المتقدمة</a></li>
+                        <li><a href="modern_biology.html">فروع متخصصة حديثة</a></li>
+                        <li><a href="lab_techniques.html">تقنيات مختبرية</a></li>
+                        <li><a href="environmental_biology.html">علوم الأحياء البيئية</a></li>
+                        <li><a href="bioinformatics.html">علوم البيانات الحيوية</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- العلوم الاجتماعية -->
+            <div class="category-card" id="social-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #f57c00, #ff9800);">
+                    <i class="fas fa-users"></i>
+                    <h3>العلوم الاجتماعية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="basic_social_sciences.html">العلوم الاجتماعية الأساسية</a></li>
+                        <li><a href="psychology.html">فروع علم النفس</a></li>
+                        <li><a href="political_sciences.html">العلوم السياسية والحكم</a></li>
+                        <li><a href="economics.html">العلوم الاقتصادية</a></li>
+                        <li><a href="human_geography.html">علوم الجغرافيا البشرية</a></li>
+                        <li><a href="statistics_research.html">علوم الإحصاء والبحث</a></li>
+                        <li><a href="society_development.html">علوم المجتمع والتنمية</a></li>
+                        <li><a href="communication.html">علوم الاتصال واللغة</a></li>
+                        <li><a href="education.html">علوم التربية والتعليم</a></li>
+                        <li><a href="health_sciences.html">علوم الصحة والرعاية</a></li>
+                        <li><a href="family_sciences.html">علوم الأسرة والجنسين</a></li>
+                        <li><a href="globalization.html">علوم العولمة والتنوع</a></li>
+                        <li><a href="law_sciences.html">علوم القانون والعدالة</a></li>
+                        <li><a href="culture_arts.html">علوم الثقافة والفنون</a></li>
+                        <li><a href="change_sciences.html">علوم التغيير والحركات</a></li>
+                        <li><a href="planning_sciences.html">علوم التخطيط والمستقبل</a></li>
+                        <li><a href="environment_society.html">علوم البيئة والمجتمع</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- العلوم التاريخية والجغرافية -->
+            <div class="category-card" id="history-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #5d4037, #795548);">
+                    <i class="fas fa-monument"></i>
+                    <h3>العلوم التاريخية والجغرافية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="historical_methodology.html">العلوم التاريخية المنهجية</a></li>
+                        <li><a href="islamic_history.html">التاريخ الإسلامي والعربي</a></li>
+                        <li><a href="arab_civilizations.html">تاريخ الحضارات العربية</a></li>
+                        <li><a href="ancient_civilizations.html">تاريخ الحضارات القديمة</a></li>
+                        <li><a href="european_history.html">التاريخ الأوروبي والغربي</a></li>
+                        <li><a href="eastern_civilizations.html">تاريخ الحضارات الشرقية</a></li>
+                        <li><a href="middle_east_history.html">تاريخ الشرق الأوسط</a></li>
+                        <li><a href="continents_history.html">تاريخ القارات والدول</a></li>
+                        <li><a href="peoples_history.html">تاريخ الأقوام والشعوب</a></li>
+                        <li><a href="thematic_history.html">التاريخ الموضوعي والمتخصص</a></li>
+                        <li><a href="periods_history.html">التاريخ حسب العصور</a></li>
+                        <li><a href="specialized_history.html">فروع التاريخ المتخصصة</a></li>
+                        <li><a href="comparative_history.html">الدراسات التاريخية المقارنة</a></li>
+                        <li><a href="physical_geography.html">علوم الجغرافيا الطبيعية</a></li>
+                        <li><a href="human_geography.html">علوم الجغرافيا البشرية</a></li>
+                        <li><a href="technical_geography.html">الجغرافيا التقنية والتطبيقية</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- العلوم الإنسانية والفلسفية -->
+            <div class="category-card" id="humanities-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #7b1fa2, #9c27b0);">
+                    <i class="fas fa-brain"></i>
+                    <h3>العلوم الإنسانية والفلسفية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="basic_philosophy.html">الفروع الفلسفية الأساسية</a></li>
+                        <li><a href="applied_philosophy.html">الفلسفات التطبيقية</a></li>
+                        <li><a href="philosophical_schools.html">المدارس الفلسفية</a></li>
+                        <li><a href="general_linguistics.html">علوم اللغويات العامة</a></li>
+                        <li><a href="theoretical_linguistics.html">اللغويات النظرية</a></li>
+                        <li><a href="sociocultural_linguistics.html">اللغويات الاجتماعية والثقافية</a></li>
+                        <li><a href="specialized_linguistics.html">فروع لغوية متخصصة</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- العلوم الإدارية والتجارية -->
+            <div class="category-card" id="business-sciences">
+                <div class="category-header" style="background: linear-gradient(135deg, #1976d2, #2196f3);">
+                    <i class="fas fa-landmark"></i>
+                    <h3>العلوم الإدارية والتجارية</h3>
+                </div>
+                <div class="category-body">
+                    <ul class="science-list">
+                        <li><a href="political_sciences.html">العلوم السياسية</a></li>
+                        <li><a href="administrative_sciences.html">العلوم الإدارية</a></li>
+                        <li><a href="commercial_sciences.html">العلوم التجارية</a></li>
+                        <li><a href="human_sciences.html">العلوم الإنسانية</a></li>
+                        <li><a href="interdisciplinary.html">فروع متعددة التخصصات</a></li>
+                        <li><a href="modern_applied.html">علوم تطبيقية حديثة</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>جميع الحقوق محفوظة &copy; 2023 موقع العلوم التعليمي</p>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
-</html>
+                                </html>

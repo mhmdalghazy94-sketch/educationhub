@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار مفهوم العلم لغةً واشتقاقاته</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    /* تنسيقات عامة */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.screen {
+    display: none;
+    background: linear-gradient(135deg, #3494E6, #EC6EAD);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.screen.active {
+    display: block;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* شاشة البداية */
+#start-screen {
+    text-align: center;
+}
+
+#start-screen p {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* شاشة الاختبار */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.timer {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+.question-counter {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.question-container {
+    margin-bottom: 30px;
+}
+
+#question-text {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: right;
+}
+
+.option:hover {
+    background-color: #e9ecef;
+}
+
+.option.selected {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.option.correct {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.option.incorrect {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+.hint-container {
+    margin-top: 20px;
+}
+
+.hint-btn {
+    padding: 8px 15px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.hint-text {
+    padding: 15px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 5px;
+    display: none;
+}
+
+.hint-text.show {
+    display: block;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 10px 15px;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.nav-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.nav-btn.submit {
+    background-color: #e74c3c;
+}
+
+.nav-btn.submit:hover {
+    background-color: #c0392b;
+}
+
+.question-list {
+    margin-top: 30px;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.number.current {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.number.answered {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.number.marked {
+    background-color: #f39c12;
+    color: white;
+    border-color: #f39c12;
+}
+
+/* شاشة النتائج */
+#results-screen {
+    text-align: center;
+}
+
+.score {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.score p {
+    margin-bottom: 10px;
+}
+
+.chart-container {
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+
+.review {
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.answer-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #bdc3c7;
+}
+
+.answer-item.correct {
+    background-color: #d5f4e6;
+    border-left-color: #2ecc71;
+}
+
+.answer-item.incorrect {
+    background-color: #fadbd8;
+    border-left-color: #e74c3c;
+}
+
+.question-review {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user-answer, .correct-answer {
+    margin-bottom: 5px;
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .navigation {
+        flex-direction: column;
+    }
+    
+    .nav-btn {
+        margin-bottom: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="start-screen" class="screen active">
+            <h1>اختبار مفهوم العلم لغةً واشتقاقاته</h1>
+            <p>يتكون هذا الاختبار من 30 أسئلة حول مفهوم العلم في اللغة العربية واشتقاقاته</p>
+            <button id="start-btn" class="btn">بدء الاختبار</button>
+        </div>
+
+        <div id="quiz-screen" class="screen">
+            <div class="header">
+                <div class="timer">
+                    الوقت المتبقي: <span id="time">10:00</span>
+                </div>
+                <div class="question-counter">
+                    السؤال <span id="current-question">1</span> من <span id="total-questions">3</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text"></h2>
+                <div id="options-container" class="options"></div>
+                
+                <div class="hint-container">
+                    <button id="hint-btn" class="hint-btn">إظهار التوضيح</button>
+                    <div id="hint-text" class="hint-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button id="prev-btn" class="nav-btn">السابق</button>
+                <button id="mark-btn" class="nav-btn">مراجعة لاحقًا</button>
+                <button id="next-btn" class="nav-btn">التالي</button>
+                <button id="submit-btn" class="nav-btn submit">إنهاء الاختبار</button>
+            </div>
+
+            <div class="question-list">
+                <h3>قائمة الأسئلة</h3>
+                <div id="question-numbers" class="numbers"></div>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen">
+            <h1>نتيجة الاختبار</h1>
+            <div class="score">
+                <p>الإجابات الصحيحة: <span id="correct-answers">0</span> من <span id="total-answers">3</span></p>
+                <p>النسبة المئوية: <span id="percentage">0%</span></p>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="results-chart"></canvas>
+            </div>
+            
+            <div class="review">
+                <h3>مراجعة الإجابات</h3>
+                <div id="answers-review"></div>
+            </div>
+            
+            <button id="restart-btn" class="btn">إعادة الاختبار</button>
+        </div>
+    </div>
+    <script>
+    
+    // تعريف الأسئلة
+    /**
+ * اختبار في دلالات واشتقاقات مصطلح "العلم" في اللغة العربية
+ * (30 سؤال اختيار من متعدد) - مطابق للشكل المطلوب
+ */
+    const questions = [
+    {
+        question: "ما الجذر اللغوي الذي تُشتق منه كلمة \"العلم\"؟",
+        options: ["(ف ه م)", "(د ر س)", "(ع ل م)", "(ق ر أ)"],
+        answer: "(ع ل م)",
+        hint: "الجذر الثلاثي هو الأصل الذي تُشتق منه الكلمة وجميع مشتقاتها في اللغة العربية."
+    },
+    {
+        question: "يشير الأصل الدلالي للجذر (ع ل م) في \"معجم مقاييس اللغة\" إلى:",
+        options: ["الحفظ والتكرار.", "أثرٍ بالشيء يتميَّز به عن غيره.", "الفهم والاستيعاب.", "القراءة والكتابة."],
+        answer: "أثرٍ بالشيء يتميَّز به عن غيره.",
+        hint: "العَلَم في أصله هو العلامة التي تميز الشيء وتجعله واضحاً."
+    },
+    {
+        question: "ما نقيض \"العلم\" في التعريف اللغوي الأساسي؟",
+        options: ["الظن.", "النسيان.", "الجهل.", "الوهم."],
+        answer: "الجهل.",
+        hint: "العلاقة بين العلم والجهل علاقة تضاد، فكل منهما ينفي الآخر."
+    },
+    {
+        question: "الصيغة \"عَلِمَ يَعْلَمُ\" تدل على:",
+        options: ["طلب العلم.", "الإخبار بشيء ما.", "الوصول إلى المعرفة والتيقن.", "التكرار والتعليم."],
+        answer: "الوصول إلى المعرفة والتيقن.",
+        hint: "هذه الصيغة هي الفعل الأساسي الذي يدل على حصول المعرفة في ذهن الشخص."
+    },
+    {
+        question: "الفعل \"أَعْلَمَ\" يكون بمعنى:",
+        options: ["صار عالماً.", "طلب العلم.", "علَّم شخصاً آخر.", "أخبر وأبلغ."],
+        answer: "أخبر وأبلغ.",
+        hint: "\"أَعْلَمَ\" فعل متعدٍّ بحرف الجر \"الباء\"، ويكون معناه الإعلام والإخبار."
+    },
+    {
+        question: "الفعل \"عَلَّمَ\" يحمل دلالة قوية على:",
+        options: ["التكرار والإفادة.", "السؤال والاستفهام.", "المعرفة الذاتية.", "الشك والتردد."],
+        answer: "التكرار والإفادة.",
+        hint: "زيادة حرف في المبنى تدل على زيادة في المعنى، فـ \"عَلَّمَ\" تدل على التكرار حتى يثبت العلم."
+    },
+    {
+        question: "الفعل \"اسْتَعْلَمَ\" يعني:",
+        options: ["أصبح عالماً.", "طلب العلم والسؤال عنه.", "أعطى العلم لشخص.", "نسي علماً كان يعرفه."],
+        answer: "طلب العلم والسؤال عنه.",
+        hint: "صيغة \"استفعل\" في اللغة العربية تدل على الطلب، مثل استغفر = طلب المغفرة."
+    },
+    {
+        question: "كلمة \"العَالِم\" في التصنيف النحوي هي:",
+        options: ["اسم مفعول.", "اسم مكان.", "اسم فاعل.", "اسم آلة."],
+        answer: "اسم فاعل.",
+        hint: "اسم الفاعل هو من قام بالفعل، فـ \"عالِم\" هو من فعل \"عَلِمَ\"."
+    },
+    {
+        question: "كلمة \"المَعْلُوم\" في التصنيف النحوي هي:",
+        options: ["اسم فاعل.", "اسم مفعول.", "اسم زمان.", "مصدر."],
+        answer: "اسم مفعول.",
+        hint: "اسم المفعول هو ما وقع عليه الفعل، فـ \"معلوم\" هو ما وقع عليه فعل \"عَلِمَ\"."
+    },
+    {
+        question: "كلمة \"عَلَم\" بفتح العين واللام قد تعني:",
+        options: ["المعرفة الشاملة.", "عملية التعليم.", "العلامة أو الإشارة المميزة.", "الشخص الجاهل."],
+        answer: "العلامة أو الإشارة المميزة.",
+        hint: "العَلَم هو ما يُنصب ليرى من بعيد ويميز مكاناً أو شخصاً، ومنه أعلام الدول."
+    },
+    {
+        question: "في قوله تعالى: ﴿وَإِنَّهُ لَعِلْمٌ لِّلسَّاعَةِ﴾، كلمة \"عِلْم\" تعني:",
+        options: ["المعرفة الكاملة.", "العلامة والدليل.", "الحكمة الإلهية.", "الكتاب السماوي."],
+        answer: "العلامة والدليل.",
+        hint: "نزول عيسى عليه السلام في آخر الزمان هو علامة من علامات اقتراب الساعة."
+    },
+    {
+        question: "في بيت زهير بن أبي سلمى: \"ولكنني عن علم ما في غدٍ عمي\"، كلمة \"علم\" تعني:",
+        options: ["التعليم.", "العلامة.", "المعرفة والدراية.", "الوهم."],
+        answer: "المعرفة والدراية.",
+        hint: "الشاعر يؤكد معرفته بالماضي والحاضر، لكن معرفة المستقبل محجوبة عنه."
+    },
+    {
+        question: "ما المقصود بـ \"الجهل البسيط\" في الجدول الوارد؟",
+        options: ["إدراك الشيء على غير حقيقته.", "ترجيح الاحتمال المرجوح.", "عدم الإدراك بشكل كلي.", "عدم ترجيح أي من الاحتمالين."],
+        answer: "عدم الإدراك بشكل كلي.",
+        hint: "الجهل البسيط هو الخالي الذهن من المعلومة، وهو أصل الجهل."
+    },
+    {
+        question: "إذا قال شخص: \"فتح مكة في العام التاسع للهجرة\" مع علمك بأنه كان في العام الثامن، فإن هذا يعد مثالاً على:",
+        options: ["العلم.", "الجهل البسيط.", "الجهل المركب.", "الظن."],
+        answer: "الجهل المركب.",
+        hint: "الجهل المركب هو الخطأ مع اعتقاد صحة ذلك الخطأ، وهو أخطر من الجهل البسيط."
+    },
+    {
+        question: "الفرق بين \"العلم\" و\"المعرفة\" من حيث القوة هو أن:",
+        options: ["العلم أضعف من المعرفة.", "هما مترادفان تماماً.", "العلم إدراك جازم بينما المعرفة قد تكون أولية.", "المعرفة خاصة بالعلوم الدينية."],
+        answer: "العلم إدراك جازم بينما المعرفة قد تكون أولية.",
+        hint: "قد تأتي المعرفة للإطلاع على شيء، أما العلم فيقتضي رسوخاً ويقيناً أكبر."
+    },
+    {
+        question: "من المعاجم التي تُعنى بجذور الكلمات والأصول اللغوية:",
+        options: ["لسان العرب.", "معجم مقاييس اللغة.", "تاج العروس.", "المصباح المنير."],
+        answer: "معجم مقاييس اللغة.",
+        hint: "\"معجم مقاييس اللغة\" لابن فارس يركز على رد الكلمات إلى أصولها وجذورها الأولى."
+    },
+    {
+        question: "يُعتبر \"تاج العروس\" للمؤلف:",
+        options: ["الخليل بن أحمد.", "ابن منظور.", "الزبيدي.", "الفيومي."],
+        answer: "الزبيدي.",
+        hint: "\"تاج العروس\" هو معجم ضخم جمعه المرتضى الزبيدي."
+    },
+    {
+        question: "أقدم المعاجم العربية المذكورة هو:",
+        options: ["لسان العرب.", "العين.", "معجم مقاييس اللغة.", "المصباح المنير."],
+        answer: "العين.",
+        hint: "معجم \"العين\" منسوب للخليل بن أحمد الفراهيدي وهو من أوائل من صنفوا في المعاجم."
+    },
+    {
+        question: "في المثال: \"القول: كان في الثامن ويحتمل في السابع\"، هذا يمثل:",
+        options: ["العلم.", "الشك.", "الظن.", "الوهم."],
+        answer: "الظن.",
+        hint: "الظن هو ترجيح أحد الاحتمالين مع إمكانية وجود الآخر (الاحتمال الراجح)."
+    },
+    {
+        question: "في المثال: \"القول: كان في السابع ويحتمل في الثامن\"، هذا يمثل:",
+        options: ["العلم.", "الشك.", "الظن.", "الوهم."],
+        answer: "الوهم.",
+        hint: "الوهم هو ترجيح الاحتمال الأضعف (المرجوح) مع الاعتراف بوجود الاحتمال الأقوى (الراجح)."
+    },
+    {
+        question: "الحالة التي يتساوى فيها الاحتمالان دون ترجيح لأحدهما تسمى:",
+        options: ["العلم.", "الشك.", "الظن.", "الجهل البسيط."],
+        answer: "الشك.",
+        hint: "الشك هو التردد بين أمرين دون ميل لأحدهما."
+    },
+    {
+        question: "كلمة \"العَلَم\" في النحو تُطلق على:",
+        options: ["الأفعال فقط.", "الحروف.", "الأسماء الخاصة.", "الجمل."],
+        answer: "الأسماء الخاصة.",
+        hint: "الأعلام في النحو هي الأسماء التي تسمى بها الأشخاص أو الأماكن لتمييزها، مثل \"أحمد\" و\"مصر\"."
+    },
+    {
+        question: "الصيغة \"يُعَلِّمُ\" هي فعل:",
+        options: ["ماضٍ.", "مضارع.", "أمر.", "مصدر."],
+        answer: "مضارع.",
+        hint: "\"يُعَلِّمُ\" هي الفعل المضارع للفعل \"عَلَّمَ\"."
+    },
+    {
+        question: "المصدر من الفعل \"أَعْلَمَ\" هو:",
+        options: ["عِلْم.", "تَعْلِيم.", "إِعْلَام.", "اِسْتِعْلَام."],
+        answer: "إِعْلَام.",
+        hint: "المصدر من الفعل \"أَفْعَلَ\" هو غالباً \"إفْعَال\"، فالمصدر من \"أَعْلَمَ\" هو \"إِعْلَام\"."
+    },
+    {
+        question: "المصدر من الفعل \"عَلَّمَ\" هو:",
+        options: ["عِلْم.", "تَعْلِيم.", "إِعْلَام.", "عِلْمَة."],
+        answer: "تَعْلِيم.",
+        hint: "المصدر من الفعل \"فَعَّلَ\" هو غالباً \"تَفْعِيل\"، فالمصدر من \"عَلَّمَ\" هو \"تَعْلِيم\"."
+    },
+    {
+        question: "الدلالة الأساسية التي انبنت عليها كلمة \"العلم\" هي:",
+        options: ["السرعة والحفظ.", "العلامة والإدراك الجازم المميز.", "الكتابة والتسجيل.", "المناقشة والجدال."],
+        answer: "العلامة والإدراك الجازم المميز.",
+        hint: "جوهر المعنى في الجذر (ع ل م) هو التمييز والوضوح، وهو أساس المعرفة."
+    },
+    {
+        question: "الفعل \"يَسْتَعْلِمُ\" يتعدى بحرف الجر:",
+        options: ["اللام.", "الباء.", "عن.", "إلى."],
+        answer: "عن.",
+        hint: "يُقال: \"اسْتَعْلَمَ عن الخبر\"، أي سأل عنه ليعرفه."
+    },
+    {
+        question: "في قوله تعالى: \"فَإِنْ عَلِمْتُمُوهُنَّ مُؤْمِنَاتٍ\"، قد تحتمل كلمة \"عَلِمْتُم\" معنى:",
+        options: ["الجهل.", "الشك.", "الظن.", "الوهم."],
+        answer: "الظن.",
+        hint: "ذكر المفسرون أن \"علمتم\" في هذه الآية قد تأتي بمعنى \"ظننتم\" في بعض السياقات."
+    },
+    {
+        question: "أي من المشتقات التالية تدل على \"جعل الشخص يعلم شيئاً\"؟",
+        options: ["عَلِمَ.", "اِسْتَعْلَمَ.", "تَعَلَّمَ.", "أَعْلَمَ."],
+        answer: "أَعْلَمَ.",
+        hint: "\"أَعْلَمَ\" فعل causative، أي أنه يتسبب في حصول العلم لدى الشخص الآخر."
+    },
+    {
+        question: "أي من الكتب التالية يوضح الفروق الدقيقة بين \"العلم\" و\"المعرفة\" بشكل خاص؟",
+        options: ["لسان العرب.", "معجم مقاييس اللغة.", "المصباح المنير.", "تاج العروس."],
+        answer: "المصباح المنير.",
+        hint: "\"المصباح المنير\" للفيومي مشهور بتفصيله للفروق الدقيقة بين المصطلحات المتقاربة."
+    }
+];
+
+// يمكنك استخدام مصفوفة quizData هذه لبناء نظام اختبار إلكتروني
+// يطابق تمامًا هيكلة البيانات التي طلبتها.
+
+    
+// متغيرات التطبيق
+let currentQuestion = 0;
+let userAnswers = Array(questions.length).fill(null);
+let markedQuestions = Array(questions.length).fill(false);
+let timeLeft = 1800; // 30 دقيقة بالثواني (زيادة الوقت لتناسب 30 سؤال)
+let timerInterval;
+let quizStarted = false;
+
+// عناصر DOM
+const startScreen = document.getElementById('start-screen');
+const quizScreen = document.getElementById('quiz-screen');
+const resultsScreen = document.getElementById('results-screen');
+const startBtn = document.getElementById('start-btn');
+const timeDisplay = document.getElementById('time');
+const currentQuestionDisplay = document.getElementById('current-question');
+const totalQuestionsDisplay = document.getElementById('total-questions');
+const questionText = document.getElementById('question-text');
+const optionsContainer = document.getElementById('options-container');
+const hintBtn = document.getElementById('hint-btn');
+const hintText = document.getElementById('hint-text');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const markBtn = document.getElementById('mark-btn');
+const submitBtn = document.getElementById('submit-btn');
+const questionNumbers = document.getElementById('question-numbers');
+const correctAnswersDisplay = document.getElementById('correct-answers');
+const totalAnswersDisplay = document.getElementById('total-answers');
+const percentageDisplay = document.getElementById('percentage');
+const answersReview = document.getElementById('answers-review');
+const restartBtn = document.getElementById('restart-btn');
+
+// تهيئة التطبيق
+function init() {
+    console.log("تم تحميل التطبيق بنجاح");
+    
+    // تعيين عدد الأسئلة الكلي
+    totalQuestionsDisplay.textContent = questions.length;
+    
+    // إنشاء أرقام الأسئلة
+    createQuestionNumbers();
+    
+    // إضافة مستمعي الأحداث
+    startBtn.addEventListener('click', startQuiz);
+    prevBtn.addEventListener('click', showPreviousQuestion);
+    nextBtn.addEventListener('click', showNextQuestion);
+    markBtn.addEventListener('click', toggleMarkQuestion);
+    submitBtn.addEventListener('click', showResults);
+    hintBtn.addEventListener('click', toggleHint);
+    restartBtn.addEventListener('click', restartQuiz);
+    
+    console.log("تم تهيئة التطبيق بنجاح");
+}
+
+// إنشاء أرقام الأسئلة
+function createQuestionNumbers() {
+    questionNumbers.innerHTML = '';
+    
+    for (let i = 0; i < questions.length; i++) {
+        const number = document.createElement('div');
+        number.className = 'number';
+        number.textContent = i + 1;
+        number.dataset.index = i;
+        
+        number.addEventListener('click', function() {
+            const index = parseInt(this.dataset.index);
+            goToQuestion(index);
+        });
+        
+        questionNumbers.appendChild(number);
+    }
+}
+
+// بدء الاختبار
+function startQuiz() {
+    console.log("تم النقر على زر بدء الاختبار");
+    
+    // إخفاء شاشة البداية وإظهار شاشة الاختبار
+    startScreen.classList.remove('active');
+    quizScreen.classList.add('active');
+    
+    // تحديث نص وصف الاختبار في شاشة البداية
+    document.querySelector('#start-screen p').textContent = `يتكون هذا الاختبار من ${questions.length} أسئلة حول مفهوم العلم في اللغة العربية واشتقاقاته`;
+    
+    // بدء المؤقت
+    startTimer();
+    
+    // عرض السؤال الأول
+    showQuestion(currentQuestion);
+    
+    console.log("بدأ الاختبار بنجاح");
+}
+
+// بدء المؤقت
+function startTimer() {
+    updateTimerDisplay();
+    
+    timerInterval = setInterval(function() {
+        timeLeft--;
+        updateTimerDisplay();
+        
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            showResults();
+        }
+    }, 1000);
+}
+
+// تحديث عرض المؤقت
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// عرض السؤال الحالي
+function showQuestion(index) {
+    currentQuestion = index;
+    const question = questions[index];
+    
+    // تحديث رقم السؤال الحالي
+    currentQuestionDisplay.textContent = index + 1;
+    
+    // عرض نص السؤال
+    questionText.textContent = question.question;
+    
+    // عرض الخيارات
+    optionsContainer.innerHTML = '';
+    
+    question.options.forEach(option => {
+        const optionElement = document.createElement('div');
+        optionElement.className = 'option';
+        
+        if (userAnswers[index] === option) {
+            optionElement.classList.add('selected');
+        }
+        
+        optionElement.textContent = option;
+        
+        optionElement.addEventListener('click', function() {
+            selectOption(option);
+        });
+        
+        optionsContainer.appendChild(optionElement);
+    });
+    
+    // تحديث حالة زر التوضيح
+    hintText.classList.remove('show');
+    hintBtn.textContent = 'إظهار التوضيح';
+    
+    // تحديث أرقام الأسئلة
+    updateQuestionNumbers();
+    
+    // تحديث حالة أزرار التنقل
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === questions.length - 1;
+    
+    // تحديث حالة زر المراجعة لاحقًا
+    markBtn.textContent = markedQuestions[index] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+}
+
+// تحديد خيار
+function selectOption(option) {
+    userAnswers[currentQuestion] = option;
+    showQuestion(currentQuestion);
+}
+
+// تبديل عرض التوضيح
+function toggleHint() {
+    const isHintVisible = hintText.classList.contains('show');
+    
+    if (isHintVisible) {
+        hintText.classList.remove('show');
+        hintBtn.textContent = 'إظهار التوضيح';
+    } else {
+        hintText.textContent = questions[currentQuestion].hint;
+        hintText.classList.add('show');
+        hintBtn.textContent = 'إخفاء التوضيح';
+    }
+}
+
+// الانتقال إلى السؤال السابق
+function showPreviousQuestion() {
+    if (currentQuestion > 0) {
+        showQuestion(currentQuestion - 1);
+    }
+}
+
+// الانتقال إلى السؤال التالي
+function showNextQuestion() {
+    if (currentQuestion < questions.length - 1) {
+        showQuestion(currentQuestion + 1);
+    }
+}
+
+// الانتقال إلى سؤال محدد
+function goToQuestion(index) {
+    showQuestion(index);
+}
+
+// تبديل حالة المراجعة لاحقًا
+function toggleMarkQuestion() {
+    markedQuestions[currentQuestion] = !markedQuestions[currentQuestion];
+    markBtn.textContent = markedQuestions[currentQuestion] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+    updateQuestionNumbers();
+}
+
+// تحديث أرقام الأسئلة
+function updateQuestionNumbers() {
+    const numbers = document.querySelectorAll('.number');
+    
+    numbers.forEach((number, index) => {
+        number.classList.remove('current', 'answered', 'marked');
+        
+        if (index === currentQuestion) {
+            number.classList.add('current');
+        }
+        
+        if (userAnswers[index] !== null) {
+            number.classList.add('answered');
+        }
+        
+        if (markedQuestions[index]) {
+            number.classList.add('marked');
+        }
+    });
+}
+
+// عرض النتائج
+function showResults() {
+    // إيقاف المؤقت
+    clearInterval(timerInterval);
+    
+    // إخفاء شاشة الاختبار وإظهار شاشة النتائج
+    quizScreen.classList.remove('active');
+    resultsScreen.classList.add('active');
+    
+    // حساب النتائج
+    let correctCount = 0;
+    
+    questions.forEach((question, index) => {
+        if (userAnswers[index] === question.answer) {
+            correctCount++;
+        }
+    });
+    
+    const percentage = Math.round((correctCount / questions.length) * 100);
+    
+    // عرض النتائج
+    correctAnswersDisplay.textContent = correctCount;
+    totalAnswersDisplay.textContent = questions.length;
+    percentageDisplay.textContent = `${percentage}%`;
+    
+    // رسم المخطط البياني
+    drawChart(correctCount, questions.length - correctCount);
+    
+    // عرض مراجعة الإجابات
+    displayAnswersReview();
+}
+
+// رسم المخطط البياني
+function drawChart(correct, incorrect) {
+    const ctx = document.getElementById('results-chart').getContext('2d');
+    
+    // إذا كان هناك مخطط بياني موجود، قم بتدميره أولاً
+    if (window.resultChart) {
+        window.resultChart.destroy();
+    }
+    
+    window.resultChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['الإجابات الصحيحة', 'الإجابات الخاطئة'],
+            datasets: [{
+                data: [correct, incorrect],
+                backgroundColor: ['#2ecc71', '#e74c3c'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+// عرض مراجعة الإجابات
+function displayAnswersReview() {
+    answersReview.innerHTML = '';
+    
+    questions.forEach((question, index) => {
+        const answerItem = document.createElement('div');
+        const isCorrect = userAnswers[index] === question.answer;
+        
+        answerItem.className = `answer-item ${isCorrect ? 'correct' : 'incorrect'}`;
+        
+        let reviewContent = `
+            <div class="question-review">${index + 1}. ${question.question}</div>
+            <div class="user-answer">إجابتك: ${userAnswers[index] || 'لم تجب'}</div>
+            <div class="correct-answer">الإجابة الصحيحة: ${question.answer}</div>
+        `;
+        
+        if (!isCorrect && userAnswers[index]) {
+            reviewContent += `<div class="hint-review">التوضيح: ${question.hint}</div>`;
+        }
+        
+        answerItem.innerHTML = reviewContent;
+        answersReview.appendChild(answerItem);
+    });
+}
+
+// إعادة الاختبار
+function restartQuiz() {
+    // إعادة تعيين المتغيرات
+    currentQuestion = 0;
+    userAnswers = Array(questions.length).fill(null);
+    markedQuestions = Array(questions.length).fill(false);
+    timeLeft = 1800; // إعادة تعيين الوقت إلى 30 دقيقة
+    
+    // إعادة تعيين الشاشات
+    resultsScreen.classList.remove('active');
+    startScreen.classList.add('active');
+    
+    // إعادة تعيين المخطط البياني
+    if (window.resultChart) {
+        window.resultChart.destroy();
+    }
+}
+
+// تهيئة التطبيق عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("تم تحميل DOM بالكامل");
+    init();
+});
+    
+    
+    
+        </script>
+    <script src="script.js"></script>
+</body>
+</html>

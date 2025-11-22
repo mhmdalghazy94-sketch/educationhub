@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار مفهوم العلم لغةً واشتقاقاته</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    /* تنسيقات عامة */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.screen {
+    display: none;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.screen.active {
+    display: block;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* شاشة البداية */
+#start-screen {
+    text-align: center;
+}
+
+#start-screen p {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* شاشة الاختبار */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.timer {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+.question-counter {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.question-container {
+    margin-bottom: 30px;
+}
+
+#question-text {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: right;
+}
+
+.option:hover {
+    background-color: #e9ecef;
+}
+
+.option.selected {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.option.correct {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.option.incorrect {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+.hint-container {
+    margin-top: 20px;
+}
+
+.hint-btn {
+    padding: 8px 15px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.hint-text {
+    padding: 15px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 5px;
+    display: none;
+}
+
+.hint-text.show {
+    display: block;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 10px 15px;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.nav-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.nav-btn.submit {
+    background-color: #e74c3c;
+}
+
+.nav-btn.submit:hover {
+    background-color: #c0392b;
+}
+
+.question-list {
+    margin-top: 30px;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.number.current {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.number.answered {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.number.marked {
+    background-color: #f39c12;
+    color: white;
+    border-color: #f39c12;
+}
+
+/* شاشة النتائج */
+#results-screen {
+    text-align: center;
+}
+
+.score {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.score p {
+    margin-bottom: 10px;
+}
+
+.chart-container {
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+
+.review {
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.answer-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #bdc3c7;
+}
+
+.answer-item.correct {
+    background-color: #d5f4e6;
+    border-left-color: #2ecc71;
+}
+
+.answer-item.incorrect {
+    background-color: #fadbd8;
+    border-left-color: #e74c3c;
+}
+
+.question-review {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user-answer, .correct-answer {
+    margin-bottom: 5px;
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .navigation {
+        flex-direction: column;
+    }
+    
+    .nav-btn {
+        margin-bottom: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="start-screen" class="screen active">
+            <h1>اختبار مفهوم العلم لغةً واشتقاقاته</h1>
+            <p>يتكون هذا الاختبار من 40 سؤالاً حول مفهوم العلم في اللغة العربية واشتقاقاته</p>
+            <button id="start-btn" class="btn">بدء الاختبار</button>
+        </div>
+
+        <div id="quiz-screen" class="screen">
+            <div class="header">
+                <div class="timer">
+                    الوقت المتبقي: <span id="time">30:00</span>
+                </div>
+                <div class="question-counter">
+                    السؤال <span id="current-question">1</span> من <span id="total-questions">30</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text"></h2>
+                <div id="options-container" class="options"></div>
+                
+                <div class="hint-container">
+                    <button id="hint-btn" class="hint-btn">إظهار التوضيح</button>
+                    <div id="hint-text" class="hint-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button id="prev-btn" class="nav-btn">السابق</button>
+                <button id="mark-btn" class="nav-btn">مراجعة لاحقًا</button>
+                <button id="next-btn" class="nav-btn">التالي</button>
+                <button id="submit-btn" class="nav-btn submit">إنهاء الاختبار</button>
+            </div>
+
+            <div class="question-list">
+                <h3>قائمة الأسئلة</h3>
+                <div id="question-numbers" class="numbers"></div>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen">
+            <h1>نتيجة الاختبار</h1>
+            <div class="score">
+                <p>الإجابات الصحيحة: <span id="correct-answers">0</span> من <span id="total-answers">30</span></p>
+                <p>النسبة المئوية: <span id="percentage">0%</span></p>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="results-chart"></canvas>
+            </div>
+            
+            <div class="review">
+                <h3>مراجعة الإجابات</h3>
+                <div id="answers-review"></div>
+            </div>
+            
+            <button id="restart-btn" class="btn">إعادة الاختبار</button>
+        </div>
+    </div>
+    <script>
+    // تعريف الأسئلة
+    const questions = [
+    /**
+ * اختبار شامل في الفروق بين العلم والفلسفة
+ * تم تحويل الأسئلة والخيارات والإجابات إلى مصفوفة من الكائنات في JavaScript.
+ * كل كائن (سؤال) يحتوي على:
+ * - question: نص السؤال.
+ * - options: مصفوفة من الخيارات المتاحة.
+ * - answer: نص الإجابة الصحيحة (مطابق لأحد الخيارات).
+ * - hint: توضيح/تفسير الإجابة.
+ */
+    {
+        question: "ما التعريف الاصطلاحي الأقرب للعلم؟",
+        options: [
+            "بحث عقلي في المبادئ الأولى والعلل الأساسية.",
+            "معرفة منهجية تنبني على الملاحظة والتجربة.", // Correct Answer
+            "دراسة القيم والأخلاق والمبادئ.",
+            "تأمل ذهني في معنى الوجود."
+        ],
+        answer: "معرفة منهجية تنبني على الملاحظة والتجربة.",
+        hint: "يتميز العلم بتركيزه على المنهج التجريبي القائم على الملاحظة والتجربة المباشرة."
+    },
+    {
+        question: 'كيف عرف كارل بوبر العلم في"أسطورة الإطار"؟',
+        options: [
+            "المعرفة القابلة للتكذيب بالدليل التجريبي.", // Correct Answer
+            "المعرفة المطلقة والنهائية.",
+            "البحث عن الحقيقة المطلقة.",
+            "التأمل في جوهر الأشياء."
+        ],
+        answer: "المعرفة القابلة للتكذيب بالدليل التجريبي.",
+        hint: "معيار القابلية للتكذيب هو حجر الزاوية في تمييز النظريات العلمية عن غيرها."
+    },
+    {
+        question: "ما التعريف الاصطلاحي الأقرب للفلسفة؟",
+        options: [
+            "البحث العقلي في المبادئ الأولى والعلل الأساسية.", // Correct Answer
+            "الملاحظة المنظمة للظواهر الطبيعية.",
+            "إجراء التجارب المخبرية.",
+            "القياس الكمي للبيانات."
+        ],
+        answer: "البحث العقلي في المبادئ الأولى والعلل الأساسية.",
+        hint: "الفلسفة تتجاوز الظواهر surface إلى البحث عن الأسس والمبادئ الكامنة وراءها."
+    },
+    {
+        question: 'كيف وصف أرسطو الفلسفة في"الميتافيزيقا"؟',
+        options: [
+            "علم العلل الأولى والمبادئ الكلية.", // Correct Answer
+            "معرفة قابلة للقياس.",
+            "نتاج للتجربة الحسية فقط.",
+            "دراسة للظواهر المتغيرة."
+        ],
+        answer: "علم العلل الأولى والمبادئ الكلية.",
+        hint: "الفلسفة عند أرسطو تبحث عن المبادئ والأسباب الأولى التي تفسر الوجود."
+    },
+    {
+        question: "ما الفرق الجوهري في الماهية بين العلم والفلسفة؟",
+        options: [
+            "العلم يدرس الكليات والفلسفة تدرس الجزئيات.",
+            "العلم يدرس الجزئيات والفلسفة تدرس الكليات.", // Correct Answer
+            "كلاهما يدرس نفس المجالات بنفس الطريقة.",
+            "الفلسفة تهتم بالتطبيقات العملية فقط."
+        ],
+        answer: "العلم يدرس الجزئيات والفلسفة تدرس الكليات.",
+        hint: "هذا الاختلاف في مستوى الدراسة (كلي مقابل جزئي) هو أحد أهم الفروق الأساسية."
+    },
+    {
+        question: "ما المنهج الأساسي الذي يعتمد عليه العلم؟",
+        options: [
+            "المنهج التجريبي.", // Correct Answer
+            "المنهج الجدلي.",
+            "التأمل الذهني المحض.",
+            "الحدس المباشر."
+        ],
+        answer: "المنهج التجريبي.",
+        hint: "يرتكز العلم على خطوات منهجية تبدأ بالملاحظة وتنتهي بالاختبار التجريبي."
+    },
+    {
+        question: "أي من العناصر التالية لا يعد جزءاً من المنهج التجريبي في العلم؟",
+        options: [
+            "الملاحظة المنظمة.",
+            "التجربة المخبرية.",
+            "التأمل الذهني المجرد.", // Correct Answer
+            "القياس الكمي."
+        ],
+        answer: "التأمل الذهني المجرد.",
+        hint: "التأمل الذهني المجرد دون ربط بالواقع التجريبي هو أقرب إلى المنهج الفلسفي."
+    },
+    {
+        question: 'من هو صاحب كتاب"الأورجانون الجديد" الذي أكد على الاستقراء التجريبي؟',
+        options: [
+            "فرانسيس بيكون.", // Correct Answer
+            "ديكارت.",
+            "كارل بوبر.",
+            "أينشتاين."
+        ],
+        answer: "فرانسيس بيكون.",
+        hint: "بيكون هو فيلسوف طرح منهجاً استقرائياً جديداً معارضاً للمنطق الأرسطي القديم."
+    },
+    {
+        question: "ما المنهج الأساسي الذي تعتمد عليه الفلسفة؟",
+        options: [
+            "المنهج التجريبي.",
+            "المنهج العقلي.", // Correct Answer
+            "القياس الإحصائي.",
+            "الملاحظة الميدانية."
+        ],
+        answer: "المنهج العقلي.",
+        hint: "تعتمد الفلسفة على قدرات العقل من استدلال وتحليل ونقد دون حاجة مباشرة للمختبر."
+    },
+    {
+        question: 'من هو الفيلسوف الذي قال:"الفلسفة تبدأ من الشك المنهجي للوصول إلى اليقين"؟',
+        options: [
+            "ديكارت.", // Correct Answer
+            "أرسطو.",
+            "الكندي.",
+            "الغزالي."
+        ],
+        answer: "ديكارت.",
+        hint: "الشك المنهجي هو نقطة البداية في فلسفة ديكارت للوصول إلى أساس يقيني للمعرفة."
+    },
+    {
+        question: "أي من الأمثلة التالية يوضح سؤالاً علمياً؟",
+        options: [
+            "ما معنى الحياة؟",
+            "ما طبيعة الخير والشر؟",
+            "كيف تسقط الأجسام؟", // Correct Answer
+            "ما حدود المعرفة الإنسانية؟"
+        ],
+        answer: "كيف تسقط الأجسام؟",
+        hint: "السؤال العلمي يتناول ظاهرة يمكن ملاحظتها وقياسها وإخضاعها للتجربة."
+    },
+    {
+        question: "أي من الأمثلة التالية يوضح سؤالاً فلسفياً؟",
+        options: [
+            "ما سرعة الضوء؟",
+            "ما مكونات الماء؟",
+            "ما ماهية الجاذبية وعلاقتها بالزمان والمكان؟", // Correct Answer
+            "كيف تعمل الخلية؟"
+        ],
+        answer: "ما ماهية الجاذبية وعلاقتها بالزمان والمكان؟",
+        hint: "السؤال الفلسفي يتناول الأسئلة الجوهرية حول طبيعة الأشياء وعلاقاتها الأساسية."
+    },
+    {
+        question: "أي من المجالات التالية يعد من مجالات العلم؟",
+        options: [
+            "الأنطولوجيا.",
+            "الفيزياء.", // Correct Answer
+            "الإبستمولوجيا.",
+            "الأكسيولوجيا."
+        ],
+        answer: "الفيزياء.",
+        hint: "الفيزياء تدرس الظواهر الطبيعية باستخدام المنهج العلمي التجريبي."
+    },
+    {
+        question: "أي من المجالات التالية يعد من مجالات الفلسفة؟",
+        options: [
+            "الكيمياء.",
+            "علم الأحياء.",
+            "الأنطولوجيا (علم الوجود).", // Correct Answer
+            "الرياضيات."
+        ],
+        answer: "الأنطولوجيا (علم الوجود).",
+        hint: "الأنطولوجيا تبحث في طبيعة الوجود نفسه، وهو سؤال مركزي في الفلسفة."
+    },
+    {
+        question: 'ما المجال الفلسفي الذي يهتم بدراسة"إمكانية المعرفة وحدودها"؟',
+        options: [
+            "الأنطولوجيا.",
+            "الإبستمولوجيا.", // Correct Answer
+            "الأكسيولوجيا.",
+            "المنطق."
+        ],
+        answer: "الإبستمولوجيا.",
+        hint: "الإبستمولوجيا أو نظرية المعرفة تبحث في مصادر المعرفة ومداها وحدودها."
+    },
+    {
+        question: 'ما المجال الفلسفي الذي يهتم بدراسة"القيم والأخلاق والجمال"؟',
+        options: [
+            "الأنطولوجيا.",
+            "الإبستمولوجيا.",
+            "الأكسيولوجيا.", // Correct Answer
+            "الميتافيزيقا."
+        ],
+        answer: "الأكسيولوجيا.",
+        hint: "الأكسيولوجيا هي الفلسفة التي تتعامل مع طبيعة القيم بأنواعها."
+    },
+    {
+        question: "أي من الخصائص تنطبق على نتائج العلم؟",
+        options: [
+            "تصورات كلية قابلة للتأويل.",
+            "قوانين كمية قابلة للقياس.", // Correct Answer
+            "أطر قيمية وأخلاقية.",
+            "تساؤلات مستمرة لا تنتهي."
+        ],
+        answer: "قوانين كمية قابلة للقياس.",
+        hint: "العلم ينتج قوانين وصيغ رياضية يمكن قياسها والتنبؤ من خلالها."
+    },
+    {
+        question: "أي من الخصائص تنطبق على نتائج الفلسفة؟",
+        options: [
+            "قوانين قابلة للتطبيق التقني.",
+            "تنبؤات دقيقة قابلة للاختبار.",
+            "تصورات كلية عن الوجود.", // Correct Answer
+            "معادلات رياضية دقيقة."
+        ],
+        answer: "تصورات كلية عن الوجود.",
+        hint: "الفلسفة تقدم رؤى وتصورات شاملة لفهم العالم والإنسان، وليس منتجات تقنية."
+    },
+    {
+        question: "ما معيار الصحة الرئيسي في العلم حسب الجدول المقارن؟",
+        options: [
+            "الاتساق المنطقي.",
+            "التطابق مع الواقع (التجربة).", // Correct Answer
+            "الشمولية والكلية.",
+            "العمق التحليلي."
+        ],
+        answer: "التطابق مع الواقع (التجربة).",
+        hint: "النظرية العلمية تثبت صحتها أو خطأها بمدى تطابقها مع نتائج التجربة والملاحظة."
+    },
+    {
+        question: "ما معيار الصحة الرئيسي في الفلسفة حسب الجدول المقارن؟",
+        options: [
+            "القابلية للتكذيب.",
+            "القدرة على التنبؤ.",
+            "الاتساق المنطقي والشمول.", // Correct Answer
+            "الإمكانية الإجرائية."
+        ],
+        answer: "الاتساق المنطقي والشمول.",
+        hint: "الفلسفة تهدف إلى بناء أنظمة فكرية متماسكة داخلياً وخالية من التناقضات."
+    },
+    {
+        question: "ما طبيعة المعرفة في العلم حسب الجدول المقارن؟",
+        options: [
+            "جدلية تعددية.",
+            "تراكمية تقدمية.", // Correct Answer
+            "ثابتة غير قابلة للتغيير.",
+            "حدسية مباشرة."
+        ],
+        answer: "تراكمية تقدمية.",
+        hint: "المعرفة العلمية تبني على ما سبقها، حيث تصحح النظريات القديمة أو توسعها."
+    },
+    {
+        question: "ما طبيعة المعرفة في الفلسفة حسب الجدول المقارن؟",
+        options: [
+            "تراكمية تقدمية.",
+            "جدلية تعددية.", // Correct Answer
+            "نهائية مطلقة.",
+            "تجريبية بحتة."
+        ],
+        answer: "جدلية تعددية.",
+        hint: "الفلسفة تتسم بوجود تيارات ومدارس متعددة ومتباينة حول الأسئلة الأساسية نفسها."
+    },
+    {
+        question: "ما لغة العلم السائدة حسب الجدول المقارن؟",
+        options: [
+            "لغة كيفيّة مفاهيمية.",
+            "لغة كميّة رقمية.", // Correct Answer
+            "لغة شعرية وجدانية.",
+            "لغة رمزية غامضة."
+        ],
+        answer: "لغة كميّة رقمية.",
+        hint: "العلم يعبر عن نتائجه بلغة الرياضيات والإحصاء والقياس الدقيق."
+    },
+    {
+        question: "ما لغة الفلسفة السائدة حسب الجدول المقارن؟",
+        options: [
+            "لغة كميّة رقمية.",
+            "لغة كيفيّة مفاهيمية.", // Correct Answer
+            "لغة معادلات رياضية.",
+            "لغة رموز كيميائية."
+        ],
+        answer: "لغة كيفيّة مفاهيمية.",
+        hint: "الفلسفة تتعامل مع المفاهيم المجردة التي تحتاج إلى تحليل وتوضيح لغوي."
+    },
+    {
+        question: 'كيف نظر الغزالي إلى الفلسفة في"المنقذ من الضلال"؟',
+        options: [
+            "رفضها بشكل مطلق.",
+            "قبلها بشكل مطلق.",
+            "قسمها وقبل ما وافق الشرع ورفض ما خالفه.", // Correct Answer
+            "اعتبرها بديلاً عن الدين."
+        ],
+        answer: "قسمها وقبل ما وافق الشرع ورفض ما خالفه.",
+        hint: "موقف الغزالي كان نقدياً تحليلياً، حيث ميز بين أقسام الفلسفة المختلفة."
+    },
+    {
+        question: 'ما موقف ابن خلدون من العلوم الطبيعية كما ورد في"المقدمة"؟',
+        options: [
+            "أنها من الفلسفة ويحظرها الشرع كلياً.",
+            "أنها من الفلسفة لكن الشرع يحظر ما يخالف النقل الصحيح.", // Correct Answer
+            "أنها لا علاقة لها بالفلسفة.",
+            "أنها أعلى منزلة من العلوم الشرعية."
+        ],
+        answer: "أنها من الفلسفة لكن الشرع يحظر ما يخالف النقل الصحيح.",
+        hint: "ابن خلدون قبل بالعلوم الطبيعية النافعة مع التحذير من ما يعارض العقيدة الإسلامية."
+    },
+    {
+        question: "أي من الكتب التالية لمحمد عابد الجابري؟",
+        options: [
+            '"نقد العقل العلمي".', // Correct Answer
+            '"بنية الثورات العلمية".',
+            '"تهافت الفلاسفة".',
+            '"الشفاء".'
+        ],
+        answer: '"نقد العقل العلمي".',
+        hint: "الجابري مفكر معاصر من المغرب اشتهر بمشروعه في 'نقد العقل العربي'."
+    },
+    {
+        question: "أي من الكتب التالية لابن سينا؟",
+        options: [
+            '"المنقذ من الضلال".',
+            '"المقدمة".',
+            '"الشفاء".', // Correct Answer
+            '"فصل المقال".'
+        ],
+        answer: '"الشفاء".',
+        hint: '"الشفاء" هو موسوعة فلسفية وعلمية ضخمة لابن سينا.'
+    },
+    {
+        question: "أي من الكتب التالية ينتقد الفلسفة من منظور إسلامي؟",
+        options: [
+            '"الشفاء" لابن سينا.',
+            '"تهافت الفلاسفة" للغزالي.', // Correct Answer
+            '"فصل المقال" لابن رشد.',
+            '"المقدمة" لابن خلدون.'
+        ],
+        answer: '"تهافت الفلاسفة" للغزالي.',
+        hint: '"تهافت الفلاسفة" هو نقد شهير للغزالي لبعض أفكار الفلاسفة المسلمين.'
+    },
+    {
+        question: "ما طبيعة العلاقة بين العلم والفلسفة كما وردت في الخلاصة؟",
+        options: [
+            "تناقض تام.",
+            "تطابق كامل.",
+            "تكامل مع تباين.", // Correct Answer
+            "عدم وجود أي علاقة."
+        ],
+        answer: "تكامل مع تباين.",
+        hint: "رغم الاختلافات المنهجية، فإن كلا المجالين يسهمان في فهم العالم والإنسان."
+    },
+    {
+        question: "ما السؤال الذي يجيب عليه العلم بشكل أساسي؟",
+        options: [
+            "لماذا؟",
+            "كيف؟", // Correct Answer
+            "لمَنْ؟",
+            "إلى أين؟"
+        ],
+        answer: "كيف؟",
+        hint: "العلم يصف الظواهر ويحاول فهم آلية عملها وتنبؤ سلوكها."
+    },
+    {
+        question: "ما السؤال الذي تجيب عليه الفلسفة بشكل أساسي؟",
+        options: [
+            "كيف؟",
+            "كم؟",
+            "لماذا؟", // Correct Answer
+            "متى؟"
+        ],
+        answer: "لماذا؟",
+        hint: "الفلسفة تبحث عن المعاني والأسباب والأغراض الكامنة وراء الظواهر."
+    },
+    {
+        question: "أي من العلوم التالية كان جزءاً من الفلسفة ثم استقل عنها؟",
+        options: [
+            "الفيزياء.", // Correct Answer
+            "الأنطولوجيا.",
+            "الإبستمولوجيا.",
+            "الأكسيولوجيا."
+        ],
+        answer: "الفيزياء.",
+        hint: "معظم العلوم الطبيعية انفصلت عن الفلسفة مع تطور المنهج التجريبي."
+    },
+    {
+        question: "في عملية اتخاذ القرار، ما دور البيانات العلمية؟",
+        options: [
+            "تقديم الأطر القيمية.",
+            "تحديد الأهداف النهائية.",
+            "تقديم الحقائق والوقائع.", // Correct Answer
+            "استبدال البعد الأخلاقي."
+        ],
+        answer: "تقديم الحقائق والوقائع.",
+        hint: "العلم يقدم المعلومات والحقائق، بينما الفلسفة تقدم الإطار القيمي لاتخاذ القرار."
+    },
+    {
+        question: "في عملية اتخاذ القرار، ما دور الأطر الفلسفية؟",
+        options: [
+            "تقديم القياسات الدقيقة.",
+            "تقديم البيانات الإحصائية.",
+            "تقديم القيم والأهداف.", // Correct Answer
+            "إجراء التجارب المخبرية."
+        ],
+        answer: "تقديم القيم والأهداف.",
+        hint: "الفلسفة تساعد في تحديد الغايات والقيم التي توجه استخدامنا للمعارف العلمية."
+    },
+    {
+        question: "ما المصدر المعرفي الرئيسي للعلم حسب الجدول المقارن؟",
+        options: [
+            "العقل والتأمل.",
+            "الحدس والإلهام.",
+            "الحواس والتجربة.", // Correct Answer
+            "النقل والوحي."
+        ],
+        answer: "الحواس والتجربة.",
+        hint: "المعرفة العلمية تستمد من الواقع المادي الملموس عبر الحواس والأدوات."
+    },
+    {
+        question: "ما المصدر المعرفي الرئيسي للفلسفة حسب الجدول المقارن؟",
+        options: [
+            "الحواس والتجربة.",
+            "العقل والتأمل.", // Correct Answer
+            "القياس الكمي.",
+            "الملاحظة المنظمة."
+        ],
+        answer: "العقل والتأمل.",
+        hint: "الفلسفة تعتمد على التفكير المجرد والتحليل المنطقي بغض النظر عن التجربة المباشرة."
+    },
+    {
+        question: "أي من الخصائص تميز النتائج العلمية؟",
+        options: [
+            "قابلة للتأويل بطرق متعددة.",
+            "قابلة للتطبيق المباشر.", // Correct Answer
+            "نهائية وغير قابلة للتغيير.",
+            "معزولة عن التقنية."
+        ],
+        answer: "قابلة للتطبيق المباشر.",
+        hint: "الاكتشافات العلمية تترجم عادة إلى تطبيقات تقنية تخدم الإنسان."
+    },
+    {
+        question: "أي من الخصائص تميز النتائج الفلسفية؟",
+        options: [
+            "قابلة للتحويل إلى معادلات.",
+            "قابلة للاختبار في المختبر.",
+            "قابلة للتأويل والمناقشة.", // Correct Answer
+            "قابلة للقياس الكمي."
+        ],
+        answer: "قابلة للتأويل والمناقشة.",
+        hint: "النصوص الفلسفية تظل قابلة للتأويل والقراءات المتعددة عبر العصور."
+    },
+    {
+        question: "ما التطبيق العملي للتمييز بين العلم والفلسفة في التعليم؟",
+        options: [
+            "تدريس العلوم بالتجربة، والفلسفة بالحوار.", // Correct Answer
+            "تدريس كلاهما بنفس الطريقة.",
+            "إلغاء تدريس الفلسفة.",
+            "الاعتماد على الحفظ فقط."
+        ],
+        answer: "تدريس العلوم بالتجربة، والفلسفة بالحوار.",
+        hint: "طبيعة كل مجال تفرض أسلوباً تعليمياً مناسباً: التجربة للعلم، والحوار والنقاش للفلسفة."
+    }
+];
+
+// مثال على كيفية استخدام المصفوفة
+// console.log(scienceVsPhilosophyQuiz.length); // 40
+// console.log(scienceVsPhilosophyQuiz[0].question); 
+
+    // متغيرات التطبيق
+    let currentQuestion = 0;
+    let userAnswers = Array(questions.length).fill(null);
+    let markedQuestions = Array(questions.length).fill(false);
+    let timeLeft = 2400; // 30 دقيقة بالثواني
+    let timerInterval;
+    let quizStarted = false;
+
+    // عناصر DOM
+    const startScreen = document.getElementById('start-screen');
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultsScreen = document.getElementById('results-screen');
+    const startBtn = document.getElementById('start-btn');
+    const timeDisplay = document.getElementById('time');
+    const currentQuestionDisplay = document.getElementById('current-question');
+    const totalQuestionsDisplay = document.getElementById('total-questions');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const hintBtn = document.getElementById('hint-btn');
+    const hintText = document.getElementById('hint-text');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const markBtn = document.getElementById('mark-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const questionNumbers = document.getElementById('question-numbers');
+    const correctAnswersDisplay = document.getElementById('correct-answers');
+    const totalAnswersDisplay = document.getElementById('total-answers');
+    const percentageDisplay = document.getElementById('percentage');
+    const answersReview = document.getElementById('answers-review');
+    const restartBtn = document.getElementById('restart-btn');
+
+    // تهيئة التطبيق
+    function init() {
+        console.log("تم تحميل التطبيق بنجاح");
+        
+        // تعيين عدد الأسئلة الكلي
+        totalQuestionsDisplay.textContent = questions.length;
+        
+        // إنشاء أرقام الأسئلة
+        createQuestionNumbers();
+        
+        // إضافة مستمعي الأحداث
+        startBtn.addEventListener('click', startQuiz);
+        prevBtn.addEventListener('click', showPreviousQuestion);
+        nextBtn.addEventListener('click', showNextQuestion);
+        markBtn.addEventListener('click', toggleMarkQuestion);
+        submitBtn.addEventListener('click', showResults);
+        hintBtn.addEventListener('click', toggleHint);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        console.log("تم تهيئة التطبيق بنجاح");
+    }
+
+    // إنشاء أرقام الأسئلة
+    function createQuestionNumbers() {
+        questionNumbers.innerHTML = '';
+        
+        for (let i = 0; i < questions.length; i++) {
+            const number = document.createElement('div');
+            number.className = 'number';
+            number.textContent = i + 1;
+            number.dataset.index = i;
+            
+            number.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                goToQuestion(index);
+            });
+            
+            questionNumbers.appendChild(number);
+        }
+    }
+
+    // بدء الاختبار
+    function startQuiz() {
+        console.log("تم النقر على زر بدء الاختبار");
+        
+        // إخفاء شاشة البداية وإظهار شاشة الاختبار
+        startScreen.classList.remove('active');
+        quizScreen.classList.add('active');
+        
+        // تحديث نص وصف الاختبار في شاشة البداية
+        document.querySelector('#start-screen p').textContent = `يتكون هذا الاختبار من ${questions.length} أسئلة حول مفهوم العلم في اللغة العربية واشتقاقاته`;
+        
+        // بدء المؤقت
+        startTimer();
+        
+        // عرض السؤال الأول
+        showQuestion(currentQuestion);
+        
+        console.log("بدأ الاختبار بنجاح");
+    }
+
+    // بدء المؤقت
+    function startTimer() {
+        updateTimerDisplay();
+        
+        timerInterval = setInterval(function() {
+            timeLeft--;
+            updateTimerDisplay();
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                showResults();
+            }
+        }, 1000);
+    }
+
+    // تحديث عرض المؤقت
+    function updateTimerDisplay() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // عرض السؤال الحالي
+    function showQuestion(index) {
+        currentQuestion = index;
+        const question = questions[index];
+        
+        // تحديث رقم السؤال الحالي
+        currentQuestionDisplay.textContent = index + 1;
+        
+        // عرض نص السؤال
+        questionText.textContent = question.question;
+        
+        // عرض الخيارات
+        optionsContainer.innerHTML = '';
+        
+        question.options.forEach(option => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'option';
+            
+            if (userAnswers[index] === option) {
+                optionElement.classList.add('selected');
+            }
+            
+            optionElement.textContent = option;
+            
+            optionElement.addEventListener('click', function() {
+                selectOption(option);
+            });
+            
+            optionsContainer.appendChild(optionElement);
+        });
+        
+        // تحديث حالة زر التوضيح
+        hintText.classList.remove('show');
+        hintBtn.textContent = 'إظهار التوضيح';
+        
+        // تحديث أرقام الأسئلة
+        updateQuestionNumbers();
+        
+        // تحديث حالة أزرار التنقل
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === questions.length - 1;
+        
+        // تحديث حالة زر المراجعة لاحقًا
+        markBtn.textContent = markedQuestions[index] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+    }
+
+    // تحديد خيار
+    function selectOption(option) {
+        userAnswers[currentQuestion] = option;
+        showQuestion(currentQuestion);
+    }
+
+    // تبديل عرض التوضيح
+    function toggleHint() {
+        const isHintVisible = hintText.classList.contains('show');
+        
+        if (isHintVisible) {
+            hintText.classList.remove('show');
+            hintBtn.textContent = 'إظهار التوضيح';
+        } else {
+            hintText.textContent = questions[currentQuestion].hint;
+            hintText.classList.add('show');
+            hintBtn.textContent = 'إخفاء التوضيح';
+        }
+    }
+
+    // الانتقال إلى السؤال السابق
+    function showPreviousQuestion() {
+        if (currentQuestion > 0) {
+            showQuestion(currentQuestion - 1);
+        }
+    }
+
+    // الانتقال إلى السؤال التالي
+    function showNextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+            showQuestion(currentQuestion + 1);
+        }
+    }
+
+    // الانتقال إلى سؤال محدد
+    function goToQuestion(index) {
+        showQuestion(index);
+    }
+
+    // تبديل حالة المراجعة لاحقًا
+    function toggleMarkQuestion() {
+        markedQuestions[currentQuestion] = !markedQuestions[currentQuestion];
+        markBtn.textContent = markedQuestions[currentQuestion] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+        updateQuestionNumbers();
+    }
+
+    // تحديث أرقام الأسئلة
+    function updateQuestionNumbers() {
+        const numbers = document.querySelectorAll('.number');
+        
+        numbers.forEach((number, index) => {
+            number.classList.remove('current', 'answered', 'marked');
+            
+            if (index === currentQuestion) {
+                number.classList.add('current');
+            }
+            
+            if (userAnswers[index] !== null) {
+                number.classList.add('answered');
+            }
+            
+            if (markedQuestions[index]) {
+                number.classList.add('marked');
+            }
+        });
+    }
+
+    // عرض النتائج
+    function showResults() {
+        // إيقاف المؤقت
+        clearInterval(timerInterval);
+        
+        // إخفاء شاشة الاختبار وإظهار شاشة النتائج
+        quizScreen.classList.remove('active');
+        resultsScreen.classList.add('active');
+        
+        // حساب النتائج
+        let correctCount = 0;
+        
+        questions.forEach((question, index) => {
+            if (userAnswers[index] === question.answer) {
+                correctCount++;
+            }
+        });
+        
+        const percentage = Math.round((correctCount / questions.length) * 100);
+        
+        // عرض النتائج
+        correctAnswersDisplay.textContent = correctCount;
+        totalAnswersDisplay.textContent = questions.length;
+        percentageDisplay.textContent = `${percentage}%`;
+        
+        // رسم المخطط البياني
+        drawChart(correctCount, questions.length - correctCount);
+        
+        // عرض مراجعة الإجابات
+        displayAnswersReview();
+    }
+
+    // رسم المخطط البياني
+    function drawChart(correct, incorrect) {
+        const ctx = document.getElementById('results-chart').getContext('2d');
+        
+        // إذا كان هناك مخطط بياني موجود، قم بتدميره أولاً
+        if (window.resultChart) {
+            window.resultChart.destroy();
+        }
+        
+        window.resultChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['الإجابات الصحيحة', 'الإجابات الخاطئة'],
+                datasets: [{
+                    data: [correct, incorrect],
+                    backgroundColor: ['#2ecc71', '#e74c3c'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    }
+
+    // عرض مراجعة الإجابات
+    function displayAnswersReview() {
+        answersReview.innerHTML = '';
+        
+        questions.forEach((question, index) => {
+            const answerItem = document.createElement('div');
+            const isCorrect = userAnswers[index] === question.answer;
+            
+            answerItem.className = `answer-item ${isCorrect ? 'correct' : 'incorrect'}`;
+            
+            let reviewContent = `
+                <div class="question-review">${index + 1}. ${question.question}</div>
+                <div class="user-answer">إجابتك: ${userAnswers[index] || 'لم تجب'}</div>
+                <div class="correct-answer">الإجابة الصحيحة: ${question.answer}</div>
+            `;
+            
+            if (!isCorrect && userAnswers[index]) {
+                reviewContent += `<div class="hint-review">التوضيح: ${question.hint}</div>`;
+            }
+            
+            answerItem.innerHTML = reviewContent;
+            answersReview.appendChild(answerItem);
+        });
+    }
+
+    // إعادة الاختبار
+    function restartQuiz() {
+        // إعادة تعيين المتغيرات
+        currentQuestion = 0;
+        userAnswers = Array(questions.length).fill(null);
+        markedQuestions = Array(questions.length).fill(false);
+        timeLeft = 2400; // إعادة تعيين الوقت إلى 30 دقيقة
+        
+        // إعادة تعيين الشاشات
+        resultsScreen.classList.remove('active');
+        startScreen.classList.add('active');
+        
+        // إعادة تعيين المخطط البياني
+        if (window.resultChart) {
+            window.resultChart.destroy();
+        }
+    }
+
+    // تهيئة التطبيق عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("تم تحميل DOM بالكامل");
+        init();
+    });
+    </script>
+</body>
+</html>

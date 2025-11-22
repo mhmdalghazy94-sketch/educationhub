@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الدراسة: التعريف الاصطلاحي للعلم</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    /* إعدادات عامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Segoe UI', Tahoma, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #3494E6, #EC6EAD);
+    direction: rtl;
+}
+
+/* الترويسة */
+header {
+    background: linear-gradient(135deg, #3494E6, #EC6EAD);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+/* التنقل */
+#main-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+#main-nav li {
+    margin: 0 0.5rem;
+}
+
+#main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+#main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* المحتوى الرئيسي */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.section {
+    margin-bottom: 3rem;
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.section h2 {
+    color: #2c5c3f;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #eaeaea;
+}
+
+.intro-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.subtitle {
+    color: #666;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+.content-box {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    border-right: 4px solid #3d8b5f;
+}
+
+.content-box h3 {
+    color: #2c5c3f;
+    margin-bottom: 0.5rem;
+}
+
+/* العناصر التفصيلية */
+.explanation h4 {
+    color: #2c5c3f;
+    margin-bottom: 0.5rem;
+}
+
+.explanation ul {
+    padding-right: 1.5rem;
+}
+
+.explanation li {
+    margin-bottom: 0.5rem;
+}
+
+.quotes {
+    list-style-type: none;
+    padding-right: 0;
+}
+
+.quotes li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.quote {
+    background-color: #e9f7ef;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-style: italic;
+}
+
+.quote-source {
+    margin-top: 1rem;
+    padding-right: 1rem;
+    border-right: 3px solid #3d8b5f;
+}
+
+.detail-item {
+    margin-bottom: 1.5rem;
+}
+
+.detail-item h4 {
+    color: #2c5c3f;
+    margin-bottom: 0.5rem;
+}
+
+.types-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.type-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid #3d8b5f;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.type-card h4, .type-card h5 {
+    color: #2c5c3f;
+    margin-bottom: 0.75rem;
+}
+
+.note-box {
+    background-color: #fff9e6;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin-top: 1.5rem;
+    border-right: 4px solid #e6b400;
+}
+
+.note-box h4 {
+    color: #b38f00;
+    margin-bottom: 0.5rem;
+}
+
+/* مقارنة الأشاعرة والمعتزلة */
+.comparison-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.viewpoint {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.viewpoint h3 {
+    background-color: #3d8b5f;
+    color: white;
+    padding: 1rem;
+    margin: 0;
+    text-align: center;
+}
+
+.viewpoint-content {
+    padding: 1.5rem;
+}
+
+.evidence {
+    background-color: #f0f7f3;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.evidence h4 {
+    color: #2c5c3f;
+    margin-bottom: 0.5rem;
+}
+
+/* خصائص العلم الحديث */
+.features-list {
+    list-style-type: none;
+    padding-right: 0;
+}
+
+.features-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.features-list h4 {
+    color: #2c5c3f;
+    margin-bottom: 0.5rem;
+}
+
+.example-box {
+    background-color: #e6f4ff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin-top: 1.5rem;
+    border-right: 4px solid #4a90e2;
+}
+
+.example-box h4 {
+    color: #2c5c3f;
+    margin-bottom: 0.5rem;
+}
+
+/* الجدول */
+.table-container {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: right;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #3d8b5f;
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #e9f7ef;
+}
+
+/* المصادر */
+.sources-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.source-category {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid #3d8b5f;
+}
+
+.source-category h3 {
+    color: #2c5c3f;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.source-category ul {
+    padding-right: 1rem;
+}
+
+.source-category li {
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0;
+}
+
+/* الملخص */
+.summary-box {
+    background: linear-gradient(135deg, #f0f7f3, #e6f4ea);
+    padding: 2rem;
+    border-radius: 8px;
+    border-right: 4px solid #3d8b5f;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* التذييل */
+footer {
+    background-color: #2c5c3f;
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    position: relative;
+}
+
+#scroll-top {
+    background-color: #3d8b5f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+#scroll-top:hover {
+    background-color: #4da374;
+}
+
+/* التجاوب مع الشاشات المختلفة */
+@media (max-width: 768px) {
+    #main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #main-nav li {
+        margin: 0.25rem 0;
+    }
+    
+    .comparison-container,
+    .types-container,
+    .sources-container {
+        grid-template-columns: 1fr;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    .section {
+        padding: 1.5rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>دليل الدراسة: التعريف الاصطلاحي للعلم</h1>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#intro">المقدمة</a></li>
+                <li><a href="#legal">المنظور الشرعي</a></li>
+                <li><a href="#philosophy">المنظور الفلسفي</a></li>
+                <li><a href="#theology">علم الكلام</a></li>
+                <li><a href="#modern">المنظور الحديث</a></li>
+                <li><a href="#comparison">المقارنة</a></li>
+                <li><a href="#sources">المصادر</a></li>
+                <li><a href="#summary">الخلاصة</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="section">
+            <div class="intro-header">
+                <h2>💎 التعريف الاصطلاحي للعلم (من منظورات متعددة)</h2>
+                <p class="subtitle">نسخة مدققة ومفصلة</p>
+            </div>
+            <p>بناءً على طلبك، سأقدم تعريف العلم اصطلاحًا من منظورات متعددة (شرعية، عقلية، فلسفية، حديثة) بتفصيل طويل، مدعومًا بالشواهد والمصادر والاقتباسات.</p>
+            
+            <div class="content-box">
+                <h3>📘 تمهيد: العلاقة بين التعريف اللغوي والاصطلاحي</h3>
+                <p>يقوم التعريف الاصطلاحي للعلم على أساسه اللغوي الذي يدور حول "الإدراك الجازم المميز للحقيقة"، لكنه يضيف عليه ضوابط وشروطًا تختلف باختلاف مجال استخدامه والغاية منه. فما يُعتبر علمًا في الشريعة قد يختلف عن شروطه في الفلسفة أو المناهج الحديثة.</p>
+            </div>
+        </section>
+
+        <section id="legal" class="section">
+            <h2>١. 📖 التعريف في علم أصول الفقه والمنظور الشرعي</h2>
+            <p>هذا التعريف هو الأكثر دقة واشتراطًا في التراث الإسلامي، حيث يميز بين العلم والظن والجهل، خاصة في الأمور الاعتقادية والتكليفية.</p>
+            
+            <div class="content-box">
+                <h3>التعريف الأصولي المباشر</h3>
+                <p>هو "إدراك الشيء على ما هو عليه إدراكًا جازمًا مطابقًا للواقع".</p>
+                
+                <div class="explanation">
+                    <h4>شرح التعريف:</h4>
+                    <ul>
+                        <li><strong>"إدراك الشيء":</strong> يشمل إدراك الحواس (كاللون والطعم) وإدراك المعاني (كالإيمان والعدل).</li>
+                        <li><strong>"على ما هو عليه":</strong> شرط المطابقة، أي أن يكون الإدراك مطابقًا للواقع الخارجي، ويخرج بذلك الجهل المركب (الاعتقاد الخاطئ مع الجزم به).</li>
+                        <li><strong>"إدراكًا جازمًا":</strong> هو الشرط الأهم، أي يقينًا لا يخالطه شك أو احتمال معتبر. وهذا ما يميزه عن الظن والوهم.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h3>الاستشهاد بالمصادر الأصولية</h3>
+                <ul class="quotes">
+                    <li>يقول الإمام الآمدي في "الإحكام في أصول الأحكام": <span class="quote">"العلم: اعتقاد الشيء على ما هو به مع الجزم به".</span></li>
+                    <li>ويؤكد الغزالي في "المستصفى" على عنصر الجزم والمطابقة للواقع.</li>
+                    <li>ويقول ابن الحاجب في "مختصر المنتهى الأصولي": <span class="quote">"هو الاعتقاد الجازم المطابق للواقع".</span></li>
+                </ul>
+            </div>
+            
+            <div class="content-box">
+                <h3>الأدلة والتفاصيل</h3>
+                
+                <div class="detail-item">
+                    <h4>تمييز العلم عن الظن:</h4>
+                    <p>الظن هو ترجيح أحد الاحتمالين دون جزم تام. وقد ذم القرآن اتباع الظن في أمور العقيدة فقال: ﴿إِنْ يَتَّبِعُونَ إِلَّا الظَّنَّ وَإِنْ هُمْ إِلَّا يَخْرُصُونَ﴾ [الأنعام: 116].</p>
+                </div>
+                
+                <div class="detail-item">
+                    <h4>أنواع العلم في الاصطلاح الشرعي:</h4>
+                    <div class="types-container">
+                        <div class="type-card">
+                            <h5>العلم الضروري</h5>
+                            <p>ما يحصل بلا تكلف أو استدلال، كالعلم بأن النار محرقة.</p>
+                        </div>
+                        <div class="type-card">
+                            <h5>العلم النظري</h5>
+                            <p>ما يحتاج إلى فكر ونظر واستدلال، كالعلم بوجود الله تعالى من خلال النظر في المخلوقات.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophy" class="section">
+            <h2>٢. 🧠 التعريف في المنطق والفلسفة الإسلامية</h2>
+            <p>ينظر المنطقيون والفلاسفة إلى العلم من زاوية كيفية حصوله في الذهن وعلاقته بالمعلوم.</p>
+            
+            <div class="content-box">
+                <h3>التعريف المنطقي</h3>
+                <p>هو "صورة الشيء في العقل" أو "حصول صورة الشيء في العقل".</p>
+                <p class="quote-source">يقول السعد التفتازاني في "شرح المقاصد": <span class="quote">"العلم: صورة الشيء المعلوم في نفس العالم".</span></p>
+            </div>
+            
+            <div class="content-box">
+                <h3>التفصيل الفلسفي (علم الحكمة)</h3>
+                <p>يقسم الفلاسفة العلم إلى:</p>
+                
+                <div class="types-container">
+                    <div class="type-card">
+                        <h4>العلم الحضوري (أو البسيط)</h4>
+                        <p>هو حضور حقيقة الشيء لدى العالم من غير توسط صورة ذهنية. مثل علمك بذاتك أو بأحوالك النفسية (كالحزن والفرح).</p>
+                    </div>
+                    <div class="type-card">
+                        <h4>العلم الحصولي (أو المركب)</h4>
+                        <p>هو حصول صورة الشيء في الذهن عبر الحواس أو التصور. مثل علمك بوجود جبل إيفرست (Everest).</p>
+                    </div>
+                </div>
+                
+                <div class="note-box">
+                    <h4>ملاحظة مهمة:</h4>
+                    <p>يرفض العديد من متكلمي الأشاعرة تعريف الفلاسفة القائل بأنه "صورة الشيء في العقل"، ويفضلون تعريفه بأنه "نسبة بين العالم والمعلوم" أو "صفة تقتضي انكشاف المعلوم".</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="theology" class="section">
+            <h2>٣. ⚖️ التعريف عند الأشاعرة والمعتزلة (علم الكلام)</h2>
+            <p>دار خلاف كبير بين المدرستين حول ماهية العلم وعلاقته بالعالم (الإنسان).</p>
+            
+            <div class="comparison-container">
+                <div class="viewpoint">
+                    <h3>موقف الأشاعرة</h3>
+                    <div class="viewpoint-content">
+                        <p>العلم "عرض قائم بالعالم (بالقلب أو النفس)". أي أنه صفة زائدة على الذات، تقوم بها، وتزول بزوالها.</p>
+                        <div class="evidence">
+                            <h4>الدليل:</h4>
+                            <p>نرى الإنسان يتعلم فينتقل من الجهل إلى العلم، وهذا الانقلاب دليل على حدوث صفة العلم فيه.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="viewpoint">
+                    <h3>موقف المعتزلة</h3>
+                    <div class="viewpoint-content">
+                        <p>العلم "هو المعلوم نفسه" أو "معنى قائم بالذات". فهم لا يرون أن العلم صفة مستقلة، بل هو كشف للمعلوم في الذهن.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h3>الاستشهاد بالمصادر الكلامية</h3>
+                <ul class="quotes">
+                    <li>يقول الإيجي في "المواقف في علم الكلام": <span class="quote">"العلم عندنا عرض موجود يقوم بالعالم".</span></li>
+                    <li>ويقول القاضي عبد الجبار (معتزلي) في "المغني في أبواب التوحيد والعدل": <span class="quote">"العلم هو المعنى القائم بنا الذي هو الكشف".</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="modern" class="section">
+            <h2>٤. 🔬 التعريف في المنظور الحديث وعلوم العصر (Science)</h2>
+            <p>مع تطور المناهج العلمية، ظهرت تعريفات للعلم (Science) تركز على المنهج التجريبي والطبيعة التراكمية للنظرية العلمية.</p>
+            
+            <div class="content-box">
+                <h3>التعريف الإجرائي (المنهجي)</h3>
+                <p>"هو المعرفة المنظمة التي يتم الحصول عليها عبر خطوات المنهج العلمي (الملاحظة، والتجربة، والقياس، وصياغة الفرضيات، والاختبار)".</p>
+                
+                <div class="detail-item">
+                    <h4>الفرق بين العلم (Science) والمعرفة (Knowledge):</h4>
+                    <p>العلم جزء من المعرفة، لكنه يتميز بمنهجيته التجريبية القابلة للاختبار والتكذيب.</p>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h3>خصائص العلم الحديث (حسب كارل بوبر وغيره)</h3>
+                <ul class="features-list">
+                    <li>
+                        <h4>القدرة على التكذيب (Falsifiability):</h4>
+                        <p>أي أن تكون النظرية قابلة للدحض بالدليل التجريبي.</p>
+                    </li>
+                    <li>
+                        <h4>الطبيعة التراكمية والتقدمية:</h4>
+                        <p>العلم يبني على ما سبقه.</p>
+                    </li>
+                    <li>
+                        <h4>الموضوعية:</h4>
+                        <p>السعي لفصل ذاتية الباحث عن نتائج البحث.</p>
+                    </li>
+                </ul>
+                
+                <div class="example-box">
+                    <h4>مثال توضيحي:</h4>
+                    <p>نظرية الجاذبية لنيوتن ثم أينشتاين هي "علم" لأنها بنيت على ملاحظات ورياضيات وقدمت تنبؤات قابلة للاختبار.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="section">
+            <h2>٥. 📚 مقارنة بين التعريفات في جدول توضيحي</h2>
+            <p>يوضح الجدول التالي الفروقات بين التعريفات المختلفة للعلم من مختلف المنظورات:</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المنظور</th>
+                            <th>التعريف الاصطلاحي</th>
+                            <th>الركيزة الأساسية</th>
+                            <th>مثال</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>أصول الفقه</td>
+                            <td>إدراك جازم مطابق للواقع.</td>
+                            <td>اليقين والموافقة للواقع.</td>
+                            <td>العلم بوجوب الصلاة.</td>
+                        </tr>
+                        <tr>
+                            <td>المنطق</td>
+                            <td>صورة الشيء في العقل.</td>
+                            <td>حصول الصورة الذهنية.</td>
+                            <td>تصور شكل التفاحة.</td>
+                        </tr>
+                        <tr>
+                            <td>علم الكلام (أشاعرة)</td>
+                            <td>عرض قائم بالعالم (صفة).</td>
+                            <td>كونه صفة زائدة على الذات.</td>
+                            <td>انتقال الشخص من الجهل إلى العلم.</td>
+                        </tr>
+                        <tr>
+                            <td>المنظور الحديث</td>
+                            <td>المعرفة المنظمة عبر المنهج العلمي.</td>
+                            <td>المنهج التجريبي والقابلية للتكذيب.</td>
+                            <td>نظرية النسبية.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="sources" class="section">
+            <h2>٦. 🏛️ مصادر ومراجع للاستزادة</h2>
+            <p>للبحث بشكل أعمق في كل منظور:</p>
+            
+            <div class="sources-container">
+                <div class="source-category">
+                    <h3>في الأصول والشرع:</h3>
+                    <ul>
+                        <li>"الإحكام في أصول الأحكام" للآمدي.</li>
+                        <li>"المستصفى" للغزالي.</li>
+                    </ul>
+                </div>
+                
+                <div class="source-category">
+                    <h3>في المنطق والفلسفة:</h3>
+                    <ul>
+                        <li>"شرح المقاصد" للسعد التفتازاني.</li>
+                        <li>"الحكمة المتعالية" لصدر الدين الشيرازي (ملاصدرا).</li>
+                    </ul>
+                </div>
+                
+                <div class="source-category">
+                    <h3>في علم الكلام:</h3>
+                    <ul>
+                        <li>"المواقف في علم الكلام" للإيجي.</li>
+                        <li>"المغني" للقاضي عبد الجبار (لمدرسة المعتزلة).</li>
+                    </ul>
+                </div>
+                
+                <div class="source-category">
+                    <h3>في فلسفة العلم الحديث:</h3>
+                    <ul>
+                        <li>"بنية الثورات العلمية" لتوماس كون.</li>
+                        <li>"أسس فلسفة العلم" لكارل بوبر.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary" class="section">
+            <h2>💎 الخلاصة</h2>
+            <div class="summary-box">
+                <p>يتجلى من هذا التفصيل أن تعريف العلم اصطلاحًا ليس تعريفًا واحدًا جامدًا، بل هو مرآة تعكس الرؤية الكونية والإبستمولوجية (المعرفية) للمجال الذي يستخدم فيه. فبينما يشترط الأصولي الجزم والمطابقة لبناء الأحكام، يركز المنطقي على الصورة الذهنية، ويهتم عالم الكلام بطبيعة هذه الصفة، بينما يهتم العالم الحديث بمنهجية الوصول إليه وقابليته للاختبار.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>دليل الدراسة - التعريف الاصطلاحي للعلم</p>
+        <button id="scroll-top">↑ العودة إلى الأعلى</button>
+    </footer>
+    <script>
+    // تنفيذ التنقل السلس
+document.addEventListener('DOMContentLoaded', function() {
+    // إضافة تأثير التنقل السلس للروابط الداخلية
+    const navLinks = document.querySelectorAll('#main-nav a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // زر العودة إلى الأعلى
+    const scrollTopBtn = document.getElementById('scroll-top');
+    
+    // إظهار/إخفاء زر العودة للأعلى
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.style.display = 'block';
+        } else {
+            scrollTopBtn.style.display = 'none';
+        }
+    });
+    
+    // حدث النقر على زر العودة للأعلى
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // إضافة تأثيرات للبطاقات عند التمرير
+    const cards = document.querySelectorAll('.type-card, .viewpoint, .source-category');
+    
+    function checkCards() {
+        cards.forEach(card => {
+            const cardTop = card.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (cardTop < windowHeight - 100) {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }
+        });
+    }
+    
+    // إعداد البطاقات للرسوم المتحركة
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s, transform 0.5s';
+    });
+    
+    // التحقق من البطاقات عند التحميل وعند التمرير
+    window.addEventListener('load', checkCards);
+    window.addEventListener('scroll', checkCards);
+    
+    // إضافة تأثيرات للعناصر عند التمرير
+    const sections = document.querySelectorAll('.section');
+    
+    function checkSections() {
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (sectionTop < windowHeight - 100) {
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            }
+        });
+    }
+    
+    // إعداد الأقسام للرسوم المتحركة
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s, transform 0.6s';
+    });
+    
+    // التحقق من الأقسام عند التحميل وعند التمرير
+    window.addEventListener('load', checkSections);
+    window.addEventListener('scroll', checkSections);
+    
+    // إضافة تأثير للجدول
+    const tableRows = document.querySelectorAll('tbody tr');
+    
+    function checkTableRows() {
+        tableRows.forEach((row, index) => {
+            const rowTop = row.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (rowTop < windowHeight - 100) {
+                setTimeout(() => {
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateX(0)';
+                }, index * 100);
+            }
+        });
+    }
+    
+    // إعداد صفوف الجدول للرسوم المتحركة
+    tableRows.forEach(row => {
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(20px)';
+        row.style.transition = 'opacity 0.4s, transform 0.4s';
+    });
+    
+    // التحقق من صفوف الجدول عند التحميل وعند التمرير
+    window.addEventListener('load', checkTableRows);
+    window.addEventListener('scroll', checkTableRows);
+});
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

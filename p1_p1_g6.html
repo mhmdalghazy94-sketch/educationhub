@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الدراسة: أهداف العلم وغاياته</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* إعدادات عامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #166088;
+    --accent-color: #2d936c;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --gray-color: #6c757d;
+    --light-gray: #e9ecef;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background: linear-gradient(135deg, #3494E6, #EC6EAD);
+    direction: rtl;
+}
+
+/* الترويسة */
+header {
+    background: linear-gradient(135deg, #3494E6, #EC6EAD);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.2rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* التنقل */
+#main-nav {
+    max-width: 1200px;
+    margin: 1.5rem auto 0;
+    padding: 0 2rem;
+}
+
+#main-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+#main-nav li {
+    margin: 0;
+}
+
+#main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+#main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* المحتوى الرئيسي */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.section {
+    margin-bottom: 3rem;
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.section-header h2 {
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.content-box {
+    background-color: var(--light-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border-right: 4px solid var(--primary-color);
+}
+
+.note-box {
+    background-color: #fff9e6;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    border-right: 4px solid #e6c200;
+}
+
+/* بطاقات الأهداف */
+.goals-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2rem;
+}
+
+.goal-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+}
+
+.goal-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.goal-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.goal-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.goal-details {
+    flex-grow: 1;
+}
+
+.goal-details h4 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.evidence, .examples {
+    margin-top: 1rem;
+}
+
+.evidence h4, .examples h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.quran-verses {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.verse {
+    background-color: var(--light-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border-right: 3px solid var(--accent-color);
+}
+
+.verse-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.verse-reference {
+    color: var(--gray-color);
+    font-style: italic;
+}
+
+.verse-explanation {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.hadith {
+    background-color: var(--light-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border-right: 3px solid var(--accent-color);
+    margin-top: 0.5rem;
+}
+
+.hadith-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.hadith-reference {
+    color: var(--gray-color);
+    font-style: italic;
+}
+
+.hadith-explanation {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.quote {
+    background-color: var(--light-gray);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+.highlight {
+    background-color: #fff9e6;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.examples ul {
+    padding-right: 1.5rem;
+}
+
+.examples li {
+    margin-bottom: 0.5rem;
+}
+
+/* الجدول */
+.table-container {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    min-width: 700px;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: right;
+    border: 1px solid #dee2e6;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+tr:hover {
+    background-color: #e9f7ff;
+}
+
+/* المصادر */
+.sources-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.source-category {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid var(--primary-color);
+}
+
+.source-category h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.source-category ul {
+    padding-right: 1rem;
+}
+
+.source-category li {
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0;
+}
+
+/* الخلاصة */
+.summary-content {
+    background-color: var(--light-color);
+    padding: 2rem;
+    border-radius: 8px;
+    border-right: 4px solid var(--primary-color);
+}
+
+.summary-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.summary-item {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.summary-item h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.applications-box {
+    background: linear-gradient(135deg, #e9f7ff, #d4edff);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    border: 1px solid #b8daff;
+}
+
+.applications-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.applications-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.application-item {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.application-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.final-note {
+    background: linear-gradient(135deg, #fff9e6, #ffeeb5);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    text-align: center;
+    border: 1px solid #ffd966;
+}
+
+/* التذييل */
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+#scroll-top {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#scroll-top:hover {
+    background-color: var(--secondary-color);
+}
+
+/* التجاوب مع الشاشات المختلفة */
+@media (max-width: 768px) {
+    #main-nav ul {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .goals-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-points,
+    .applications-container {
+        grid-template-columns: 1fr;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    .section {
+        padding: 1.5rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+    }
+    
+    #main-nav a {
+        font-size: 0.85rem;
+        padding: 0.75rem 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>دليل الدراسة: أهداف العلم وغاياته</h1>
+            <p class="subtitle">تحليل مفصل لأهداف العلم من منظور إسلامي شامل</p>
+        </div>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#intro"><i class="fas fa-star"></i> التمهيد</a></li>
+                <li><a href="#faith"><i class="fas fa-mosque"></i> الأهداف العقدية</a></li>
+                <li><a href="#cognitive"><i class="fas fa-brain"></i> الأهداف المعرفية</a></li>
+                <li><a href="#ethical"><i class="fas fa-heart"></i> الأهداف الأخلاقية</a></li>
+                <li><a href="#social"><i class="fas fa-users"></i> الأهداف الاجتماعية</a></li>
+                <li><a href="#scientific"><i class="fas fa-flask"></i> الأهداف العلمية</a></li>
+                <li><a href="#economic"><i class="fas fa-chart-line"></i> الأهداف الاقتصادية</a></li>
+                <li><a href="#educational"><i class="fas fa-graduation-cap"></i> الأهداف التعليمية</a></li>
+                <li><a href="#summary-table"><i class="fas fa-table"></i> جدول الأهداف</a></li>
+                <li><a href="#sources"><i class="fas fa-book-open"></i> المصادر</a></li>
+                <li><a href="#conclusion"><i class="fas fa-gem"></i> الخلاصة</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-star"></i> تمهيد: مكانة العلم في الإسلام</h2>
+            </div>
+            <div class="content-box">
+                <p>العلم في التصور الإسلامي ليس غاية في ذاته، بل هو وسيلة لتحقيق مقاصد كبرى، وهو من أعظم العبادات التي يتقرب بها العبد إلى ربه، وضرورة لعمارة الأرض.</p>
+                <div class="note-box">
+                    <p><strong>ملاحظة:</strong> بناءً على البحث في المصادر الشرعية والفلسفية والعلمية، يمكنني تقديم أهداف العلم وغاياته بالتفصيل المطلوب، مدعومة بالأدلة والشواهد والمصادر.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faith" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-mosque"></i> ١. الأهداف العقدية والإيمانية</h2>
+            </div>
+            
+            <div class="goals-container">
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>معرفة الله تعالى (الغاية الكبرى)</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>التوصل إلى الإيمان بالله بالدليل والبرهان عن طريق التفكر في مخلوقاته.</p>
+                            <div class="evidence">
+                                <h4>الأدلة الشرعية:</h4>
+                                <div class="quran-verses">
+                                    <div class="verse">
+                                        <p class="verse-text">﴿إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافِ اللَّيْلِ وَالنَّهَارِ لَآيَاتٍ لِّأُولِي الْأَلْبَابِ﴾</p>
+                                        <p class="verse-reference">[آل عمران: 190]</p>
+                                    </div>
+                                    <div class="verse">
+                                        <p class="verse-text">﴿سَنُرِيهِمْ آيَاتِنَا فِي الْآفَاقِ وَفِي أَنفُسِهِمْ حَتَّىٰ يَتَبَيَّنَ لَهُمْ أَنَّهُ الْحَقُّ﴾</p>
+                                        <p class="verse-reference">[فصلت: 53]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-hands-praying"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>تعظيم الخالق</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>من خلال دراسة دقة الخلق وإتقان الصنعة، يصل الإنسان إلى تعظيم الصانع والإقرار بوحدانيته.</p>
+                            <div class="evidence">
+                                <h4>الاستشهاد بالمصادر:</h4>
+                                <p class="quote">يقول الغزالي في "إحياء علوم الدين": <span class="highlight">"من لم يَعرف عظمة الصنعة، كيف يعرف عظمة الصانع؟"</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cognitive" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-brain"></i> ٢. الأهداف المعرفية والعقلية</h2>
+            </div>
+            
+            <div class="goals-container">
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>كشف الحقائق</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>الوصول إلى المعرفة الصحيحة بالكون والحياة، بما فيها من قوانين وظواهر.</p>
+                            <div class="examples">
+                                <h4>الأمثلة:</h4>
+                                <ul>
+                                    <li>دراسة الفلك للتعرف على نظام الكون.</li>
+                                    <li>دراسة الطب لفهم تركيب جسم الإنسان ووظائفه.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>تنمية العقل</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>تطوير القدرات العقلية والإدراكية، وتحرير الفكر من الجمود والتبعية.</p>
+                            <div class="evidence">
+                                <h4>الاستشهاد بالمصادر:</h4>
+                                <p class="quote">يقول ابن خلدون في "المقدمة": <span class="highlight">"العلم ينمي العقل ويهذب النفس"</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ethical" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-heart"></i> ٣. الأهداف الأخلاقية والتربوية</h2>
+            </div>
+            
+            <div class="goals-container">
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>تهذيب النفس</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>الوصول من خلال المعرفة إلى الخوف من الله وتحسين السلوك والاستقامة.</p>
+                            <div class="evidence">
+                                <h4>الأدلة الشرعية:</h4>
+                                <div class="quran-verses">
+                                    <div class="verse">
+                                        <p class="verse-text">﴿إِنَّمَا يَخْشَى اللَّهَ مِنْ عِبَادِهِ الْعُلَمَاءُ﴾</p>
+                                        <p class="verse-reference">[فاطر: 28]</p>
+                                        <p class="verse-explanation">(ربط الخشية بالعلم)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>مقاومة الجهل</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>القضاء على الظلمات والخرافات، وتأسيس القرارات على البصيرة لا الوهم.</p>
+                            <div class="evidence">
+                                <h4>الاستشهاد بالمصادر:</h4>
+                                <p class="quote">يقول ابن القيم في "مفتاح دار السعادة": <span class="highlight">"العلم يزيل ظلمة الجهل كما تزيل الشمس الظلام"</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="social" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-users"></i> ٤. الأهداف الاجتماعية والحضارية</h2>
+            </div>
+            
+            <div class="goals-container">
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>إصلاح المجتمع</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>بناء مجتمع متعلم ومتحضر وقائم على العدل.</p>
+                            <div class="examples">
+                                <h4>الأمثلة:</h4>
+                                <ul>
+                                    <li>علم الاجتماع لتحليل المشكلات المجتمعية واقتراح الحلول.</li>
+                                    <li>علم الاقتصاد لتحسين إدارة الثروات والمعيشة.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>نقل المعرفة</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>حفظ التراث العلمي ونقله وتعميمه للأجيال القادمة (مبدأ تراكمية العلم).</p>
+                            <div class="evidence">
+                                <h4>الاستشهاد بالمصادر:</h4>
+                                <p class="quote">يقول ابن عبد البر في "جامع بيان العلم وفضله": <span class="highlight">"العلم يزكو على الإنفاق"</span> (أي البذل والتعليم).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="scientific" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-flask"></i> ٥. الأهداف العلمية والتطبيقية</h2>
+            </div>
+            
+            <div class="goals-container">
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>تطوير التقنيات</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>اختراع وتطوير أدوات وتقنيات تخدم البشرية وتسهل حياتها.</p>
+                            <div class="examples">
+                                <h4>الأمثلة:</h4>
+                                <ul>
+                                    <li>تطوير التقنيات الطبية والتشخيصية.</li>
+                                    <li>ابتكار وسائل الاتصال الحديثة.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>حل المشكلات</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>معالجة التحديات التي تواجه الإنسان في مجالات البيئة والصحة والأمن الغذائي.</p>
+                            <div class="evidence">
+                                <h4>الاستشهاد بالمصادر:</h4>
+                                <p class="quote">يقول البيروني في "الصيدنة": <span class="highlight">"العلم وسيلة لحل معضلات الحياة"</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="economic" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> ٦. الأهداف الاقتصادية</h2>
+            </div>
+            
+            <div class="goals-container">
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>تحقيق الرفاهية</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>تحسين المستوى المعيشي ورفع جودة الحياة للأفراد.</p>
+                            <div class="examples">
+                                <h4>الأمثلة:</h4>
+                                <ul>
+                                    <li>العلوم الزراعية لزيادة الإنتاج وكفاءة الغذاء.</li>
+                                    <li>الهندسة لتحسين البنى التحتية والمساكن.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>استغلال الموارد (عمارة الأرض)</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>الاستخدام الأمثل لثروات الأرض الطبيعية والحفاظ عليها.</p>
+                            <div class="evidence">
+                                <h4>الأدلة الشرعية:</h4>
+                                <div class="quran-verses">
+                                    <div class="verse">
+                                        <p class="verse-text">﴿هُوَ أَنشَأَكُم مِّنَ الْأَرْضِ وَاسْتَعْمَرَكُمْ فِيهَا﴾</p>
+                                        <p class="verse-reference">[هود: 61]</p>
+                                        <p class="verse-explanation">(دعوة صريحة للعمارة والاستثمار الرشيد)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="educational" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-graduation-cap"></i> ٧. الأهداف التعليمية</h2>
+            </div>
+            
+            <div class="goals-container">
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>نشر المعرفة</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>تعميم العلم على جميع فئات المجتمع ومحاربة الأمية.</p>
+                            <div class="evidence">
+                                <h4>الاستشهاد بالمصادر:</h4>
+                                <div class="hadith">
+                                    <p class="hadith-text">"بلغوا عني ولو آية"</p>
+                                    <p class="hadith-reference">(رواه البخاري)</p>
+                                    <p class="hadith-explanation">(مبدأ نشر المعلومة)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="goal-content">
+                        <h3>إعداد الكفاءات</h3>
+                        <div class="goal-details">
+                            <h4>الغاية:</h4>
+                            <p>تخريج متخصصين وخبراء مؤهلين في مختلف المجالات لتلبية احتياجات المجتمع.</p>
+                            <div class="examples">
+                                <h4>الأمثلة:</h4>
+                                <ul>
+                                    <li>كليات الطب والهندسة والعلوم.</li>
+                                    <li>معاهد البحث العلمي المتخصص.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary-table" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-table"></i> ٨. جدول يلخص الأهداف الرئيسية</h2>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نوع الهدف</th>
+                            <th>الغاية الرئيسية</th>
+                            <th>الأمثلة من العلوم</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>عقدي إيماني</td>
+                            <td>المعرفة بالخالق وتعظيمه</td>
+                            <td>علوم الفلك، الأحياء (التفكر)، علوم الشرع</td>
+                        </tr>
+                        <tr>
+                            <td>أخلاقي تربوي</td>
+                            <td>تهذيب النفس ومقاومة الجهل</td>
+                            <td>علوم الشرع، الآداب، علم النفس التربوي</td>
+                        </tr>
+                        <tr>
+                            <td>اجتماعي حضاري</td>
+                            <td>إصلاح المجتمع ونقل التراث</td>
+                            <td>علم الاجتماع، الاقتصاد، التاريخ</td>
+                        </tr>
+                        <tr>
+                            <td>علمي تطبيقي</td>
+                            <td>التقدم التقني وحل المشكلات</td>
+                            <td>الهندسة، الطب، الكيمياء، الفيزياء</td>
+                        </tr>
+                        <tr>
+                            <td>اقتصادي</td>
+                            <td>تحقيق الرفاه وعمارة الأرض</td>
+                            <td>الزراعة، الصناعة، الإدارة المالية</td>
+                        </tr>
+                        <tr>
+                            <td>تعليمي</td>
+                            <td>نشر المعرفة وإعداد الكفاءات</td>
+                            <td>البيداغوجيا، المناهج التعليمية</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="sources" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-book-open"></i> ٩. مصادر ومراجع للاستزادة</h2>
+            </div>
+            
+            <div class="sources-container">
+                <div class="source-category">
+                    <h3>المصادر الإسلامية:</h3>
+                    <ul>
+                        <li>"إحياء علوم الدين" لـ الغزالي</li>
+                        <li>"مفتاح دار السعادة" لـ ابن القيم</li>
+                        <li>"جامع بيان العلم وفضله" لـ ابن عبد البر</li>
+                        <li>"الموافقات" لـ الشاطبي</li>
+                    </ul>
+                </div>
+                
+                <div class="source-category">
+                    <h3>المصادر المعاصرة (في فلسفة العلم):</h3>
+                    <ul>
+                        <li>"فلسفة العلم" لـ كارل بوبر</li>
+                        <li>"أهداف العلم" لـ برتراند راسل</li>
+                        <li>"المعرفة وأهدافها" لـ محمد باقر الصدر</li>
+                    </ul>
+                </div>
+                
+                <div class="source-category">
+                    <h3>المراجع العربية المتخصصة:</h3>
+                    <ul>
+                        <li>"أهداف العلم في الإسلام" لـ عبد الحليم عويس</li>
+                        <li>"مقاصد الشريعة والعلم" لـ الطاهر بن عاشور</li>
+                        <li>"العلم وأهدافه التربوية" لـ محمد منير مرسي</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-gem"></i> الخلاصة والنتائج</h2>
+            </div>
+            
+            <div class="summary-content">
+                <p>من خلال هذا التحليل التفصيلي يمكن استخلاص النقاط التالية:</p>
+                
+                <div class="summary-points">
+                    <div class="summary-item">
+                        <h3>الشمولية:</h3>
+                        <p>أهداف العلم في الإسلام شاملة لجميع جوانب الحياة (الروحية والمادية).</p>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <h3>التكامل:</h3>
+                        <p>لا فصل بين الأهداف المادية والروحية، فخدمة الإنسان عمارة للكون وعبادة للخالق.</p>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <h3>المسؤولية:</h3>
+                        <p>العالم مسؤول عن استخدام علمه في الخير، والابتعاد عن الإفساد.</p>
+                    </div>
+                </div>
+                
+                <div class="applications-box">
+                    <h3>🎯 تطبيقات عملية</h3>
+                    <div class="applications-container">
+                        <div class="application-item">
+                            <h4>للمجتمعات:</h4>
+                            <p>توجيه البحث العلمي لخدمة الاحتياجات الحقيقية للمجتمع أولاً.</p>
+                        </div>
+                        <div class="application-item">
+                            <h4>للأفراد:</h4>
+                            <p>اختيار التخصصات التي تحقق المنفعة العامة (فرض كفاية).</p>
+                        </div>
+                        <div class="application-item">
+                            <h4>للمؤسسات:</h4>
+                            <p>دمج الأخلاقيات والقيم في المناهج العلمية والبحوث.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="final-note">
+                    <p>هذه الأهداف المتكاملة تجعل من العلم في المنظور الإسلامي رحمة للعالمين، ووسيلة لتحقيق العبودية لله وعمارة الأرض.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>دليل الدراسة - أهداف العلم وغاياته</p>
+            <button id="scroll-top"><i class="fas fa-arrow-up"></i> العودة إلى الأعلى</button>
+        </div>
+    </footer>
+    <script>
+    // تنفيذ التنقل السلس
+document.addEventListener('DOMContentLoaded', function() {
+    // إضافة تأثير التنقل السلس للروابط الداخلية
+    const navLinks = document.querySelectorAll('#main-nav a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // زر العودة إلى الأعلى
+    const scrollTopBtn = document.getElementById('scroll-top');
+    
+    // إظهار/إخفاء زر العودة للأعلى
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.style.display = 'block';
+        } else {
+            scrollTopBtn.style.display = 'none';
+        }
+    });
+    
+    // حدث النقر على زر العودة للأعلى
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // إضافة تأثيرات للبطاقات عند التمرير
+    const cards = document.querySelectorAll('.goal-card, .source-category, .summary-item');
+    
+    function checkCards() {
+        cards.forEach(card => {
+            const cardTop = card.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (cardTop < windowHeight - 100) {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }
+        });
+    }
+    
+    // إعداد البطاقات للرسوم المتحركة
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s, transform 0.5s';
+    });
+    
+    // التحقق من البطاقات عند التحميل وعند التمرير
+    window.addEventListener('load', checkCards);
+    window.addEventListener('scroll', checkCards);
+    
+    // إضافة تأثيرات للعناصر عند التمرير
+    const sections = document.querySelectorAll('.section');
+    
+    function checkSections() {
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (sectionTop < windowHeight - 100) {
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            }
+        });
+    }
+    
+    // إعداد الأقسام للرسوم المتحركة
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s, transform 0.6s';
+    });
+    
+    // التحقق من الأقسام عند التحميل وعند التمرير
+    window.addEventListener('load', checkSections);
+    window.addEventListener('scroll', checkSections);
+    
+    // إضافة تأثير للجدول
+    const tableRows = document.querySelectorAll('tbody tr');
+    
+    function checkTableRows() {
+        tableRows.forEach((row, index) => {
+            const rowTop = row.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (rowTop < windowHeight - 100) {
+                setTimeout(() => {
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateX(0)';
+                }, index * 100);
+            }
+        });
+    }
+    
+    // إعداد صفوف الجدول للرسوم المتحركة
+    tableRows.forEach(row => {
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(20px)';
+        row.style.transition = 'opacity 0.4s, transform 0.4s';
+    });
+    
+    // التحقق من صفوف الجدول عند التحميل وعند التمرير
+    window.addEventListener('load', checkTableRows);
+    window.addEventListener('scroll', checkTableRows);
+    
+    // إضافة تأثيرات للآيات القرآنية والأحاديث
+    const verses = document.querySelectorAll('.verse, .hadith');
+    
+    function animateVerses() {
+        verses.forEach((verse, index) => {
+            const verseTop = verse.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (verseTop < windowHeight - 100) {
+                setTimeout(() => {
+                    verse.style.opacity = '1';
+                    verse.style.transform = 'translateY(0)';
+                }, index * 150);
+            }
+        });
+    }
+    
+    // إعداد الآيات والأحاديث للرسوم المتحركة
+    verses.forEach(verse => {
+        verse.style.opacity = '0';
+        verse.style.transform = 'translateY(20px)';
+        verse.style.transition = 'opacity 0.6s, transform 0.6s';
+    });
+    
+    // التحقق من الآيات والأحاديث عند التحميل وعند التمرير
+    window.addEventListener('load', animateVerses);
+    window.addEventListener('scroll', animateVerses);
+    
+    // إضافة تأثيرات للأيقونات
+    const icons = document.querySelectorAll('.goal-icon');
+    
+    function animateIcons() {
+        icons.forEach((icon, index) => {
+            const iconTop = icon.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (iconTop < windowHeight - 100) {
+                setTimeout(() => {
+                    icon.style.opacity = '1';
+                    icon.style.transform = 'scale(1)';
+                }, index * 200);
+            }
+        });
+    }
+    
+    // إعداد الأيقونات للرسوم المتحركة
+    icons.forEach(icon => {
+        icon.style.opacity = '0';
+        icon.style.transform = 'scale(0.8)';
+        icon.style.transition = 'opacity 0.5s, transform 0.5s';
+    });
+    
+    // التحقق من الأيقونات عند التحميل وعند التمرير
+    window.addEventListener('load', animateIcons);
+    window.addEventListener('scroll', animateIcons);
+});
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

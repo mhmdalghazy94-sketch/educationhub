@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار مفهوم العلم لغةً واشتقاقاته</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    /* تنسيقات عامة */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.screen {
+    display: none;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.screen.active {
+    display: block;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* شاشة البداية */
+#start-screen {
+    text-align: center;
+}
+
+#start-screen p {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* شاشة الاختبار */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.timer {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+.question-counter {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.question-container {
+    margin-bottom: 30px;
+}
+
+#question-text {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: right;
+}
+
+.option:hover {
+    background-color: #e9ecef;
+}
+
+.option.selected {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.option.correct {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.option.incorrect {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+.hint-container {
+    margin-top: 20px;
+}
+
+.hint-btn {
+    padding: 8px 15px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.hint-text {
+    padding: 15px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 5px;
+    display: none;
+}
+
+.hint-text.show {
+    display: block;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 10px 15px;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.nav-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.nav-btn.submit {
+    background-color: #e74c3c;
+}
+
+.nav-btn.submit:hover {
+    background-color: #c0392b;
+}
+
+.question-list {
+    margin-top: 30px;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.number.current {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.number.answered {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.number.marked {
+    background-color: #f39c12;
+    color: white;
+    border-color: #f39c12;
+}
+
+/* شاشة النتائج */
+#results-screen {
+    text-align: center;
+}
+
+.score {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.score p {
+    margin-bottom: 10px;
+}
+
+.chart-container {
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+
+.review {
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.answer-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #bdc3c7;
+}
+
+.answer-item.correct {
+    background-color: #d5f4e6;
+    border-left-color: #2ecc71;
+}
+
+.answer-item.incorrect {
+    background-color: #fadbd8;
+    border-left-color: #e74c3c;
+}
+
+.question-review {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user-answer, .correct-answer {
+    margin-bottom: 5px;
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .navigation {
+        flex-direction: column;
+    }
+    
+    .nav-btn {
+        margin-bottom: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="start-screen" class="screen active">
+            <h1>اختبار مفهوم العلم لغةً واشتقاقاته</h1>
+            <p>يتكون هذا الاختبار من 40 سؤالاً حول مفهوم العلم في اللغة العربية واشتقاقاته</p>
+            <button id="start-btn" class="btn">بدء الاختبار</button>
+        </div>
+
+        <div id="quiz-screen" class="screen">
+            <div class="header">
+                <div class="timer">
+                    الوقت المتبقي: <span id="time">30:00</span>
+                </div>
+                <div class="question-counter">
+                    السؤال <span id="current-question">1</span> من <span id="total-questions">30</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text"></h2>
+                <div id="options-container" class="options"></div>
+                
+                <div class="hint-container">
+                    <button id="hint-btn" class="hint-btn">إظهار التوضيح</button>
+                    <div id="hint-text" class="hint-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button id="prev-btn" class="nav-btn">السابق</button>
+                <button id="mark-btn" class="nav-btn">مراجعة لاحقًا</button>
+                <button id="next-btn" class="nav-btn">التالي</button>
+                <button id="submit-btn" class="nav-btn submit">إنهاء الاختبار</button>
+            </div>
+
+            <div class="question-list">
+                <h3>قائمة الأسئلة</h3>
+                <div id="question-numbers" class="numbers"></div>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen">
+            <h1>نتيجة الاختبار</h1>
+            <div class="score">
+                <p>الإجابات الصحيحة: <span id="correct-answers">0</span> من <span id="total-answers">30</span></p>
+                <p>النسبة المئوية: <span id="percentage">0%</span></p>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="results-chart"></canvas>
+            </div>
+            
+            <div class="review">
+                <h3>مراجعة الإجابات</h3>
+                <div id="answers-review"></div>
+            </div>
+            
+            <button id="restart-btn" class="btn">إعادة الاختبار</button>
+        </div>
+    </div>
+    <script>
+    // تعريف الأسئلة
+    const questions = [
+    /**
+ * اختبار شامل في أهداف العلم وغاياته في التصور الإسلامي
+ * تم تحويل الأسئلة والخيارات والإجابات إلى مصفوفة من الكائنات في JavaScript.
+ * كل كائن (سؤال) يحتوي على:
+ * - question: نص السؤال.
+ * - options: مصفوفة من الخيارات المتاحة.
+ * - answer: نص الإجابة الصحيحة (مطابق لأحد الخيارات).
+ * - hint: توضيح/تفسير الإجابة.
+ */
+    {
+        question: "ما الغاية الكبرى للعلم في التصور الإسلامي؟",
+        options: [
+            "تحقيق الثروة المادية فقط.",
+            "الترفيه والتسلية.",
+            "معرفة الله تعالى والتعرف عليه عبر مخلوقاته.", // Correct Answer
+            "التفوق على الآخرين."
+        ],
+        answer: "معرفة الله تعالى والتعرف عليه عبر مخلوقاته.",
+        hint: "العلم وسيلة لتعظيم الخالق من خلال التدبر في بديع صنعه ودقة خلقه."
+    },
+    {
+        question: "أي آية قرآنية تدعو بشكل صريح إلى التفكر في خلق السماوات والأرض كطريق للإيمان؟",
+        options: [
+            "{وَإِلَهُكُمْ إِلَهٌ وَاحِدٌ} [البقرة: 163].",
+            "{إِنَّا كُلَّ شَيْءٍ خَلَقْنَاهُ بِقَدَرٍ} [القمر: 49].",
+            "{إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ ...} [آل عمران: 190].", // Correct Answer
+            "{قُلْ هُوَ اللَّهُ أَحَدٌ} [الإخلاص: 1]."
+        ],
+        answer: "{إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ ...} [آل عمران: 190].",
+        hint: "الآية تشير مباشرة إلى أن التفكر في الخلق هو دليل لأولي الألباب على وجود الخالق وعظمته."
+    },
+    {
+        question: "كيف يؤدي العلم إلى تعظيم الخالق حسب رأي الغزالي؟",
+        options: [
+            "بجمع المعلومات فقط.",
+            "بالتفوق في المجادلة.",
+            "من خلال معرفة عظمة الصنعة التي تدل على عظمة الصانع.", // Correct Answer
+            "بإهمال دراسة الكون."
+        ],
+        answer: "من خلال معرفة عظمة الصنعة التي تدل على عظمة الصانع.",
+        hint: "فهم إتقان الخلق وكماله يؤدي بشكل طبيعي إلى الإعجاب بالخالق وتعظيمه."
+    },
+    {
+        question: "ما الهدف المعرفي الأساسي من دراسة العلوم الطبيعية مثل الفلك؟",
+        options: [
+            "تحقيق الشهرة والجاه.",
+            "كشف الحقائق عن نظام الكون وقوانينه.", // Correct Answer
+            "إثبات عدم وجود خالق للكون.",
+            "إهمال دراسة الظواهر الطبيعية."
+        ],
+        answer: "كشف الحقائق عن نظام الكون وقوانينه.",
+        hint: "المعرفة بحد ذاتها غاية نبيلة، وتُكسب الإنسان فهماً أعمق للعالم من حوله."
+    },
+    {
+        question: "كيف يساهم العلم في تنمية العقل حسب رأي ابن خلدون؟",
+        options: [
+            "يجعله أكثر جموداً وتقليداً.",
+            "ينمي العقل ويهذب النفس.", // Correct Answer
+            "يحد من قدرات التفكير.",
+            "يشغل العقل عن التفكير الجاد."
+        ],
+        answer: "ينمي العقل ويهذب النفس.",
+        hint: "العلم يوسع آفاق التفكير وينظمه، ويحرر العقل من قيود الجهل والخرافة."
+    },
+    {
+        question: "ما الغاية الأخلاقية التي ربطها القرآن بالعلم في سورة فاطر؟",
+        options: [
+            "القسوة والغلظة.",
+            "الخشية من الله تعالى.", // Correct Answer
+            "الغرور والتكبر.",
+            "الجدال والعناد."
+        ],
+        answer: "الخشية من الله تعالى.",
+        hint: "العالم الحقيقي هو من ينتقل من علمه إلى مراقبة الله وخشيته في السر والعلن."
+    },
+    {
+        question: "بماذا شبه ابن القيم دور العلم في إزالة الجهل؟",
+        options: [
+            "بالمطر الذي يسبب الفيضانات.",
+            "بالنار التي تحرق الأخضر واليابس.",
+            "بالشمس التي تزيل الظلام.", // Correct Answer
+            "بالريح التي تنقل الأتربة."
+        ],
+        answer: "بالشمس التي تزيل الظلام.",
+        hint: "كما أن الشمس تبدد الظلام الحسي، فالعلم يبدد ظلام الجهل والوهم."
+    },
+    {
+        question: "ما الهدف الاجتماعي الرئيسي من علم الاجتماع والاقتصاد؟",
+        options: [
+            "تفكيك روابط المجتمع.",
+            "إصلاح المجتمع وتحليل مشكلاته.", // Correct Answer
+            "زيادة الصراعات الطبقية.",
+            "تبرير الأوضاع الاجتماعية الخاطئة."
+        ],
+        answer: "إصلاح المجتمع وتحليل مشكلاته.",
+        hint: "هذه العلوم تقدم أدوات لفهم المجتمع وتشخيص علله واقتراح حلول عملية لها."
+    },
+    {
+        question: "ما المقصود بـ'تراكمية العلم' في الهدف الاجتماعي؟",
+        options: [
+            "إهمال التراث العلمي السابق.",
+            "حفظ التراث العلمي ونقله للأجيال القادمة.", // Correct Answer
+            "البدء من الصفر في كل جيل.",
+            "احتكار العلم على فئة معينة."
+        ],
+        answer: "حفظ التراث العلمي ونقله للأجيال القادمة.",
+        hint: "المعرفة البشرية تبني بعضها على بعض، مما يسمح بتقدم مستمر بدلاً من البدء مجدداً."
+    },
+    {
+        question: "كيف نظر ابن عبد البر إلى إنفاق العلم؟",
+        options: [
+            "أنه إضاعة للوقت.",
+            "أنه يزكو على الإنفاق (أي بالتعليم والبذل).", // Correct Answer
+            "أنه يؤدي إلى نسيانه.",
+            "أنه يجب كتمه."
+        ],
+        answer: "أنه يزكو على الإنفاق (أي بالتعليم والبذل).",
+        hint: "العلم يشبه النور، كلما أنفقته وبذلته زاد انتشاره ولم ينقص من حصيلتك."
+    },
+    {
+        question: "ما الهدف التطبيقي المباشر لتطوير التقنيات الطبية؟",
+        options: [
+            "زيادة تعقيد حياة الناس.",
+            "خدمة البشرية وتسهيل حياتها.", // Correct Answer
+            "إثبات التفوق التقني فقط.",
+            "استنزاف الموارد المالية."
+        ],
+        answer: "خدمة البشرية وتسهيل حياتها.",
+        hint: "التقنيات الطبية تهدف في جوهرها إلى تخفيف الألم وعلاج المرض وإطالة العمر."
+    },
+    {
+        question: 'كيف وصف البيروني دور العلم في"الصيدنة"؟',
+        options: [
+            "وسيلة للهروب من مواجهة الحياة.",
+            "وسيلة لحل معضلات الحياة.", // Correct Answer
+            "وسيلة للتفاخر والتباهي.",
+            "وسيلة لتعقيد المشكلات."
+        ],
+        answer: "وسيلة لحل معضلات الحياة.",
+        hint: "العلم يمنح الإنسان الأدوات العقلية والعملية للتغلب على التحديات التي تواجهه."
+    },
+    {
+        question: "ما الهدف الاقتصادي من دراسة العلوم الزراعية؟",
+        options: [
+            "تقليل الإنتاج الزراعي.",
+            "زيادة الإنتاج وتحقيق كفاءة الغذاء.", // Correct Answer
+            "إهمال القطاع الزراعي.",
+            "الاعتماد الكامل على الاستيراد."
+        ],
+        answer: "زيادة الإنتاج وتحقيق كفاءة الغذاء.",
+        hint: "العلوم الزراعية تهدف إلى تحقيق الأمن الغذائي وتحسين جودة المحاصيل."
+    },
+    {
+        question: "ما الغاية من 'عمارة الأرض' التي ذكرت في القرآن؟",
+        options: [
+            "تدمير البيئة واستنزاف مواردها.",
+            "الاستخدام الأمثل لثروات الأرض والحفاظ عليها.", // Correct Answer
+            "إهمال موارد الأرض تماماً.",
+            "احتكار الخيرات لفئة قليلة."
+        ],
+        answer: "الاستخدام الأمثل لثروات الأرض والحفاظ عليها.",
+        hint: "العمارة تعني الاستثمار الرشيد الذي يجمع بين الانتفاع والحفاظ على التوازن البيئي."
+    },
+    {
+        question: "ما الهدف التعليمي من الحديث النبوي 'بلغوا عني ولو آية'؟",
+        options: [
+            "كتم العلم وعدم نشره.",
+            "تعميم العلم ونشر المعرفة.", // Correct Answer
+            "التخصص الشديد وعدم مشاركة المعرفة.",
+            "جعل العلم حكراً على العلماء."
+        ],
+        answer: "تعميم العلم ونشر المعرفة.",
+        hint: "الحديث يحث على نشر العلم ولو كان قليلاً، مما يحقق فائدة تعم المجتمع."
+    },
+    {
+        question: "ما الغاية من إعداد الكفاءات المتخصصة في المجتمع؟",
+        options: [
+            "زيادة نسبة البطالة.",
+            "تلبية احتياجات المجتمع المختلفة.", // Correct Answer
+            "إهمال مجالات التخصص.",
+            "تقليل فرص التعلم."
+        ],
+        answer: "تلبية احتياجات المجتمع المختلفة.",
+        hint: "كل تخصص يحتاجه المجتمع يعتبر 'فرض كفاية' لتسيير أمور الحياة."
+    },
+    {
+        question: "أي من العلوم التالية يخدم الهدف العقدي الإيماني بشكل مباشر؟",
+        options: [
+            "علم الفلك.", // Correct Answer
+            "علم التسويق.",
+            "علم الموضة.",
+            "علم الألعاب الإلكترونية."
+        ],
+        answer: "علم الفلك.",
+        hint: "التأمل في الكون والسماوات من أعظم أسباب زيادة الإيمان بالخالق."
+    },
+    {
+        question: "أي من العلوم التالية يخدم الهدف الأخلاقي التربوي؟",
+        options: [
+            "علم النفس التربوي.", // Correct Answer
+            "الهندسة النووية.",
+            "البرمجة.",
+            "المحاسبة."
+        ],
+        answer: "علم النفس التربوي.",
+        hint: "علم النفس التربوي يهتم بتهذيب السلوك وبناء الشخصية السوية."
+    },
+    {
+        question: "أي من المؤلفات التالية للغزالي؟",
+        options: [
+            '"مفتاح دار السعادة".',
+            '"إحياء علوم الدين".', // Correct Answer
+            '"جامع بيان العلم وفضله".',
+            '"الموافقات".'
+        ],
+        answer: '"إحياء علوم الدين".',
+        hint: '"إحياء علوم الدين" من أهم المؤلفات التي تناولت مكانة العلم والأخلاق في الإسلام.'
+    },
+    {
+        question: "من هو صاحب كتاب 'مفتاح دار السعادة'؟",
+        options: [
+            "الغزالي.",
+            "ابن القيم.", // Correct Answer
+            "ابن عبد البر.",
+            "الشاطبي."
+        ],
+        answer: "ابن القيم.",
+        hint: "ابن القيم الجوزية هو تلميذ ابن تيمية ومؤلف هذا الكتاب الشهير."
+    },
+    {
+        question: "ما السمة الرئيسية لأهداف العلم في الإسلام كما وردت في الخلاصة؟",
+        options: [
+            "الانحصار في الجانب المادي فقط.",
+            "الشمولية لجميع جوانب الحياة.", // Correct Answer
+            "التركيز على الجانب الروحي فقط.",
+            "إهمال الجانب الاجتماعي."
+        ],
+        answer: "الشمولية لجميع جوانب الحياة.",
+        hint: "التصور الإسلامي للعلم يشمل الروحي والمادي والفردي والجماعي في آن واحد."
+    },
+    {
+        question: "ما معنى 'التكامل' بين الأهداف المادية والروحية للعلم؟",
+        options: [
+            "أن خدمة الإنسان عمارة للكون وعبادة للخالق.", // Correct Answer
+            "الفصل التام بين الدين والعلم.",
+            "تقديم المصلحة المادية على كل شيء.",
+            "إهمال الجانب الروحي تماماً."
+        ],
+        answer: "أن خدمة الإنسان عمارة للكون وعبادة للخالق.",
+        hint: "العمل الدنيوي النافع يصبح عبادة عندما يقترب بنية صالحة ويستند إلى علم مفيد."
+    },
+    {
+        question: "ما المسؤولية الملقاة على عاتق العالم حسب الخلاصة؟",
+        options: [
+            "استخدام علمه في الشر والإفساد.",
+            "استخدام علمه في الخير والابتعاد عن الإفساد.", // Correct Answer
+            "احتكار علمه ومنعه عن الآخرين.",
+            "الاهتمام بالربح المادي فقط."
+        ],
+        answer: "استخدام علمه في الخير والابتعاد عن الإفساد.",
+        hint: "العالم مسؤول عن عواقب علمه، وعليه أن يوجهه لما فيه صالح البشرية."
+    },
+    {
+        question: "ما التطبيق العملي لأهداف العلم على مستوى المجتمعات؟",
+        options: [
+            "توجيه البحث العلمي لخدمة احتياجات المجتمع الحقيقية.", // Correct Answer
+            "إهمال احتياجات المجتمع.",
+            "توجيه البحث العلمي لأهداف ترفيهية فقط.",
+            "منع البحث العلمي."
+        ],
+        answer: "توجيه البحث العلمي لخدمة احتياجات المجتمع الحقيقية.",
+        hint: "أولوية البحث العلمي يجب أن تكون لحل المشكلات الواقعية التي يواجهها الناس."
+    },
+    {
+        question: "ما التطبيق العملي على مستوى الأفراد؟",
+        options: [
+            "اختيار تخصصات لا تحقق منفعة لأحد.",
+            "اختيار التخصصات التي تحقق المنفعة العامة (فرض كفاية).", // Correct Answer
+            "اختيار التخصصات سهلة الدراسة فقط.",
+            "تجنب التخصصات العلمية entirely."
+        ],
+        answer: "اختيار التخصصات التي تحقق المنفعة العامة (فرض كفاية).",
+        hint: "عندما يختار الفرد تخصصاً نافعاً للمجتمع، فإنه يشارك في حمل الأمانة وتحقيق العمارة."
+    },
+    {
+        question: "ما التطبيق العملي على مستوى المؤسسات التعليمية؟",
+        options: [
+            "دمج الأخلاقيات والقيم في المناهج العلمية.", // Correct Answer
+            "الفصل بين العلم والأخلاق.",
+            "تدريس العلوم دون أي ضوابط.",
+            "إهمال الجانب التطبيقي للعلوم."
+        ],
+        answer: "دمج الأخلاقيات والقيم في المناهج العلمية.",
+        hint: "التعليم ليس مجرد نقل للمعلومات، بل هو غرس للقيم التي توجه استخدام هذه المعلومات."
+    },
+    {
+        question: "ما المقصود بـ'فرض كفاية' في سياق اختيار التخصصات؟",
+        options: [
+            "عمل غير مطلوب من أحد.",
+            "عمل إذا قام به البعض سقط الإثم عن الباقين.", // Correct Answer
+            "عمل محرم على الجميع.",
+            "عمل يجب على كل فرد القيام به."
+        ],
+        answer: "عمل إذا قام به البعض سقط الإثم عن الباقين.",
+        hint: "التخصصات النافعة للمجتمع كالطب والهندسة من فروض الكفاية التي يجب أن يوجد من يقوم بها."
+    },
+    {
+        question: "كيف يصبح العلم 'رحمة للعالمين'؟",
+        options: [
+            "عندما يستخدم في التدمير والحروب.",
+            "عندما يكون وسيلة لتحقيق العبودية لله وعمارة الأرض.", // Correct Answer
+            "عندما يحقق مصالح فئة قليلة.",
+            "عندما يسبب الضرر للبيئة."
+        ],
+        answer: "عندما يكون وسيلة لتحقيق العبودية لله وعمارة الأرض.",
+        hint: "الرحمة تكون بشمول النفع وعدم حصره، وتحقيق الخير للبشرية جمعاء."
+    },
+    {
+        question: "أي من المؤلفات التالية لمحمد باقر الصدر؟",
+        options: [
+            '"إحياء علوم الدين".',
+            '"مفتاح دار السعادة".',
+            '"المعرفة وأهدافها".', // Correct Answer
+            '"جامع بيان العلم وفضله".'
+        ],
+        answer: '"المعرفة وأهدافها".',
+        hint: "السيد محمد باقر الصدر من المفكرين الإسلاميين المعاصرين الذين كتبوا في قضايا المعرفة."
+    },
+    {
+        question: "من هو صاحب كتاب 'الموافقات'؟",
+        options: [
+            "الغزالي.",
+            "ابن القيم.",
+            "الشاطبي.", // Correct Answer
+            "ابن عبد البر."
+        ],
+        answer: "الشاطبي.",
+        hint: "الشاطبي هو فقيه أصولي اشتهر بكتابه 'الموافقات في أصول الشريعة'."
+    },
+    {
+        question: "أي من الفلاسفة المذكورين كتب في 'فلسفة العلم'؟",
+        options: [
+            "كارل بوبر.", // Correct Answer
+            "ابن خلدون.",
+            "الغزالي.",
+            "البيروني."
+        ],
+        answer: "كارل بوبر.",
+        hint: "كارل بوبر من أشهر فلاسفة العلم في القرن العشرين."
+    },
+    {
+        question: "ما الهدف من دراسة علم الطب وفق التصور الشامل؟",
+        options: [
+            "الكسب المادي فقط.",
+            "فهم تركيب جسم الإنسان وعلاج أمراضه.", // Correct Answer
+            "التجارة بالأدوية.",
+            "إهمال صحة المرضى."
+        ],
+        answer: "فهم تركيب جسم الإنسان وعلاج أمراضه.",
+        hint: "دراسة الطب تجمع بين الهدف المعرفي (فهم الجسم) والعملي (العلاج) والإيماني (التفكر في الخلق)."
+    },
+    {
+        question: "كيف يحقق العلم العدل في المجتمع؟",
+        options: [
+            "بزيادة الفجوة بين الطبقات.",
+            "بتوفير المعرفة التي تساعد على إقامة العدل.", // Correct Answer
+            "بمنع التعليم عن بعض الفئات.",
+            "بتبرير الظلم."
+        ],
+        answer: "بتوفير المعرفة التي تساعد على إقامة العدل.",
+        hint: "المعرفة تمكن من وضع التشريعات والسياسات العادلة، وتكشف الظلم."
+    },
+    {
+        question: "ما دور العلم في تحقيق الأمن الغذائي؟",
+        options: [
+            "تقليل الإنتاجية الزراعية.",
+            "زيادة الإنتاجية وتحسين جودة المحاصيل.", // Correct Answer
+            "إهدار الموارد الغذائية.",
+            "الاعتماد على الصدفة في الزراعة."
+        ],
+        answer: "زيادة الإنتاجية وتحسين جودة المحاصيل.",
+        hint: "الأبحاث الزراعية تطور أساليب وطرقاً تزيد من كفاءة وجودة الغذاء."
+    },
+    {
+        question: "لماذا يعتبر العلم من أعظم العبادات؟",
+        options: [
+            "لأنه وسيلة للتقرب إلى الله بعمارة الأرض ونفع الخلق.", // Correct Answer
+            "لأنه يؤدي إلى الغرور.",
+            "لأنه يبعد عن الله.",
+            "لأنه لا فائدة منه."
+        ],
+        answer: "لأنه وسيلة للتقرب إلى الله بعمارة الأرض ونفع الخلق.",
+        hint: "أي عمل نافع مقصود به وجه الله يعد عبادة، والعلم من أنفع الأعمال."
+    },
+    {
+        question: "ما معنى أن العلم 'وسيلة وليس غاية'؟",
+        options: [
+            "أنه يجب طلبه لذاته دون النظر للنتائج.",
+            "أنه يجب أن يوصل إلى غايات أسمى مثل معرفة الله ونفع الناس.", // Correct Answer
+            "أنه لا قيمة له على الإطلاق.",
+            "أنه غاية في ذاته."
+        ],
+        answer: "أنه يجب أن يوصل إلى غايات أسمى مثل معرفة الله ونفع الناس.",
+        hint: "الوسيلة تؤدي إلى غاية، وغايات العلم هي ما يحقق مصالح العباد والعباد."
+    },
+    {
+        question: "كيف يقاوم العلم الخرافات؟",
+        options: [
+            "بنشر الأكاذيب.",
+            "بتأسيس القرارات على البصيرة والدليل.", // Correct Answer
+            "بتشجيع الوهم.",
+            "بمنع التفكير."
+        ],
+        answer: "بتأسيس القرارات على البصيرة والدليل.",
+        hint: "العلم يقوم على الأدلة والبراهين، وهي نقيض الخرافات التي تفتقر إلى الدليل."
+    },
+    {
+        question: "ما الفرق بين العلم كـ'عبادة' والعلم كـ 'أداة' فقط؟",
+        options: [
+            "لا فرق بينهما.",
+            "العبادة تتعلق بالنية وارتباط العمل بالله، بينما الأداة قد تكون محايدة.", // Correct Answer
+            "العبادة لا علاقة لها بالعلم.",
+            "الأداة أفضل من العبادة."
+        ],
+        answer: "العبادة تتعلق بالنية وارتباط العمل بالله، بينما الأداة قد تكون محايدة.",
+        hint: "عندما يقترن العلم بالنية الصالحة ويسعى لتحقيق مقاصد شرعية، يتحول من أداة دنيوية إلى عبادة."
+    },
+    {
+        question: "أي من المؤلفات التالية لعبد الحليم عويس؟",
+        options: [
+            '"أهداف العلم في الإسلام".', // Correct Answer
+            '"إحياء علوم الدين".',
+            '"مفتاح دار السعادة".',
+            '"الموافقات".'
+        ],
+        answer: '"أهداف العلم في الإسلام".',
+        hint: "عبد الحليم عويس كاتب معاصر تناول العديد من القضايا الفكرية الإسلامية."
+    },
+    {
+        question: "ما النتيجة النهائية للعلم عندما يحقق أهدافه المتكاملة؟",
+        options: [
+            "الإفساد في الأرض.",
+            "أن يكون رحمة للعالمين.", // Correct Answer
+            "زيادة الجهل.",
+            "تدمير الحضارات."
+        ],
+        answer: "أن يكون رحمة للعالمين.",
+        hint: "تحقيق الأهداف الشاملة (الإيمانية، الأخلاقية، الاجتماعية، التطبيقية) يجعل العلم نعمة حقيقية على البشرية."
+    }
+];
+
+// يمكنك الآن استخدام المصفوفة 'islamicScienceGoalsQuiz' في تطبيقك.
+
+    // متغيرات التطبيق
+    let currentQuestion = 0;
+    let userAnswers = Array(questions.length).fill(null);
+    let markedQuestions = Array(questions.length).fill(false);
+    let timeLeft = 2400; // 30 دقيقة بالثواني
+    let timerInterval;
+    let quizStarted = false;
+
+    // عناصر DOM
+    const startScreen = document.getElementById('start-screen');
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultsScreen = document.getElementById('results-screen');
+    const startBtn = document.getElementById('start-btn');
+    const timeDisplay = document.getElementById('time');
+    const currentQuestionDisplay = document.getElementById('current-question');
+    const totalQuestionsDisplay = document.getElementById('total-questions');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const hintBtn = document.getElementById('hint-btn');
+    const hintText = document.getElementById('hint-text');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const markBtn = document.getElementById('mark-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const questionNumbers = document.getElementById('question-numbers');
+    const correctAnswersDisplay = document.getElementById('correct-answers');
+    const totalAnswersDisplay = document.getElementById('total-answers');
+    const percentageDisplay = document.getElementById('percentage');
+    const answersReview = document.getElementById('answers-review');
+    const restartBtn = document.getElementById('restart-btn');
+
+    // تهيئة التطبيق
+    function init() {
+        console.log("تم تحميل التطبيق بنجاح");
+        
+        // تعيين عدد الأسئلة الكلي
+        totalQuestionsDisplay.textContent = questions.length;
+        
+        // إنشاء أرقام الأسئلة
+        createQuestionNumbers();
+        
+        // إضافة مستمعي الأحداث
+        startBtn.addEventListener('click', startQuiz);
+        prevBtn.addEventListener('click', showPreviousQuestion);
+        nextBtn.addEventListener('click', showNextQuestion);
+        markBtn.addEventListener('click', toggleMarkQuestion);
+        submitBtn.addEventListener('click', showResults);
+        hintBtn.addEventListener('click', toggleHint);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        console.log("تم تهيئة التطبيق بنجاح");
+    }
+
+    // إنشاء أرقام الأسئلة
+    function createQuestionNumbers() {
+        questionNumbers.innerHTML = '';
+        
+        for (let i = 0; i < questions.length; i++) {
+            const number = document.createElement('div');
+            number.className = 'number';
+            number.textContent = i + 1;
+            number.dataset.index = i;
+            
+            number.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                goToQuestion(index);
+            });
+            
+            questionNumbers.appendChild(number);
+        }
+    }
+
+    // بدء الاختبار
+    function startQuiz() {
+        console.log("تم النقر على زر بدء الاختبار");
+        
+        // إخفاء شاشة البداية وإظهار شاشة الاختبار
+        startScreen.classList.remove('active');
+        quizScreen.classList.add('active');
+        
+        // تحديث نص وصف الاختبار في شاشة البداية
+        document.querySelector('#start-screen p').textContent = `يتكون هذا الاختبار من ${questions.length} أسئلة حول مفهوم العلم في اللغة العربية واشتقاقاته`;
+        
+        // بدء المؤقت
+        startTimer();
+        
+        // عرض السؤال الأول
+        showQuestion(currentQuestion);
+        
+        console.log("بدأ الاختبار بنجاح");
+    }
+
+    // بدء المؤقت
+    function startTimer() {
+        updateTimerDisplay();
+        
+        timerInterval = setInterval(function() {
+            timeLeft--;
+            updateTimerDisplay();
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                showResults();
+            }
+        }, 1000);
+    }
+
+    // تحديث عرض المؤقت
+    function updateTimerDisplay() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // عرض السؤال الحالي
+    function showQuestion(index) {
+        currentQuestion = index;
+        const question = questions[index];
+        
+        // تحديث رقم السؤال الحالي
+        currentQuestionDisplay.textContent = index + 1;
+        
+        // عرض نص السؤال
+        questionText.textContent = question.question;
+        
+        // عرض الخيارات
+        optionsContainer.innerHTML = '';
+        
+        question.options.forEach(option => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'option';
+            
+            if (userAnswers[index] === option) {
+                optionElement.classList.add('selected');
+            }
+            
+            optionElement.textContent = option;
+            
+            optionElement.addEventListener('click', function() {
+                selectOption(option);
+            });
+            
+            optionsContainer.appendChild(optionElement);
+        });
+        
+        // تحديث حالة زر التوضيح
+        hintText.classList.remove('show');
+        hintBtn.textContent = 'إظهار التوضيح';
+        
+        // تحديث أرقام الأسئلة
+        updateQuestionNumbers();
+        
+        // تحديث حالة أزرار التنقل
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === questions.length - 1;
+        
+        // تحديث حالة زر المراجعة لاحقًا
+        markBtn.textContent = markedQuestions[index] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+    }
+
+    // تحديد خيار
+    function selectOption(option) {
+        userAnswers[currentQuestion] = option;
+        showQuestion(currentQuestion);
+    }
+
+    // تبديل عرض التوضيح
+    function toggleHint() {
+        const isHintVisible = hintText.classList.contains('show');
+        
+        if (isHintVisible) {
+            hintText.classList.remove('show');
+            hintBtn.textContent = 'إظهار التوضيح';
+        } else {
+            hintText.textContent = questions[currentQuestion].hint;
+            hintText.classList.add('show');
+            hintBtn.textContent = 'إخفاء التوضيح';
+        }
+    }
+
+    // الانتقال إلى السؤال السابق
+    function showPreviousQuestion() {
+        if (currentQuestion > 0) {
+            showQuestion(currentQuestion - 1);
+        }
+    }
+
+    // الانتقال إلى السؤال التالي
+    function showNextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+            showQuestion(currentQuestion + 1);
+        }
+    }
+
+    // الانتقال إلى سؤال محدد
+    function goToQuestion(index) {
+        showQuestion(index);
+    }
+
+    // تبديل حالة المراجعة لاحقًا
+    function toggleMarkQuestion() {
+        markedQuestions[currentQuestion] = !markedQuestions[currentQuestion];
+        markBtn.textContent = markedQuestions[currentQuestion] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+        updateQuestionNumbers();
+    }
+
+    // تحديث أرقام الأسئلة
+    function updateQuestionNumbers() {
+        const numbers = document.querySelectorAll('.number');
+        
+        numbers.forEach((number, index) => {
+            number.classList.remove('current', 'answered', 'marked');
+            
+            if (index === currentQuestion) {
+                number.classList.add('current');
+            }
+            
+            if (userAnswers[index] !== null) {
+                number.classList.add('answered');
+            }
+            
+            if (markedQuestions[index]) {
+                number.classList.add('marked');
+            }
+        });
+    }
+
+    // عرض النتائج
+    function showResults() {
+        // إيقاف المؤقت
+        clearInterval(timerInterval);
+        
+        // إخفاء شاشة الاختبار وإظهار شاشة النتائج
+        quizScreen.classList.remove('active');
+        resultsScreen.classList.add('active');
+        
+        // حساب النتائج
+        let correctCount = 0;
+        
+        questions.forEach((question, index) => {
+            if (userAnswers[index] === question.answer) {
+                correctCount++;
+            }
+        });
+        
+        const percentage = Math.round((correctCount / questions.length) * 100);
+        
+        // عرض النتائج
+        correctAnswersDisplay.textContent = correctCount;
+        totalAnswersDisplay.textContent = questions.length;
+        percentageDisplay.textContent = `${percentage}%`;
+        
+        // رسم المخطط البياني
+        drawChart(correctCount, questions.length - correctCount);
+        
+        // عرض مراجعة الإجابات
+        displayAnswersReview();
+    }
+
+    // رسم المخطط البياني
+    function drawChart(correct, incorrect) {
+        const ctx = document.getElementById('results-chart').getContext('2d');
+        
+        // إذا كان هناك مخطط بياني موجود، قم بتدميره أولاً
+        if (window.resultChart) {
+            window.resultChart.destroy();
+        }
+        
+        window.resultChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['الإجابات الصحيحة', 'الإجابات الخاطئة'],
+                datasets: [{
+                    data: [correct, incorrect],
+                    backgroundColor: ['#2ecc71', '#e74c3c'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    }
+
+    // عرض مراجعة الإجابات
+    function displayAnswersReview() {
+        answersReview.innerHTML = '';
+        
+        questions.forEach((question, index) => {
+            const answerItem = document.createElement('div');
+            const isCorrect = userAnswers[index] === question.answer;
+            
+            answerItem.className = `answer-item ${isCorrect ? 'correct' : 'incorrect'}`;
+            
+            let reviewContent = `
+                <div class="question-review">${index + 1}. ${question.question}</div>
+                <div class="user-answer">إجابتك: ${userAnswers[index] || 'لم تجب'}</div>
+                <div class="correct-answer">الإجابة الصحيحة: ${question.answer}</div>
+            `;
+            
+            if (!isCorrect && userAnswers[index]) {
+                reviewContent += `<div class="hint-review">التوضيح: ${question.hint}</div>`;
+            }
+            
+            answerItem.innerHTML = reviewContent;
+            answersReview.appendChild(answerItem);
+        });
+    }
+
+    // إعادة الاختبار
+    function restartQuiz() {
+        // إعادة تعيين المتغيرات
+        currentQuestion = 0;
+        userAnswers = Array(questions.length).fill(null);
+        markedQuestions = Array(questions.length).fill(false);
+        timeLeft = 2400; // إعادة تعيين الوقت إلى 30 دقيقة
+        
+        // إعادة تعيين الشاشات
+        resultsScreen.classList.remove('active');
+        startScreen.classList.add('active');
+        
+        // إعادة تعيين المخطط البياني
+        if (window.resultChart) {
+            window.resultChart.destroy();
+        }
+    }
+
+    // تهيئة التطبيق عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("تم تحميل DOM بالكامل");
+        init();
+    });
+    </script>
+</body>
+</html>

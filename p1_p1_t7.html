@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار مفهوم العلم لغةً واشتقاقاته</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    /* تنسيقات عامة */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.screen {
+    display: none;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.screen.active {
+    display: block;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* شاشة البداية */
+#start-screen {
+    text-align: center;
+}
+
+#start-screen p {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* شاشة الاختبار */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.timer {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+.question-counter {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.question-container {
+    margin-bottom: 30px;
+}
+
+#question-text {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: right;
+}
+
+.option:hover {
+    background-color: #e9ecef;
+}
+
+.option.selected {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.option.correct {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.option.incorrect {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+.hint-container {
+    margin-top: 20px;
+}
+
+.hint-btn {
+    padding: 8px 15px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.hint-text {
+    padding: 15px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 5px;
+    display: none;
+}
+
+.hint-text.show {
+    display: block;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 10px 15px;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.nav-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.nav-btn.submit {
+    background-color: #e74c3c;
+}
+
+.nav-btn.submit:hover {
+    background-color: #c0392b;
+}
+
+.question-list {
+    margin-top: 30px;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.number.current {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.number.answered {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.number.marked {
+    background-color: #f39c12;
+    color: white;
+    border-color: #f39c12;
+}
+
+/* شاشة النتائج */
+#results-screen {
+    text-align: center;
+}
+
+.score {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.score p {
+    margin-bottom: 10px;
+}
+
+.chart-container {
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+
+.review {
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.answer-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #bdc3c7;
+}
+
+.answer-item.correct {
+    background-color: #d5f4e6;
+    border-left-color: #2ecc71;
+}
+
+.answer-item.incorrect {
+    background-color: #fadbd8;
+    border-left-color: #e74c3c;
+}
+
+.question-review {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user-answer, .correct-answer {
+    margin-bottom: 5px;
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .navigation {
+        flex-direction: column;
+    }
+    
+    .nav-btn {
+        margin-bottom: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="start-screen" class="screen active">
+            <h1>اختبار مفهوم العلم لغةً واشتقاقاته</h1>
+            <p>يتكون هذا الاختبار من 40 سؤالاً حول مفهوم العلم في اللغة العربية واشتقاقاته</p>
+            <button id="start-btn" class="btn">بدء الاختبار</button>
+        </div>
+
+        <div id="quiz-screen" class="screen">
+            <div class="header">
+                <div class="timer">
+                    الوقت المتبقي: <span id="time">30:00</span>
+                </div>
+                <div class="question-counter">
+                    السؤال <span id="current-question">1</span> من <span id="total-questions">30</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text"></h2>
+                <div id="options-container" class="options"></div>
+                
+                <div class="hint-container">
+                    <button id="hint-btn" class="hint-btn">إظهار التوضيح</button>
+                    <div id="hint-text" class="hint-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button id="prev-btn" class="nav-btn">السابق</button>
+                <button id="mark-btn" class="nav-btn">مراجعة لاحقًا</button>
+                <button id="next-btn" class="nav-btn">التالي</button>
+                <button id="submit-btn" class="nav-btn submit">إنهاء الاختبار</button>
+            </div>
+
+            <div class="question-list">
+                <h3>قائمة الأسئلة</h3>
+                <div id="question-numbers" class="numbers"></div>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen">
+            <h1>نتيجة الاختبار</h1>
+            <div class="score">
+                <p>الإجابات الصحيحة: <span id="correct-answers">0</span> من <span id="total-answers">30</span></p>
+                <p>النسبة المئوية: <span id="percentage">0%</span></p>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="results-chart"></canvas>
+            </div>
+            
+            <div class="review">
+                <h3>مراجعة الإجابات</h3>
+                <div id="answers-review"></div>
+            </div>
+            
+            <button id="restart-btn" class="btn">إعادة الاختبار</button>
+        </div>
+    </div>
+    <script>
+    // تعريف الأسئلة
+    const questions = [
+    /**
+ * اختبار شامل في خصائص العلم ومميزاته
+ * تم تحويل الأسئلة والخيارات والإجابات إلى مصفوفة من الكائنات في JavaScript.
+ * كل كائن (سؤال) يحتوي على:
+ * - question: نص السؤال.
+ * - options: مصفوفة من الخيارات المتاحة.
+ * - answer: نص الإجابة الصحيحة (مطابق لأحد الخيارات).
+ * - hint: توضيح/تفسير الإجابة.
+ */
+    {
+        question: "ما المقصود بخصيصة 'الموضوعية' في العلم؟",
+        options: [
+            "التأثر بالانفعالات والأحكام الشخصية.",
+            "تجنب التحيز الشخصي والتركيز على الحقائق القابلة للملاحظة.", // Correct Answer
+            "الاعتماد على الآراء الشعبية.",
+            "تغيير النتائج لتناسب وجهة نظر معينة."
+        ],
+        answer: "تجنب التحيز الشخصي والتركيز على الحقائق القابلة للملاحظة.",
+        hint: "الموضوعية تعني أن النتائج يجب أن تكون قابلة للتكرار والتحقق من قبل أي باحث آخر بغض النظر عن معتقداته."
+    },
+    {
+        question: "من القائل: 'لا تعرف الحق بالرجال، اعرف الحق تعرف أهله'؟",
+        options: [
+            "الغزالي.",
+            "كارل بوبر.",
+            "علي بن أبي طالب.", // Correct Answer
+            "ابن خلدون."
+        ],
+        answer: "علي بن أبي طالب.",
+        hint: "هذه المقولة تؤكد على أهمية الاعتماد على الدليل والحقيقة نفسها، وليس على الأشخاص الذين يقولونها."
+    },
+    {
+        question: "ما المقصود بكون العلم 'تراكمياً'؟",
+        options: [
+            "أن المعرفة الجديدة تبني على المعرفة القديمة.", // Correct Answer
+            "أن كل جيل يبدأ البحث من الصفر.",
+            "أن النظريات العلمية ثابتة ولا تتغير.",
+            "إهمال كل ما توصل إليه الباحثون السابقون."
+        ],
+        answer: "أن المعرفة الجديدة تبني على المعرفة القديمة.",
+        hint: "التراكمية تعني أن فهمنا للعالم يتقدم بشكل تدريجي، حيث يصحح اللاحقون أخطاء السابقين ويضيفون عليها."
+    },
+    {
+        question: "أي من الأمثلة التالية يوضح خاصية 'التراكمية' في العلم؟",
+        options: [
+            "تطور نظرية الذرة من ديمقريطس إلى بوهر ثم إلى ميكانيكا الكم.", // Correct Answer
+            "رفض جميع النظريات القديمة واعتبارها غير مجدية.",
+            "الاكتفاء بنظرية واحدة وعدم تطويرها.",
+            "الاعتماد على المصادفة في الاكتشافات."
+        ],
+        answer: "تطور نظرية الذرة من ديمقريطس إلى بوهر ثم إلى ميكانيكا الكم.",
+        hint: "تطور نظرية الذرة عبر التاريخ هو نموذج واضح على كيف تبني النظريات اللاحقة على ما سبقها وتطوره."
+    },
+    {
+        question: "ما المقصود بـ'القابلية للاختبار' كخاصية منهجية للعلم؟",
+        options: [
+            "إمكانية التحقق من صحة الفرضيات بالتجربة والملاحظة.", // Correct Answer
+            "قبول النتائج دون أي تدقيق.",
+            "الاعتماد على الحدس والتخمين فقط.",
+            "صعوبة إعادة تجربة النتائج."
+        ],
+        answer: "إمكانية التحقق من صحة الفرضيات بالتجربة والملاحظة.",
+        hint: "لا تصبح الفكرة علماً حتى يمكن اختبارها عملياً وإثباتها أو دحضها ببيانات قابلة للملاحظة."
+    },
+    {
+        question: "أي آية قرآنية تشير إلى مبدأ المطالبة بالدليل والبينة؟",
+        options: [
+            "{إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ} [آل عمران: 190].",
+            "{قُلْ هَاتُوا بُرْهَانَكُمْ إِن كُنتُمْ صَادِقِينَ} [البقرة: 111].", // Correct Answer
+            "{وَمَا أُوتِيتُم مِّنَ الْعِلْمِ إِلَّا قَلِيلًا} [الإسراء: 85].",
+            "{يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ} [المجادلة: 11]."
+        ],
+        answer: "{قُلْ هَاتُوا بُرْهَانَكُمْ إِن كُنتُمْ صَادِقِينَ} [البقرة: 111].",
+        hint: "الآية تؤكد على ضرورة إقامة الدليل والبرهان لإثبات أي ادعاء، وهو أساس المنهج العلمي."
+    },
+    {
+        question: "ما المقصود بـ'الدقة والكمية' في العلم؟",
+        options: [
+            "استخدام الوصف الأدبي والعاطفي للظواهر.",
+            "استخدام القياسات الدقيقة والأرقام والمعادلات الرياضية.", // Correct Answer
+            "الاعتماد على الروايات الشفهية فقط.",
+            "تقديم تفسيرات عامة وغير محددة."
+        ],
+        answer: "استخدام القياسات الدقيقة والأرقام والمعادلات الرياضية.",
+        hint: "الدقة الكمية تسمح بإجراء حسابات دقيقة والتنبؤ بظواهر مستقبلية، مما يعزز موثوقية العلم."
+    },
+    {
+        question: "من القائل: 'الوزن ميزان الأمور، والعدد بيان المقادير'؟",
+        options: [
+            "البيروني.", // Correct Answer
+            "ابن خلدون.",
+            "كارل بوبر.",
+            "الغزالي."
+        ],
+        answer: "البيروني.",
+        hint: "البيروني كان عالمًا رياضيًا وفلكيًا اهتم بالقياس الدقيق، وهذه العبارة تعكس ذلك."
+    },
+    {
+        question: "ما المقصود بـ'القدرة على التنبؤ' كخاصية للعلم؟",
+        options: [
+            "التكهن بالمستقبل باستخدام الأساطير.",
+            "استشراف نتائج مستقبلية بناءً على قوانين ثابتة.", // Correct Answer
+            "الاعتماد على الحظ في التوقعات.",
+            "عدم القدرة على توقع أي شيء."
+        ],
+        answer: "استشراف نتائج مستقبلية بناءً على قوانين ثابتة.",
+        hint: "قدرة النظرية العلمية على التنبؤ بظواهر لم تلاحظ بعد هي أحد أقوى أدلة صحتها."
+    },
+    {
+        question: "أي من الأمثلة التالية يوضح 'القدرة على التنبؤ'؟",
+        options: [
+            "قراءة الطالع.",
+            "التنبؤ بمواقع الكواكب وأوقات الكسوف.", // Correct Answer
+            "التخمين في نتائج مباراة.",
+            "توقع أحوال الطقس بناءً على خرافات."
+        ],
+        answer: "التنبؤ بمواقع الكواكب وأوقات الكسوف.",
+        hint: "الحسابات الفلكية الدقيقة التي تتنبأ بظواهر مثل الكسوف بناءً على قوانين الجاذبية والحركة هي مثال علمي صرف."
+    },
+    {
+        question: "ما المقصود بـ'العمومية' في نتائج العلم؟",
+        options: [
+            "انطباق النتائج على حالة واحدة فقط.",
+            "انطباق القوانين العلمية على جميع الحالات المماثلة.", // Correct Answer
+            "تغير النتائج مع تغير المزاج الشخصي.",
+            "عدم إمكانية تعميم أي نتيجة."
+        ],
+        answer: "انطباق القوانين العلمية على جميع الحالات المماثلة.",
+        hint: "القانون العلمي يكون صالحاً للتطبيق في أي زمان ومكان تتوفر فيه نفس الشروط."
+    },
+    {
+        question: "أي آية قرآنية تشير إلى ثبات السنن والقوانين الكونية؟",
+        options: [
+            "{سُنَّةَ اللَّهِ فِي الَّذِينَ خَلَوْا مِن قَبْلُ} [الأحزاب: 62].", // Correct Answer
+            "{اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ} [العلق: 1].",
+            "{وَيَتَفَكَّرُونَ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ} [آل عمران: 191].",
+            "{إِنَّمَا يَخْشَى اللَّهَ مِنْ عِبَادِهِ الْعُلَمَاءُ} [فاطر: 28]."
+        ],
+        answer: "{سُنَّةَ اللَّهِ فِي الَّذِينَ خَلَوْا مِن قَبْلُ} [الأحزاب: 62].",
+        hint: "الآية تؤكد على أن سنن الله في الخلق والاجتماع ثابتة لا تتغير."
+    },
+    {
+        question: "ما المقصود بـ'القابلية للتكذيب' لكارل بوبر؟",
+        options: [
+            "أن النظرية العلمية يجب أن تكون غير قابلة للدحض.",
+            "إمكانية دحض النظرية العلمية بدليل تجريبي جديد.", // Correct Answer
+            "أن النظريات العلمية حقائق مطلقة.",
+            "وجوب قبول جميع النظريات دون نقد."
+        ],
+        answer: "إمكانية دحض النظرية العلمية بدليل تجريبي جديد.",
+        hint: "معيار التكذيب هو ما يميز العلم الحقيقي عن العلم الزائف أو الأيديولوجيا، فهو يجعل العلم قابلاً للتقدم والتصحيح."
+    },
+    {
+        question: "ما المقصود بـ'النسبية' في سياق تطور المعرفة العلمية؟",
+        options: [
+            "ثبات المعرفة العلمية ووصولها إلى شكلها النهائي.",
+            "تطور المعرفة وعدم ثباتها النهائي، حيث تتغير النظريات.", // Correct Answer
+            "أن العلم يعطي إجابات نهائية لا تتغير.",
+            "أن الحقائق العلمية تعتمد على الرأي الشخصي فقط."
+        ],
+        answer: "تطور المعرفة وعدم ثباتها النهائي، حيث تتغير النظريات.",
+        hint: "النسبية هنا تعني أن فهمنا للعالم قابل للتعديل والتحسين مع تقدم الأدوات والمناهج، وليس أن الحقيقة النهائية غير موجودة."
+    },
+    {
+        question: "أي من الأمثلة يوضح 'النسبية' في العلم؟",
+        options: [
+            "ثبات قانون الجاذبية عبر العصور دون أي تغيير.",
+            "تطور مفهوم الذرة من النموذج الصلب إلى النموذج الكمي.", // Correct Answer
+            "اعتقاد أن الأرض مسطحة منذ القدم وحتى الآن.",
+            "رفض أي تغيير في النظريات الطبية رغم الأدلة الجديدة."
+        ],
+        answer: "تطور مفهوم الذرة من النموذج الصلب إلى النموذج الكمي.",
+        hint: "تطور النماذج الذرية يظهر كيف أن فهمنا للحقيقة يتطور مع ظهور أدلة جديدة، دون أن يعني ذلك أن النماذج القديمة كانت عديمة الفائدة."
+    },
+    {
+        question: "ما المقصود بـ'الربانية' كخاصية للعلم في المفهوم الإسلامي؟",
+        options: [
+            "فصل العلم عن أي غاية أخلاقية أو دينية.",
+            "ارتباط العلم بالخالق وكون هدفه عمارة الأرض وعبادة الله.", // Correct Answer
+            "استخدام العلم لإثبات عدم وجود خالق.",
+            "جعل العلم غاية في ذاته فقط."
+        ],
+        answer: "ارتباط العلم بالخالق وكون هدفه عمارة الأرض وعبادة الله.",
+        hint: "الربانية تعطي للعلم بُعداً قيمياً وغائياً، فليس مجرد نشاط تقني محض، بل هو جزء من العبادة."
+    },
+    {
+        question: "أي آية تربط بين العلم والخشية من الله؟",
+        options: [
+            "{إِنَّمَا يَخْشَى اللَّهَ مِنْ عِبَادِهِ الْعُلَمَاءُ} [فاطر: 28].", // Correct Answer
+            "{قُلْ هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ} [الزمر: 9].",
+            "{يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ} [المجادلة: 11].",
+            "{اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ} [العلق: 1]."
+        ],
+        answer: "{إِنَّمَا يَخْشَى اللَّهَ مِنْ عِبَادِهِ الْعُلَمَاءُ} [فاطر: 28].",
+        hint: "الآية تربط بشكل واضح بين صفة العلم ونتيجتها الوجدانية والأخلاقية، وهي الخشية."
+    },
+    {
+        question: "ما المقصود بـ'الأخلاقية' في العلم وفق الرؤية الإسلامية؟",
+        options: [
+            "استخدام العلم بلا أي ضوابط أخلاقية.",
+            "تقييد العلم بضوابط الشرع والأخلاق ووجوب استخدامه في الخير.", // Correct Answer
+            "فصل العلم عن الأخلاق تماماً.",
+            "اعتبار الأخلاق عائقاً أمام التقدم العلمي."
+        ],
+        answer: "تقييد العلم بضوابط الشرع والأخلاق ووجوب استخدامه في الخير.",
+        hint: "الأخلاقية تضمن أن القوة الهائلة للمعرفة العلمية توجّه لخدمة الإنسان والكون، وليس لتدميرهما."
+    },
+    {
+        question: "من القائل: 'العلم بلا عمل جنون، والعمل بلا علم لا يكون'؟",
+        options: [
+            "الغزالي.", // Correct Answer
+            "كارل بوبر.",
+            "ابن خلدون.",
+            "البيروني."
+        ],
+        answer: "الغزالي.",
+        hint: "الغزالي اشتهر بالربط بين العلم والعمل الصالح، معتبراً أن كلاً منهما يكمل الآخر."
+    },
+    {
+        question: "ما المقصود بـ'الشمولية' في المفهوم الإسلامي للعلم؟",
+        options: [
+            "الفصل التام بين العلوم الشرعية والعلوم الطبيعية.",
+            "عدم طلب العلوم الدنيوية.",
+            "جمع وطلب كل من العلوم الشرعية والعلوم الكونية النافعة.", // Correct Answer
+            "الاكتفاء بدراسة العلوم الدينية فقط."
+        ],
+        answer: "جمع وطلب كل من العلوم الشرعية والعلوم الكونية النافعة.",
+        hint: "الشمولية تعكس تكليف المسلم بعمارة الأرض الذي يتطلب معرفة بشؤون الدين والدنيا معاً."
+    },
+    {
+        question: "أي من العلماء المسلمين يمثل نموذجاً للجمع بين العلوم الشرعية والعلوم الطبيعية؟",
+        options: [
+            "ابن سينا.", // Correct Answer
+            "شاعر فقط.",
+            "سياسي فقط.",
+            "فقيه فقط دون اهتمام بالعلوم الأخرى."
+        ],
+        answer: "ابن سينا.",
+        hint: "ابن سينا كان طبيباً وفيلسوفاً وعالماً طبيعياً، وكتب في علوم شتى، وهو نموذج للعالم الشامل."
+    },
+    {
+        question: "أي من المميزات التالية تعني 'قدرة العلم على تحرير العقل من الخرافات'؟",
+        options: [
+            "التحرر من الخرافات.", // Correct Answer
+            "القدرة على حل المشكلات.",
+            "التنمية المستدامة.",
+            "التراكمية."
+        ],
+        answer: "التحرر من الخرافات.",
+        hint: "العلم يقوم على الأدلة والمنطق، مما يزيل المعتقدات التي لا تستند إلى دليل."
+    },
+    {
+        question: "كيف يساهم العلم في 'التنمية المستدامة'؟",
+        options: [
+            "بالتسبب في استنزاف الموارد الطبيعية.",
+            "بالمساهمة في التطور البشري والاقتصادي المستمر.", // Correct Answer
+            "بمنع أي تطور تقني.",
+            "بإهمال حاجات الأجيال القادمة."
+        ],
+        answer: "بالمساهمة في التطور البشري والاقتصادي المستمر.",
+        hint: "يوفر العلم المعرفة اللازمة لاستغلال الموارد بشكل أكثر كفاءة واستدامة، مما يخدم الأجيال الحالية والمستقبلية."
+    },
+    {
+        question: "ما الكتاب الذي ألفه كارل بوبر والمذكور في النص؟",
+        options: [
+            '"بنية الثورات العلمية".',
+            '"أسطورة الإطار".', // Correct Answer
+            '"فلسفة العلم".',
+            '"إحياء علوم الدين".'
+        ],
+        answer: '"أسطورة الإطار".',
+        hint: "كارل بوبر هو فيلسوف العلوم المشهور بكتاب 'أسطورة الإطار' among others."
+    },
+    {
+        question: "من هو صاحب كتاب 'بنية الثورات العلمية'؟",
+        options: [
+            "توماس كون.", // Correct Answer
+            "كارل بوبر.",
+            "محمد عابد الجابري.",
+            "الغزالي."
+        ],
+        answer: "توماس كون.",
+        hint: "توماس كون قدم في هذا الكتاب مفهوم 'التحول النظري' أو 'paradigm shift' في تطور العلم."
+    },
+    {
+        question: "أي خاصية من خصائص العلم تعني 'انتظام المعرفة في منظومة متكاملة'؟",
+        options: [
+            "الموضوعية.",
+            "الترابط والنسقية.", // Correct Answer
+            "التراكمية.",
+            "النسبية."
+        ],
+        answer: "الترابط والنسقية.",
+        hint: "النسقية تعني أن الحقائق ليست منعزلة، بل تكون شبكة مترابطة من المفاهيم والقوانين."
+    },
+    {
+        question: "كيف عبر ابن خلدون عن فكرة الترابط المنهجي في العلوم؟",
+        options: [
+            '"العلوم متصلة السند".', // Correct Answer
+            '"العلم بلا عمل جنون".',
+            '"لا تعرف الحق بالرجال".',
+            '"الوزن ميزان الأمور".'
+        ],
+        answer: '"العلوم متصلة السند".',
+        hint: "العبارة تشير إلى أن المعرفة تنتقل وتتطور بشكل منهجي ومتصل، وليست مجرد معلومات متفرقة."
+    },
+    {
+        question: "ما الخاصية التي تميز العلم الحقيقي عن العلم الزائف حسب كارل بوبر؟",
+        options: [
+            "القابلية للتكذيب.", // Correct Answer
+            "الثبات المطلق.",
+            "الغموض والتعقيد.",
+            "الاعتماد على السلطة فقط."
+        ],
+        answer: "القابلية للتكذيب.",
+        hint: "النظرية التي لا يمكن اختبارها أو تفنيدها بأي دليل محتمل تقع خارج نطاق العلم."
+    },
+    {
+        question: "أي من الخصائص التالية تجعل العلم أداة فعالة لحل المشكلات التقنية والصحية؟",
+        options: [
+            "الأخلاقية.",
+            "الربانية.",
+            "القدرة على حل المشكلات.", // Correct Answer
+            "النسبية."
+        ],
+        answer: "القدرة على حل المشكلات.",
+        hint: "هذه الميزة هي نتيجة لتطبيق الخصائص الأخرى مثل الاختبارية والدقة والتنبؤ على التحديات الواقعية."
+    },
+    {
+        question: "ما المقصود بـ'التحرر من الخرافات' كميزة للعلم؟",
+        options: [
+            "الاعتماد على التفسيرات السحرية للظواهر.",
+            "القضاء على الأساطير والتفكير السحري غير المنطقي.", // Correct Answer
+            "رفض أي تفسير مادي للظواهر.",
+            "تبني المعتقدات الشعبية دون تمحيص."
+        ],
+        answer: "القضاء على الأساطير والتفكير السحري غير المنطقي.",
+        hint: "هذه الميزة هي أحد أهم الإنجازات الاجتماعية للعلم، حيث حرر المجتمعات من many forms of superstition."
+    },
+    {
+        question: "كيف تجمع خصائص العلم بين 'الأصالة والحداثة' حسب الخلاصة؟",
+        options: [
+            "برفض كل ما هو قديم.",
+            "بالجمع بين الثوابت الإيمانية والمتغيرات المنهجية.", // Correct Answer
+            "بالتقييد الحرفي بالنصوص دون استخدام العقل.",
+            "برفض أي منهج حديث."
+        ],
+        answer: "بالجمع بين الثوابت الإيمانية والمتغيرات المنهجية.",
+        hint: "الأصالة تأتي من الثوابت (كربانية العلم وأخلاقيته)، والحداثة تأتي من مرونة المنهج وقابليته للتطوير."
+    },
+    {
+        question: "أي خاصية تؤكد على أن النتائج العلمية يجب أن تكون قابلة للتكرار والتحقق من قبل باحثين مختلفين؟",
+        options: [
+            "الموضوعية.", // Correct Answer
+            "التراكمية.",
+            "النسبية.",
+            "الربانية."
+        ],
+        answer: "الموضوعية.",
+        hint: "هذه هي الضمانة الأساسية ضد الغش والتحيز في البحث العلمي."
+    },
+    {
+        question: "ما الدور الرئيسي لخاصية 'الدقة والكمية' في المنهج العلمي؟",
+        options: [
+            "جعل النتائج غامضة.",
+            "التعبير عن الظواهر بطريقة رياضية قابلة للقياس والتحقق.", // Correct Answer
+            "الاعتماد على الوصف الأدبي.",
+            "جعل العلم صعب الفهم."
+        ],
+        answer: "التعبير عن الظواهر بطريقة رياضية قابلة للقياس والتحقق.",
+        hint: "without quantification and precision, it would be difficult to distinguish between competing theories or make accurate predictions."
+    },
+    {
+        question: "لماذا تعتبر 'التراكمية' مهمة للتقدم العلمي؟",
+        options: [
+            "لأنها تسمح للباحثين بالبدء من حيث انتهى الآخرون.", // Correct Answer
+            "لأنها تجبر كل جيل على إعادة اختراع العجلة.",
+            "لأنها تثبت أن كل النظريات القديمة خاطئة.",
+            "لأنها تمنع أي تطور جديد."
+        ],
+        answer: "لأنها تسمح للباحثين بالبدء من حيث انتهى الآخرون.",
+        hint: "التراكمية توفر الوقت والجهد، وتسمح للبشرية بتسريع وتيرة الاكتشاف والاختراع."
+    },
+    {
+        question: "كيف تعزز 'العمومية' من قيمة القانون العلمي؟",
+        options: [
+            "بجعله قابلاً للتطبيق في ظروف محدودة جداً.",
+            "بانطباقه على جميع الحالات المماثلة عبر الزمان والمكان.", // Correct Answer
+            "بتغييره مع تغير الثقافات.",
+            "بعدم إمكانية استخدامه للتنبؤ."
+        ],
+        answer: "بانطباقه على جميع الحالات المماثلة عبر الزمان والمكان.",
+        hint: "العمومية هي ما يعطي العلم قوته التفسيرية والتنبؤية الواسعة."
+    },
+    {
+        question: "ما الفائدة العملية من 'القدرة على التنبؤ' في العلوم التطبيقية مثل الهندسة؟",
+        options: [
+            "بناء هياكل وآلات آمنة وفعالة.", // Correct Answer
+            "التخمين العشوائي في نتائج التصاميم.",
+            "الاعتماد على الصدفة في الإنشاء.",
+            "عدم الاهتمام بسلامة المنشآت."
+        ],
+        answer: "بناء هياكل وآلات آمنة وفعالة.",
+        hint: "القدرة على التنبؤ بسلوك المواد والقوى under different conditions is fundamental to all engineering disciplines."
+    },
+    {
+        question: "كيف تخدم 'الربانية' العالم المسلم في مسيرته العلمية؟",
+        options: [
+            "بجعله يهمل دراسته الدنيوية.",
+            "بمنحه دافعاً أخلاقياً وغائياً أسمى لعمله.", // Correct Answer
+            "بمنعه من دراسة العلوم الطبيعية.",
+            "بجعله يشك في قيمة العلم."
+        ],
+        answer: "بمنحه دافعاً أخلاقياً وغائياً أسمى لعمله.",
+        hint: "الربانية تحول العمل العلمي من مجرد وظيفة أو hobby إلى عبادة وقربى من الله."
+    },
+    {
+        question: "ما التحدي الأكبر الذي تواجهه 'الأخلاقية' في العلم الحديث؟",
+        options: [
+            "كيفية توجيه التقنيات القوية (مثل الذكاء الاصطناعي والهندسة الوراثية) لخدمة البشرية دون إلحاق الضرر.", // Correct Answer
+            "عدم وجود أي تقنيات جديدة.",
+            "أن العلم الحديث بلا أي مخاطر أخلاقية.",
+            "أن الأخلاق لم تعد مهمة."
+        ],
+        answer: "كيفية توجيه التقنيات القوية (مثل الذكاء الاصطناعي والهندسة الوراثية) لخدمة البشرية دون إلحاق الضرر.",
+        hint: "مع تزايد قوة التقنيات العلمية، تزداد الحاجة إلى إطار أخلاقي رصين لتوجيهها."
+    },
+    {
+        question: "أي من الخصائص التالية تضمن استمرارية وتقدم المعرفة العلمية على المدى الطويل؟",
+        options: [
+            "التراكمية والقابلية للتكذيب.", // Correct Answer
+            "الربانية فقط.",
+            "الأخلاقية فقط.",
+            "النسبية المطلقة."
+        ],
+        answer: "التراكمية والقابلية للتكذيب.",
+        hint: "التراكمية تسمح بالبناء على الماضي، والقابلية للتكذيب تسمح بتصحيح المسار، مما يضمن تقدمًا مستمرًا."
+    },
+    {
+        question: "ما الذي تشير إليه 'النسقية' في بنية العلم؟",
+        options: [
+            "أن الحقائق العلمية منعزلة ومستقلة عن بعضها.",
+            "أن المعرفة العلمية تشكل شبكة مترابطة من النظريات والقوانين.", // Correct Answer
+            "أن كل فرع من فروع العلم يعمل بمعزل عن الآخر.",
+            "عدم وجود أي ترابط بين الاكتشافات."
+        ],
+        answer: "أن المعرفة العلمية تشكل شبكة مترابطة من النظريات والقوانين.",
+        hint: "هذه الشبكة المترابطة هي ما يجعل العلم قويًا، حيث يدعم كل جزء الأجزاء الأخرى."
+    }
+];
+
+// يمكنك الآن استخدام المصفوفة 'scienceCharacteristicsQuiz' في تطبيقك.
+
+    
+    // متغيرات التطبيق
+    let currentQuestion = 0;
+    let userAnswers = Array(questions.length).fill(null);
+    let markedQuestions = Array(questions.length).fill(false);
+    let timeLeft = 2400; // 30 دقيقة بالثواني
+    let timerInterval;
+    let quizStarted = false;
+
+    // عناصر DOM
+    const startScreen = document.getElementById('start-screen');
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultsScreen = document.getElementById('results-screen');
+    const startBtn = document.getElementById('start-btn');
+    const timeDisplay = document.getElementById('time');
+    const currentQuestionDisplay = document.getElementById('current-question');
+    const totalQuestionsDisplay = document.getElementById('total-questions');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const hintBtn = document.getElementById('hint-btn');
+    const hintText = document.getElementById('hint-text');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const markBtn = document.getElementById('mark-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const questionNumbers = document.getElementById('question-numbers');
+    const correctAnswersDisplay = document.getElementById('correct-answers');
+    const totalAnswersDisplay = document.getElementById('total-answers');
+    const percentageDisplay = document.getElementById('percentage');
+    const answersReview = document.getElementById('answers-review');
+    const restartBtn = document.getElementById('restart-btn');
+
+    // تهيئة التطبيق
+    function init() {
+        console.log("تم تحميل التطبيق بنجاح");
+        
+        // تعيين عدد الأسئلة الكلي
+        totalQuestionsDisplay.textContent = questions.length;
+        
+        // إنشاء أرقام الأسئلة
+        createQuestionNumbers();
+        
+        // إضافة مستمعي الأحداث
+        startBtn.addEventListener('click', startQuiz);
+        prevBtn.addEventListener('click', showPreviousQuestion);
+        nextBtn.addEventListener('click', showNextQuestion);
+        markBtn.addEventListener('click', toggleMarkQuestion);
+        submitBtn.addEventListener('click', showResults);
+        hintBtn.addEventListener('click', toggleHint);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        console.log("تم تهيئة التطبيق بنجاح");
+    }
+
+    // إنشاء أرقام الأسئلة
+    function createQuestionNumbers() {
+        questionNumbers.innerHTML = '';
+        
+        for (let i = 0; i < questions.length; i++) {
+            const number = document.createElement('div');
+            number.className = 'number';
+            number.textContent = i + 1;
+            number.dataset.index = i;
+            
+            number.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                goToQuestion(index);
+            });
+            
+            questionNumbers.appendChild(number);
+        }
+    }
+
+    // بدء الاختبار
+    function startQuiz() {
+        console.log("تم النقر على زر بدء الاختبار");
+        
+        // إخفاء شاشة البداية وإظهار شاشة الاختبار
+        startScreen.classList.remove('active');
+        quizScreen.classList.add('active');
+        
+        // تحديث نص وصف الاختبار في شاشة البداية
+        document.querySelector('#start-screen p').textContent = `يتكون هذا الاختبار من ${questions.length} أسئلة حول مفهوم العلم في اللغة العربية واشتقاقاته`;
+        
+        // بدء المؤقت
+        startTimer();
+        
+        // عرض السؤال الأول
+        showQuestion(currentQuestion);
+        
+        console.log("بدأ الاختبار بنجاح");
+    }
+
+    // بدء المؤقت
+    function startTimer() {
+        updateTimerDisplay();
+        
+        timerInterval = setInterval(function() {
+            timeLeft--;
+            updateTimerDisplay();
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                showResults();
+            }
+        }, 1000);
+    }
+
+    // تحديث عرض المؤقت
+    function updateTimerDisplay() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // عرض السؤال الحالي
+    function showQuestion(index) {
+        currentQuestion = index;
+        const question = questions[index];
+        
+        // تحديث رقم السؤال الحالي
+        currentQuestionDisplay.textContent = index + 1;
+        
+        // عرض نص السؤال
+        questionText.textContent = question.question;
+        
+        // عرض الخيارات
+        optionsContainer.innerHTML = '';
+        
+        question.options.forEach(option => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'option';
+            
+            if (userAnswers[index] === option) {
+                optionElement.classList.add('selected');
+            }
+            
+            optionElement.textContent = option;
+            
+            optionElement.addEventListener('click', function() {
+                selectOption(option);
+            });
+            
+            optionsContainer.appendChild(optionElement);
+        });
+        
+        // تحديث حالة زر التوضيح
+        hintText.classList.remove('show');
+        hintBtn.textContent = 'إظهار التوضيح';
+        
+        // تحديث أرقام الأسئلة
+        updateQuestionNumbers();
+        
+        // تحديث حالة أزرار التنقل
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === questions.length - 1;
+        
+        // تحديث حالة زر المراجعة لاحقًا
+        markBtn.textContent = markedQuestions[index] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+    }
+
+    // تحديد خيار
+    function selectOption(option) {
+        userAnswers[currentQuestion] = option;
+        showQuestion(currentQuestion);
+    }
+
+    // تبديل عرض التوضيح
+    function toggleHint() {
+        const isHintVisible = hintText.classList.contains('show');
+        
+        if (isHintVisible) {
+            hintText.classList.remove('show');
+            hintBtn.textContent = 'إظهار التوضيح';
+        } else {
+            hintText.textContent = questions[currentQuestion].hint;
+            hintText.classList.add('show');
+            hintBtn.textContent = 'إخفاء التوضيح';
+        }
+    }
+
+    // الانتقال إلى السؤال السابق
+    function showPreviousQuestion() {
+        if (currentQuestion > 0) {
+            showQuestion(currentQuestion - 1);
+        }
+    }
+
+    // الانتقال إلى السؤال التالي
+    function showNextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+            showQuestion(currentQuestion + 1);
+        }
+    }
+
+    // الانتقال إلى سؤال محدد
+    function goToQuestion(index) {
+        showQuestion(index);
+    }
+
+    // تبديل حالة المراجعة لاحقًا
+    function toggleMarkQuestion() {
+        markedQuestions[currentQuestion] = !markedQuestions[currentQuestion];
+        markBtn.textContent = markedQuestions[currentQuestion] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+        updateQuestionNumbers();
+    }
+
+    // تحديث أرقام الأسئلة
+    function updateQuestionNumbers() {
+        const numbers = document.querySelectorAll('.number');
+        
+        numbers.forEach((number, index) => {
+            number.classList.remove('current', 'answered', 'marked');
+            
+            if (index === currentQuestion) {
+                number.classList.add('current');
+            }
+            
+            if (userAnswers[index] !== null) {
+                number.classList.add('answered');
+            }
+            
+            if (markedQuestions[index]) {
+                number.classList.add('marked');
+            }
+        });
+    }
+
+    // عرض النتائج
+    function showResults() {
+        // إيقاف المؤقت
+        clearInterval(timerInterval);
+        
+        // إخفاء شاشة الاختبار وإظهار شاشة النتائج
+        quizScreen.classList.remove('active');
+        resultsScreen.classList.add('active');
+        
+        // حساب النتائج
+        let correctCount = 0;
+        
+        questions.forEach((question, index) => {
+            if (userAnswers[index] === question.answer) {
+                correctCount++;
+            }
+        });
+        
+        const percentage = Math.round((correctCount / questions.length) * 100);
+        
+        // عرض النتائج
+        correctAnswersDisplay.textContent = correctCount;
+        totalAnswersDisplay.textContent = questions.length;
+        percentageDisplay.textContent = `${percentage}%`;
+        
+        // رسم المخطط البياني
+        drawChart(correctCount, questions.length - correctCount);
+        
+        // عرض مراجعة الإجابات
+        displayAnswersReview();
+    }
+
+    // رسم المخطط البياني
+    function drawChart(correct, incorrect) {
+        const ctx = document.getElementById('results-chart').getContext('2d');
+        
+        // إذا كان هناك مخطط بياني موجود، قم بتدميره أولاً
+        if (window.resultChart) {
+            window.resultChart.destroy();
+        }
+        
+        window.resultChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['الإجابات الصحيحة', 'الإجابات الخاطئة'],
+                datasets: [{
+                    data: [correct, incorrect],
+                    backgroundColor: ['#2ecc71', '#e74c3c'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    }
+
+    // عرض مراجعة الإجابات
+    function displayAnswersReview() {
+        answersReview.innerHTML = '';
+        
+        questions.forEach((question, index) => {
+            const answerItem = document.createElement('div');
+            const isCorrect = userAnswers[index] === question.answer;
+            
+            answerItem.className = `answer-item ${isCorrect ? 'correct' : 'incorrect'}`;
+            
+            let reviewContent = `
+                <div class="question-review">${index + 1}. ${question.question}</div>
+                <div class="user-answer">إجابتك: ${userAnswers[index] || 'لم تجب'}</div>
+                <div class="correct-answer">الإجابة الصحيحة: ${question.answer}</div>
+            `;
+            
+            if (!isCorrect && userAnswers[index]) {
+                reviewContent += `<div class="hint-review">التوضيح: ${question.hint}</div>`;
+            }
+            
+            answerItem.innerHTML = reviewContent;
+            answersReview.appendChild(answerItem);
+        });
+    }
+
+    // إعادة الاختبار
+    function restartQuiz() {
+        // إعادة تعيين المتغيرات
+        currentQuestion = 0;
+        userAnswers = Array(questions.length).fill(null);
+        markedQuestions = Array(questions.length).fill(false);
+        timeLeft = 2400; // إعادة تعيين الوقت إلى 30 دقيقة
+        
+        // إعادة تعيين الشاشات
+        resultsScreen.classList.remove('active');
+        startScreen.classList.add('active');
+        
+        // إعادة تعيين المخطط البياني
+        if (window.resultChart) {
+            window.resultChart.destroy();
+        }
+    }
+
+    // تهيئة التطبيق عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("تم تحميل DOM بالكامل");
+        init();
+    });
+    </script>
+</body>
+</html>

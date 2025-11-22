@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار مفهوم العلم لغةً واشتقاقاته</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    /* تنسيقات عامة */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.screen {
+    display: none;
+    background: linear-gradient(135deg, #3494E6, #EC6EAD);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.screen.active {
+    display: block;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* شاشة البداية */
+#start-screen {
+    text-align: center;
+}
+
+#start-screen p {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* شاشة الاختبار */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.timer {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+.question-counter {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.question-container {
+    margin-bottom: 30px;
+}
+
+#question-text {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: right;
+}
+
+.option:hover {
+    background-color: #e9ecef;
+}
+
+.option.selected {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.option.correct {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.option.incorrect {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+.hint-container {
+    margin-top: 20px;
+}
+
+.hint-btn {
+    padding: 8px 15px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.hint-text {
+    padding: 15px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 5px;
+    display: none;
+}
+
+.hint-text.show {
+    display: block;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 10px 15px;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.nav-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.nav-btn.submit {
+    background-color: #e74c3c;
+}
+
+.nav-btn.submit:hover {
+    background-color: #c0392b;
+}
+
+.question-list {
+    margin-top: 30px;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.number.current {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.number.answered {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.number.marked {
+    background-color: #f39c12;
+    color: white;
+    border-color: #f39c12;
+}
+
+/* شاشة النتائج */
+#results-screen {
+    text-align: center;
+}
+
+.score {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.score p {
+    margin-bottom: 10px;
+}
+
+.chart-container {
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+
+.review {
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.answer-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #bdc3c7;
+}
+
+.answer-item.correct {
+    background-color: #d5f4e6;
+    border-left-color: #2ecc71;
+}
+
+.answer-item.incorrect {
+    background-color: #fadbd8;
+    border-left-color: #e74c3c;
+}
+
+.question-review {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user-answer, .correct-answer {
+    margin-bottom: 5px;
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .navigation {
+        flex-direction: column;
+    }
+    
+    .nav-btn {
+        margin-bottom: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="start-screen" class="screen active">
+            <h1> الفروق بين العلم والمعرفة </h1>
+            <p>يتكون من 40 سؤالا</p>
+            <button id="start-btn" class="btn">بدء الاختبار</button>
+        </div>
+
+        <div id="quiz-screen" class="screen">
+            <div class="header">
+                <div class="timer">
+                    الوقت المتبقي: <span id="time">30:00</span>
+                </div>
+                <div class="question-counter">
+                    السؤال <span id="current-question">1</span> من <span id="total-questions">30</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text"></h2>
+                <div id="options-container" class="options"></div>
+                
+                <div class="hint-container">
+                    <button id="hint-btn" class="hint-btn">إظهار التوضيح</button>
+                    <div id="hint-text" class="hint-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button id="prev-btn" class="nav-btn">السابق</button>
+                <button id="mark-btn" class="nav-btn">مراجعة لاحقًا</button>
+                <button id="next-btn" class="nav-btn">التالي</button>
+                <button id="submit-btn" class="nav-btn submit">إنهاء الاختبار</button>
+            </div>
+
+            <div class="question-list">
+                <h3>قائمة الأسئلة</h3>
+                <div id="question-numbers" class="numbers"></div>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen">
+            <h1>نتيجة الاختبار</h1>
+            <div class="score">
+                <p>الإجابات الصحيحة: <span id="correct-answers">0</span> من <span id="total-answers">30</span></p>
+                <p>النسبة المئوية: <span id="percentage">0%</span></p>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="results-chart"></canvas>
+            </div>
+            
+            <div class="review">
+                <h3>مراجعة الإجابات</h3>
+                <div id="answers-review"></div>
+            </div>
+            
+            <button id="restart-btn" class="btn">إعادة الاختبار</button>
+        </div>
+    </div>
+    <script>
+    // تعريف الأسئلة
+    const questions = [
+    {
+        question: "ما الجذر اللغوي الذي تُشتق منه كلمة 'المعرفة'؟",
+        options: ["(ع ل م)", "(ف ه م)", "(د ر س)", "(ع ر ف)"],
+        answer: "(ع ر ف)",
+        hint: "الجذر الثلاثي هو الأصل الذي تُشتق منه الكلمة في اللغة العربية."
+    },
+    {
+        question: "يدل الجذر اللغوي لكلمة 'المعرفة' على:",
+        options: ["العلامة المميزة للشيء.", "الأثر الدال الذي يستدل به على شيء.", "الإدراك الفوري والجازم.", "الحفظ والتكرار."],
+        answer: "الأثر الدال الذي يستدل به على شيء.",
+        hint: "المعرفة تأتي من 'عرف' التي تدل على شيء يتتابع ويتصل، كالشعار الذي تعرف به القبيلة."
+    },
+    {
+        question: "ما الجذر اللغوي الذي تُشتق منه كلمة 'العلم'؟",
+        options: ["(ع ر ف)", "(ق ر أ)", "(ع ل م)", "(ش ع ر)"],
+        answer: "(ع ل م)",
+        hint: "كل المشتقات مثل يعلم، عالم، معلم، تأتي من هذا الجذر الأساسي."
+    },
+    {
+        question: "يدل الجذر اللغوي لكلمة 'العلم' في أصله على:",
+        options: ["التتابع والاتصال.", "الأثر المميز للشيء عن غيره.", "التأمل والتفكر.", "السرعة والإنجاز."],
+        answer: "الأثر المميز للشيء عن غيره.",
+        hint: "العَلَم هو العلامة التي تميز الشيء وتجعله واضحاً ومعروفاً."
+    },
+    {
+        question: "ما التعريف اللغوي الأقرب للمعرفة؟",
+        options: ["إدراك الشيء على ما هو عليه إدراكاً جازماً.", "إدراك الشيء بتفكر وتأمل.", "حفظ المعلومات وتذكرها.", "التصديق المطلق بالشيء."],
+        answer: "إدراك الشيء بتفكر وتأمل.",
+        hint: "المعرفة تتميز بطابعها التدريجي والتأملي مقارنة بالعلم."
+    },
+    {
+        question: "ما التعريف اللغوي الأقرب للعلم؟",
+        options: ["إدراك الشيء بتفكر وتأمل.", "جمع المعلومات المتفرقة.", "إدراك الشيء على ما هو عليه إدراكاً جازماً.", "الظن بالشيء."],
+        answer: "إدراك الشيء على ما هو عليه إدراكاً جازماً.",
+        hint: "جوهر التعريف اللغوي للعلم هو الجزم والانكشاف التام للحقيقة."
+    },
+    {
+        question: "من هو صاحب كتاب 'مقاييس اللغة' الذي تم الاستشهاد بتعريفه للمعرفة؟",
+        options: ["الراغب الأصفهاني.", "الجرجاني.", "ابن فارس.", "الفيومي."],
+        answer: "ابن فارس.",
+        hint: "ابن فارس هو مؤلف كتاب 'مقاييس اللغة' الشهير الذي يبحث في جذور الكلمات."
+    },
+    {
+        question: "من هو صاحب كتاب 'التعريفات' الذي عرف العلم بأنه 'صفة ينكشف بها المطلوب انكشافًا تامًا'؟",
+        options: ["الغزالي.", "الجرجاني.", "ابن القيم.", "الفيومي."],
+        answer: "الجرجاني.",
+        hint: "الجرجاني هو مؤلف كتاب 'التعريفات' الذي يعد من أهم الكتب في شرح المصطلحات."
+    },
+    {
+        question: "أي من العبارات التالية تلخص الفرق الجوهري اللغوي بين العلم والمعرفة؟",
+        options: ["المعرفة جازمة بينما العلم تأملي.", "المعرفة تدرك بالتدريج بينما العلم انكشاف تام.", "العلم أعم من المعرفة.", "المعرفة خاصة بالعلوم الحديثة."],
+        answer: "المعرفة تدرك بالتدريج بينما العلم انكشاف تام.",
+        hint: "هذه النقطة هي المحور الأساسي الذي تنبني عليه العديد من الفروقات الأخرى."
+    },
+    {
+        question: "من حيث الطبيعة، تكون المعرفة في الغالب:",
+        options: ["كلية وشاملة.", "جزئية ومتقطعة.", "ثابتة ومستقرة.", "منظمة وممنهجة."],
+        answer: "جزئية ومتقطعة.",
+        hint: "المعرفة قد تكون عبارة عن معلومات متفرقة وغير مكتملة الصورة."
+    },
+    {
+        question: "من حيث الطبيعة، يكون العلم في الغالب:",
+        options: ["متغيراً وقابلاً للتعديل.", "جزئياً ومتقطعاً.", "كلياً وشاملاً.", "غير منتظم."],
+        answer: "كلياً وشاملاً.",
+        hint: "العلم يقدم صورة مكتملة ومنظمة عن المعلومة أو الظاهرة."
+    },
+    {
+        question: "من حيث الثبوت والاستقرار، تكون المعرفة:",
+        options: ["ثابتة ومستقرة.", "نهائية وغير قابلة للتغيير.", "متغيرة وقابلة للتعديل.", "غير قابلة للنقاش."],
+        answer: "متغيرة وقابلة للتعديل.",
+        hint: "المعرفة قابلة للتطور والتبدل مع تلقي معلومات جديدة أو حدوث تغير في الفهم."
+    },
+    {
+        question: "من حيث الثبوت والاستقرار، يكون العلم:",
+        options: ["متغيراً باستمرار.", "ثابتاً ومستقراً.", "قابلاً للتبدل بسهولة.", "غير مؤكد."],
+        answer: "ثابتاً ومستقراً.",
+        hint: "عندما يصل الإدراك إلى درجة العلم، فإنه يكون يقيناً ثابتاً في النفس."
+    },
+    {
+        question: "أي من العبارات التالية وردت على لسان الغزالي في 'معيار العلم'؟",
+        options: ["'المعرفة أخص من العلم'.", "'المعرفة مقدمة العلم، فكل علم معرفة، وليس كل معرفة علمًا'.", "'العلم أعم من المعرفة'.", "'العلم والمعرفة مترادفان'."],
+        answer: "'المعرفة مقدمة العلم، فكل علم معرفة، وليس كل معرفة علمًا'.",
+        hint: "هذه العبارة توضح العلاقة بين المفهومين، حيث أن العلم مرحلة متقدمة من المعرفة."
+    },
+    {
+        question: "كيف وصف ابن القيم العلاقة بين العلم والمعرفة في 'مفتاح دار السعادة'؟",
+        options: ["أن العلم والمعرفة مترادفان تماماً.", "أن المعرفة أعم من العلم.", "أن المعرفة أخص من العلم.", "أن العلم أعم من جهة، وأخص من جهة."],
+        answer: "أن العلم أعم من جهة، وأخص من جهة.",
+        hint: "هذه العبارة تدل على تداخل العلاقة بين المفهومين وعدم كونها علاقة عموم وخصوص مطلق."
+    },
+    {
+        question: "في الاستخدام القرآني، وردت كلمة 'المعرفة' ومرادفاتها في سياق:",
+        options: ["العموميات والشؤون العامة.", "الأشياء المحسوسة والملموسة.", "الغيبيات فقط.", "الأحكام التشريعية العامة."],
+        answer: "الأشياء المحسوسة والملموسة.",
+        hint: "القرآن استخدم صيغ 'عرف' في مواضع الإدراك الحسي المباشر، كما في قصة آدم."
+    },
+    {
+        question: "في الاستخدام القرآني، وردت كلمة 'العلم' ومرادفاتها في سياق:",
+        options: ["المحسوسات فقط.", "المعاني الخاصة والجزئية.", "العموميات والشؤون العامة.", "الأمور الدنيوية فقط."],
+        answer: "العموميات والشؤون العامة.",
+        hint: "الآيات التي ذكرت 'العلم' جاءت في سياقات عامة وشمولية، كقول الله تعالى: {وَاللَّهُ بِكُلِّ شَيْءٍ عَلِيمٌ}."
+    },
+    {
+        question: "في الاستخدام الاصطلاحي المعاصر، تُستخدم 'المعرفة' للدلالة على:",
+        options: ["النظريات الفلسفية المعقدة.", "المعلومات الجزئية والمهارات المكتسبة.", "الحقائق الكونية الثابتة.", "المناهج الرياضية المحضة."],
+        answer: "المعلومات الجزئية والمهارات المكتسبة.",
+        hint: "كلمة 'Knowledge' في الإنجليزية غالباً ما تترجم إلى 'معرفة' للدلالة على المعلومات والمهارات."
+    },
+    {
+        question: "في الاستخدام الاصطلاحي المعاصر، يُستخدم 'العلم' للدلالة على:",
+        options: ["الآراء الشخصية.", "المعرفة المنظمة والممنهجة.", "المعتقدات الشعبية.", "الخبرات الفردية غير القابلة للنقل."],
+        answer: "المعرفة المنظمة والممنهجة.",
+        hint: "كلمة 'Science' تترجم إلى 'علم' وتشير إلى المعرفة المنهجية المنظمة."
+    },
+    {
+        question: "من حيث طريقة الاكتساب، تأتي المعرفة أحياناً:",
+        options: ["بعد جهد طويل ومنهجية صارمة.", "بشكل فجائي أو بفعل خارجي.", "عبر الاستدلال المنطقي فقط.", "عن طريق النسيان أولاً."],
+        answer: "بشكل فجائي أو بفعل خارجي.",
+        hint: "المعرفة قد تأتي بصورة مفاجئة أو بسيطة دون تخطيط مسبق، كمعرفة رائحة وردة ما."
+    },
+    {
+        question: "من حيث طريقة الاكتساب، يحتاج العلم إلى:",
+        options: ["التدرج والاستدلال.", "الصدفة فقط.", "النسيان أولاً.", "الإلهام الفوري."],
+        answer: "التدرج والاستدلال.",
+        hint: "الوصول إلى درجة العلم تتطلب بناءً متراكباً وخطوات منهجية."
+    },
+    {
+        question: "أي من الأمثلة التالية يعد مثالاً على 'المعرفة'؟",
+        options: ["فهمك لقوانين الحركة في الفيزياء.", "معرفتك بأن النار محرقة.", "إتقانك لمنهجية البحث العلمي.", "دراستك لنظرية التطور."],
+        answer: "معرفتك بأن النار محرقة.",
+        hint: "هذه معرفة بديهية مباشرة لا تحتاج إلى استدلال معقد."
+    },
+    {
+        question: "أي من الأمثلة التالية يعد مثالاً على 'العلم'؟",
+        options: ["شعورك بالحر عند الاقتراب من النار.", "معرفتك بمذاق طعام معين.", "فهمك لكيفية حدوث الاحتراق وتركيب اللهب.", "تذكرك لوجه شخص ما."],
+        answer: "فهمك لكيفية حدوث الاحتراق وتركيب اللهب.",
+        hint: "هذا المثال يتضمن فهماً منظماً وممنهجاً لظاهرة ما، وليس مجرد إدراك حسي بسيط."
+    },
+    {
+        question: "ما طبيعة الإدراك في 'المعرفة' حسب الجدول المقارن؟",
+        options: ["كلي - منظم - جازم.", "جزئي - متقطع - تدريجي.", "ثابت - مستقر - نهائي.", "عشوائي - غير مألوف."],
+        answer: "جزئي - متقطع - تدريجي.",
+        hint: "هذه الخصائص تنبع من الأصل اللغوي والطبيعة التكوينية للمعرفة."
+    },
+    {
+        question: "ما طبيعة الإدراك في 'العلم' حسب الجدول المقارن؟",
+        options: ["جزئي - متقطع.", "كلي - منظم - جازم.", "متغير - قابل للتطور.", "حدسي - عاطفي."],
+        answer: "كلي - منظم - جازم.",
+        hint: "هذه الخصائص هي التي تميز العلم وتجعله مرحلة متقدمة عن المعرفة البسيطة."
+    },
+    {
+        question: "ما درجة اليقين في 'المعرفة' حسب الجدول المقارن؟",
+        options: ["جازمة ويقينية.", "تبدأ من الظن إلى اليقين.", "شكية دائماً.", "وهمية غير حقيقية."],
+        answer: "تبدأ من الظن إلى اليقين.",
+        hint: "المعرفة قد تبدأ كظن أو تخمين ثم ترتقي إلى اليقين، أو قد تبقى في مستوى أدنى."
+    },
+    {
+        question: "ما درجة اليقين في 'العلم' حسب الجدول المقارن؟",
+        options: ["ظنية واحتمالية.", "جازمة ويقينية.", "شكية دائماً.", "غير مستقرة."],
+        answer: "جازمة ويقينية.",
+        hint: "الجزم واليقين هما من أهم الشروط لكي يوصف الإدراك بالعلم."
+    },
+    {
+        question: "ما طبيعة المنهجية في 'المعرفة' حسب الجدول المقارن؟",
+        options: ["منظمة وممنهجة.", "غير منتظمة بالضرورة.", "رياضية صارمة.", "غير موجودة."],
+        answer: "غير منتظمة بالضرورة.",
+        hint: "المعرفة قد تكتسب بطرق عشوائية أو غير مقصودة."
+    },
+    {
+        question: "ما طبيعة المنهجية في 'العلم' حسب الجدول المقارن؟",
+        options: ["عشوائية.", "غير منتظمة.", "منظمة وممنهجة.", "اعتباطية."],
+        answer: "منظمة وممنهجة.",
+        hint: "المنهجية والتنظيم هما سمة أساسية من سمات العلم بمعناه الاصطلاحي."
+    },
+    {
+        question: "ما العلاقة الصحيحة بين المفهومين كما وردت في الخلاصة؟",
+        options: ["العلم أعم من المعرفة.", "المعرفة أخص من العلم.", "كل علم معرفة، وليس كل معرفة علماً.", "هما مترادفان تماماً."],
+        answer: "كل علم معرفة، وليس كل معرفة علماً.",
+        hint: "هذه العبارة تلخص طبيعة العلاقة بين المفهومين، وهي علاقة عموم وخصوص."
+    },
+    {
+        question: "في التطبيق العملي، تمثل المعرفة في العملية التعليمية:",
+        options: ["الصياغة النهائية للنظريات.", "المادة الخام التي نبدأ بها.", "المرحلة النهائية من التعلم.", "التطبيقات المعقدة فقط."],
+        answer: "المادة الخام التي نبدأ بها.",
+        hint: "في التعليم، نبدأ بتقديم المعلومات والبيانات الأولية (معرفة) قبل الانتقال إلى التنظير (علم)."
+    },
+    {
+        question: "في التطبيق العملي، يمثل العلم في العملية التعليمية:",
+        options: ["المعلومات الأولية غير المنظمة.", "الصياغة المنظمة للمعرفة في نظريات.", "المرحلة الأولى من التعلم.", "جمع البيانات المتفرقة."],
+        answer: "الصياغة المنظمة للمعرفة في نظريات.",
+        hint: "الهدف من التعليم هو تحويل المعرفة المبعثرة إلى علم منظم ومترابط."
+    },
+    {
+        question: "في البحث العلمي، تمثل 'جمع المعطيات' مرحلة:",
+        options: ["العلم.", "المعرفة.", "الجهل.", "الوهم."],
+        answer: "المعرفة.",
+        hint: "في مرحلة جمع البيانات، الباحث يجمّع معلومات قد تكون متفرقة (معرفة) قبل تحليلها."
+    },
+    {
+        question: "في البحث العلمي، تمثل 'صياغة النظريات' مرحلة:",
+        options: ["المعرفة.", "العلم.", "الشك.", "الجهل المركب."],
+        answer: "العلم.",
+        hint: "عندما يتم تحليل المعطيات وصياغتها في إطار نظري متماسك، تتحول إلى علم."
+    },
+    {
+        question: "أي من الكتب التالية هو من المصادر المعاصرة التي تناولت موضوع المعرفة؟",
+        options: ["'مقاييس اللغة'.", "'المعرفة والوجود' لزكي نجيب محمود.", "'التعريفات' للجرجاني.", "'المفردات في غريب القرآن'."],
+        answer: "'المعرفة والوجود' لزكي نجيب محمود.",
+        hint: "زكي نجيب محمود فيلسوف مصري معاصر تناول موضوعات المعرفة والوجود في العديد من مؤلفاته."
+    },
+    {
+        question: "من هو صاحب كتاب 'معيار العلم' الذي تم الاستشهاد به؟",
+        options: ["الغزالي.", "ابن القيم.", "الجرجاني.", "الفيومي."],
+        answer: "الغزالي.",
+        hint: "الإمام الغزالي هو صاحب الكتاب الشهير 'معيار العلم' في علم المنطق وأصول المعرفة."
+    },
+    {
+        question: "ما الأصل اللغوي لكلمة 'المعرفة' حسب الجدول المقارن؟",
+        options: ["من 'علم' بمعنى العلامة المميزة.", "من 'فهم' بمعنى الإدراك.", "من 'عرف' بمعنى الأثر الدال.", "من 'درى' بمعنى العلم."],
+        answer: "من 'عرف' بمعنى الأثر الدال.",
+        hint: "هذا الأصل هو ما يعطي الكلمة دلالتها الخاصة على المعرفة التدريجية."
+    },
+    {
+        question: "ما الأصل اللغوي لكلمة 'العلم' حسب الجدول المقارن؟",
+        options: ["من 'عرف' بمعنى الأثر الدال.", "من 'علم' بمعنى العلامة المميزة.", "من 'شعر' بمعنى الإحساس.", "من 'وجد' بمعنى الوجود."],
+        answer: "من 'علم' بمعنى العلامة المميزة.",
+        hint: "هذا الأصل هو ما يعطي الكلمة دلالتها على الوضوح والتميز والجزم."
+    },
+    {
+        question: "أي من الفلاسفة الغربيين المذكورين كتب في 'نظرية المعرفة'؟",
+        options: ["توماس كون.", "برتراند راسل.", "أفلاطون.", "أرسطو."],
+        answer: "برتراند راسل.",
+        hint: "برتراند راسل من الفلاسفة المشهورين بكتاباتهم في نظرية المعرفة والمنطق."
+    },
+    {
+        question: "ما التطبيق العملي لفهم الفرق بين العلم والمعرفة في مجال البحث؟",
+        options: ["الخلط بين جمع البيانات وصياغة النظريات.", "إهمال مرحلة جمع المعلومات.", "التمييز بين مرحلة جمع المعطيات (معرفة) ومرحلة التنظير (علم).", "الاعتماد على الصدفة في جميع المراحل."],
+        answer: "التمييز بين مرحلة جمع المعطيات (معرفة) ومرحلة التنظير (علم).",
+        hint: "هذا الفهم يساعد الباحث على تنظيم عمله والانتقال من مرحلة إلى أخرى بوعي ووضوح."
+    }
+];
+
+// يمكنك استخدام هذه المصفوفة لإنشاء اختبار تفاعلي في صفحة ويب
+// مثال للوصول إلى السؤال الأول:
+// console.log(knowledgeScienceQuiz[0].question);
+// console.log(knowledgeScienceQuiz[0].answer);
+
+    // متغيرات التطبيق
+    let currentQuestion = 0;
+    let userAnswers = Array(questions.length).fill(null);
+    let markedQuestions = Array(questions.length).fill(false);
+    let timeLeft = 2400; // 30 دقيقة بالثواني
+    let timerInterval;
+    let quizStarted = false;
+
+    // عناصر DOM
+    const startScreen = document.getElementById('start-screen');
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultsScreen = document.getElementById('results-screen');
+    const startBtn = document.getElementById('start-btn');
+    const timeDisplay = document.getElementById('time');
+    const currentQuestionDisplay = document.getElementById('current-question');
+    const totalQuestionsDisplay = document.getElementById('total-questions');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const hintBtn = document.getElementById('hint-btn');
+    const hintText = document.getElementById('hint-text');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const markBtn = document.getElementById('mark-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const questionNumbers = document.getElementById('question-numbers');
+    const correctAnswersDisplay = document.getElementById('correct-answers');
+    const totalAnswersDisplay = document.getElementById('total-answers');
+    const percentageDisplay = document.getElementById('percentage');
+    const answersReview = document.getElementById('answers-review');
+    const restartBtn = document.getElementById('restart-btn');
+
+    // تهيئة التطبيق
+    function init() {
+        console.log("تم تحميل التطبيق بنجاح");
+        
+        // تعيين عدد الأسئلة الكلي
+        totalQuestionsDisplay.textContent = questions.length;
+        
+        // إنشاء أرقام الأسئلة
+        createQuestionNumbers();
+        
+        // إضافة مستمعي الأحداث
+        startBtn.addEventListener('click', startQuiz);
+        prevBtn.addEventListener('click', showPreviousQuestion);
+        nextBtn.addEventListener('click', showNextQuestion);
+        markBtn.addEventListener('click', toggleMarkQuestion);
+        submitBtn.addEventListener('click', showResults);
+        hintBtn.addEventListener('click', toggleHint);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        console.log("تم تهيئة التطبيق بنجاح");
+    }
+
+    // إنشاء أرقام الأسئلة
+    function createQuestionNumbers() {
+        questionNumbers.innerHTML = '';
+        
+        for (let i = 0; i < questions.length; i++) {
+            const number = document.createElement('div');
+            number.className = 'number';
+            number.textContent = i + 1;
+            number.dataset.index = i;
+            
+            number.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                goToQuestion(index);
+            });
+            
+            questionNumbers.appendChild(number);
+        }
+    }
+
+    // بدء الاختبار
+    function startQuiz() {
+        console.log("تم النقر على زر بدء الاختبار");
+        
+        // إخفاء شاشة البداية وإظهار شاشة الاختبار
+        startScreen.classList.remove('active');
+        quizScreen.classList.add('active');
+        
+        // تحديث نص وصف الاختبار في شاشة البداية
+        document.querySelector('#start-screen p').textContent = `يتكون هذا الاختبار من ${questions.length} أسئلة حول مفهوم العلم في اللغة العربية واشتقاقاته`;
+        
+        // بدء المؤقت
+        startTimer();
+        
+        // عرض السؤال الأول
+        showQuestion(currentQuestion);
+        
+        console.log("بدأ الاختبار بنجاح");
+    }
+
+    // بدء المؤقت
+    function startTimer() {
+        updateTimerDisplay();
+        
+        timerInterval = setInterval(function() {
+            timeLeft--;
+            updateTimerDisplay();
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                showResults();
+            }
+        }, 1000);
+    }
+
+    // تحديث عرض المؤقت
+    function updateTimerDisplay() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // عرض السؤال الحالي
+    function showQuestion(index) {
+        currentQuestion = index;
+        const question = questions[index];
+        
+        // تحديث رقم السؤال الحالي
+        currentQuestionDisplay.textContent = index + 1;
+        
+        // عرض نص السؤال
+        questionText.textContent = question.question;
+        
+        // عرض الخيارات
+        optionsContainer.innerHTML = '';
+        
+        question.options.forEach(option => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'option';
+            
+            if (userAnswers[index] === option) {
+                optionElement.classList.add('selected');
+            }
+            
+            optionElement.textContent = option;
+            
+            optionElement.addEventListener('click', function() {
+                selectOption(option);
+            });
+            
+            optionsContainer.appendChild(optionElement);
+        });
+        
+        // تحديث حالة زر التوضيح
+        hintText.classList.remove('show');
+        hintBtn.textContent = 'إظهار التوضيح';
+        
+        // تحديث أرقام الأسئلة
+        updateQuestionNumbers();
+        
+        // تحديث حالة أزرار التنقل
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === questions.length - 1;
+        
+        // تحديث حالة زر المراجعة لاحقًا
+        markBtn.textContent = markedQuestions[index] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+    }
+
+    // تحديد خيار
+    function selectOption(option) {
+        userAnswers[currentQuestion] = option;
+        showQuestion(currentQuestion);
+    }
+
+    // تبديل عرض التوضيح
+    function toggleHint() {
+        const isHintVisible = hintText.classList.contains('show');
+        
+        if (isHintVisible) {
+            hintText.classList.remove('show');
+            hintBtn.textContent = 'إظهار التوضيح';
+        } else {
+            hintText.textContent = questions[currentQuestion].hint;
+            hintText.classList.add('show');
+            hintBtn.textContent = 'إخفاء التوضيح';
+        }
+    }
+
+    // الانتقال إلى السؤال السابق
+    function showPreviousQuestion() {
+        if (currentQuestion > 0) {
+            showQuestion(currentQuestion - 1);
+        }
+    }
+
+    // الانتقال إلى السؤال التالي
+    function showNextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+            showQuestion(currentQuestion + 1);
+        }
+    }
+
+    // الانتقال إلى سؤال محدد
+    function goToQuestion(index) {
+        showQuestion(index);
+    }
+
+    // تبديل حالة المراجعة لاحقًا
+    function toggleMarkQuestion() {
+        markedQuestions[currentQuestion] = !markedQuestions[currentQuestion];
+        markBtn.textContent = markedQuestions[currentQuestion] ? 'إلغاء المراجعة' : 'مراجعة لاحقًا';
+        updateQuestionNumbers();
+    }
+
+    // تحديث أرقام الأسئلة
+    function updateQuestionNumbers() {
+        const numbers = document.querySelectorAll('.number');
+        
+        numbers.forEach((number, index) => {
+            number.classList.remove('current', 'answered', 'marked');
+            
+            if (index === currentQuestion) {
+                number.classList.add('current');
+            }
+            
+            if (userAnswers[index] !== null) {
+                number.classList.add('answered');
+            }
+            
+            if (markedQuestions[index]) {
+                number.classList.add('marked');
+            }
+        });
+    }
+
+    // عرض النتائج
+    function showResults() {
+        // إيقاف المؤقت
+        clearInterval(timerInterval);
+        
+        // إخفاء شاشة الاختبار وإظهار شاشة النتائج
+        quizScreen.classList.remove('active');
+        resultsScreen.classList.add('active');
+        
+        // حساب النتائج
+        let correctCount = 0;
+        
+        questions.forEach((question, index) => {
+            if (userAnswers[index] === question.answer) {
+                correctCount++;
+            }
+        });
+        
+        const percentage = Math.round((correctCount / questions.length) * 100);
+        
+        // عرض النتائج
+        correctAnswersDisplay.textContent = correctCount;
+        totalAnswersDisplay.textContent = questions.length;
+        percentageDisplay.textContent = `${percentage}%`;
+        
+        // رسم المخطط البياني
+        drawChart(correctCount, questions.length - correctCount);
+        
+        // عرض مراجعة الإجابات
+        displayAnswersReview();
+    }
+
+    // رسم المخطط البياني
+    function drawChart(correct, incorrect) {
+        const ctx = document.getElementById('results-chart').getContext('2d');
+        
+        // إذا كان هناك مخطط بياني موجود، قم بتدميره أولاً
+        if (window.resultChart) {
+            window.resultChart.destroy();
+        }
+        
+        window.resultChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['الإجابات الصحيحة', 'الإجابات الخاطئة'],
+                datasets: [{
+                    data: [correct, incorrect],
+                    backgroundColor: ['#2ecc71', '#e74c3c'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    }
+
+    // عرض مراجعة الإجابات
+    function displayAnswersReview() {
+        answersReview.innerHTML = '';
+        
+        questions.forEach((question, index) => {
+            const answerItem = document.createElement('div');
+            const isCorrect = userAnswers[index] === question.answer;
+            
+            answerItem.className = `answer-item ${isCorrect ? 'correct' : 'incorrect'}`;
+            
+            let reviewContent = `
+                <div class="question-review">${index + 1}. ${question.question}</div>
+                <div class="user-answer">إجابتك: ${userAnswers[index] || 'لم تجب'}</div>
+                <div class="correct-answer">الإجابة الصحيحة: ${question.answer}</div>
+            `;
+            
+            if (!isCorrect && userAnswers[index]) {
+                reviewContent += `<div class="hint-review">التوضيح: ${question.hint}</div>`;
+            }
+            
+            answerItem.innerHTML = reviewContent;
+            answersReview.appendChild(answerItem);
+        });
+    }
+
+    // إعادة الاختبار
+    function restartQuiz() {
+        // إعادة تعيين المتغيرات
+        currentQuestion = 0;
+        userAnswers = Array(questions.length).fill(null);
+        markedQuestions = Array(questions.length).fill(false);
+        timeLeft = 2400; // إعادة تعيين الوقت إلى 30 دقيقة
+        
+        // إعادة تعيين الشاشات
+        resultsScreen.classList.remove('active');
+        startScreen.classList.add('active');
+        
+        // إعادة تعيين المخطط البياني
+        if (window.resultChart) {
+            window.resultChart.destroy();
+        }
+    }
+
+    // تهيئة التطبيق عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("تم تحميل DOM بالكامل");
+        init();
+    });
+    </script>
+</body>
+</html>

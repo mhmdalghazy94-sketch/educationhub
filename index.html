@@ -1,60 +1,50 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>صفحة تعليمية</title>
-	<style>
+	  <style>
 		:root{
-			--accent:#1e90ff;
-			--accent-2:#36b3ff;
-			--bg:#f6fbff;
-			--muted:#6b7280;
+			--primary:#0ea5a4; /* teal */
+			--primary-2:#028484;
+			--bg:#f7fbfc;
+			--muted:#657786;
 			--card:#ffffff;
-			--glass:rgba(255,255,255,0.6)
+			--glass:rgba(255,255,255,0.65);
 		}
 		*{box-sizing:border-box}
-		body{font-family:Inter,Segoe UI,Roboto,Tahoma,Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#0f172a;line-height:1.5}
-		header{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 12px;position:sticky;top:0;z-index:80}
-		.container{max-width:1100px;margin:12px auto;padding:0 12px}
-		h1,h2{margin:0 0 10px}
-		p.lead{margin:6px 0 0;opacity:.97}
-		nav{display:flex;gap:14px;align-items:center;justify-content:flex-end}
-		nav a{color:rgba(255,255,255,.98);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;transition:background .18s,transform .12s}
-		nav a:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
-		.hero{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
-		.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
-		.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.03)}
-		code{background:#f3f4f6;padding:4px 8px;border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-		.example pre{white-space:pre-wrap;background:#0f1724;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto}
-		.quiz button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
-		footer{padding:26px 0;text-align:center;color:var(--muted)}
-		/* small utilities */
-		.text-muted{color:var(--muted)}
-		.button-ghost{background:transparent;border:1px solid rgba(255,255,255,.12);padding:8px 10px;border-radius:8px;color:#fff}
-		/* header search */
-		.header-actions{display:flex;gap:8px;align-items:center}
-		.header-search{background:var(--glass);padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.06);backdrop-filter:blur(6px)}
-		.header-search input{border:0;background:transparent;color:#fff;outline:none}
-		@media (min-width:800px){.hero{flex-direction:row;justify-content:space-between;align-items:center}}
-
-		/* Sidebar layout */
-		.menu-btn{background:transparent;border:0;color:#fff;font-size:20px;padding:6px;display:inline-block}
-		.sidebar{position:fixed;top:0;left:0;height:100%;width:280px;background:var(--card);box-shadow:2px 0 24px rgba(16,24,40,.12);transform:translateX(-115%);transition:transform .28s cubic-bezier(.2,.9,.2,1);z-index:60;padding:80px 18px 18px}
-		.sidebar.open{transform:translateX(0)}
-		.sidebar h3{margin:0 0 6px}
-		.sidebar nav ul{list-style:none;padding:0;margin:12px 0}
-		.sidebar nav a{display:flex;gap:10px;align-items:center;padding:10px;border-radius:8px;color:#0f172a;text-decoration:none}
-		.sidebar nav a:hover{background:rgba(14,38,60,.04)}
-		.sidebar nav a .icon{font-size:16px;color:var(--accent)}
-		.sidebar nav a.active{background:linear-gradient(90deg,rgba(30,144,255,.08),rgba(54,179,255,.06));border-left:3px solid var(--accent);padding-left:8px}
-		.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .22s;z-index:50}
-		.overlay.show{opacity:1;pointer-events:auto}
-		.layout{display:block}
-		@media (min-width:980px){
-			.layout{display:grid;grid-template-columns:280px 1fr;gap:28px}
-			.sidebar{position:relative;transform:none;box-shadow:none;padding:20px;top:auto;height:auto;width:auto}
-			.overlay{display:none}
+		body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Tahoma,Arial,sans-serif;margin:0;background:var(--bg);color:#0b2230}
+		/* Header */
+		header{background:#fff;border-bottom:1px solid rgba(11,34,48,0.06);padding:8px 12px;position:sticky;top:0;z-index:90}
+		.header-inner{max-width:1100px;margin:6px auto;padding:0 12px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+		.logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--primary-2)}
+		.logo .mark{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:inline-block}
+		.nav{display:flex;gap:10px;align-items:center}
+		.nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
+		.nav a.cta{background:var(--primary);color:#fff}
+		.search{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;background:var(--glass);border:1px solid rgba(11,34,48,0.04)}
+		.search input{border:0;background:transparent;outline:none;padding:6px}
+		/* Hero */
+		.hero-wrap{max-width:1100px;margin:18px auto;padding:20px 12px;display:flex;gap:18px;align-items:center;justify-content:space-between}
+		.hero{flex:1;background:linear-gradient(90deg,var(--primary),var(--primary-2));color:#fff;padding:28px;border-radius:14px;box-shadow:0 12px 36px rgba(2,6,23,0.08)}
+		.hero h1{font-size:24px;margin:0 0 6px}
+		.hero p{margin:0 0 12px;opacity:.95}
+		.hero .cta{background:#fff;color:var(--primary-2);padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none}
+		.hero-aside{width:260px;display:none}
+		/* Courses grid */
+		.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
+		.card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 26px rgba(2,8,23,0.04);border:1px solid rgba(11,34,48,0.03)}
+		.card h3{margin:0 0 6px}
+		.card p{color:var(--muted);margin:0 0 10px}
+		.card .btn{display:inline-block;background:var(--primary);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none}
+		/* Sidebar (keep compact) */
+		.sidebar{padding:16px}
+		/* Footer */
+		footer{max-width:1100px;margin:18px auto;padding:12px;color:var(--muted);text-align:center}
+		/* Responsive */
+		@media(min-width:940px){
+			.hero-wrap{padding:28px 12px}
+			.hero-aside{display:block}
+		}
+	  </style>
 			.menu-btn{display:none}
 		}
 
@@ -75,28 +65,35 @@
 </head>
 <body>
 	<header>
-		<div class="container">
-			<nav aria-label="الرئيسية">
-				<a href="#lessons">الدروس</a>
-				<a href="#examples">أمثلة</a>
-				<a href="#quiz">اختبار سريع</a>
-			</nav>
-			<div class="hero">
-				<div>
-					<h1>مرحبًا بك في الصفحة التعليمية</h1>
-					<p class="lead">دروس قصيرة وأمثلة عملية مع اختبار سريع لمراجعة ما تعلمته.</p>
+		<div class="header-inner">
+			<div class="logo"><span class="mark" aria-hidden="true"></span><span>EduSite</span></div>
+			<div style="display:flex;align-items:center;gap:10px">
+				<div class="nav">
+					<a href="#lessons">الدروس</a>
+					<a href="#examples">أمثلة</a>
+					<a href="#quiz">اختبار سريع</a>
+					<a href="developer.html">مطور الموقع</a>
 				</div>
-				<div style="text-align:left;display:flex;gap:12px;align-items:center">
-					<button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
-					<div class="header-actions">
-						<div class="header-search" role="search" aria-label="بحث">
-							<input type="search" placeholder="ابحث عن درس أو مثال" aria-label="بحث">
-						</div>
-						<a href="#quiz" class="button-ghost">ابدأ الاختبار</a>
-						<a href="settings.html" class="button-ghost" aria-label="الإعدادات">⚙️ إعدادات</a>
-					</div>
+				<div class="search" role="search" aria-label="بحث">
+					<input type="search" placeholder="ابحث عن درس أو مثال">
 				</div>
+				<a href="settings.html" class="nav cta">⚙️ إعدادات</a>
 			</div>
+		</div>
+		<div class="hero-wrap">
+			<section class="hero">
+				<h1>ابدأ رحلتك التعليمية</h1>
+				<p>دروس منظمة ومسارات تعلمية تناسب الطلاب والمتعلمين الذاتيِّين — موارد عملية ومخططات بسيطة للبدء اليوم.</p>
+				<a class="cta" href="track.html">استعرض المسارات</a>
+			</section>
+			<aside class="hero-aside">
+				<div class="card">
+					<h3>تسجيل</h3>
+					<p class="text-muted">انشئ حسابًا للوصول إلى الدروس المتقدمة وتتبع تقدمك.</p>
+					<p><a class="btn" href="#">سجل الآن</a></p>
+				</div>
+			</aside>
+		</div>
 		</div>
 	</header>
 
@@ -121,7 +118,7 @@
 			<p>هذه صفحة تعليمية بسيطة باللغة العربية تعرض: دروس موجزة، أمثلة تنفيذية، واختبار تفاعلي قصير. يمكنك تعديل المحتوى أو إضافة دروس جديدة بسهولة.</p>
 		</section>
 
-		<section class="grid" aria-label="الدروس">
+	    <section class="grid" aria-label="الدروس">
 			<article class="card">
 				<h3>درس 1 — الفكرة الأساسية</h3>
 				<p>شرح مختصر عن الفكرة مع نقاط رئيسية سهلة القراءة.</p>

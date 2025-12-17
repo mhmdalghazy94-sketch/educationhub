@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الروضة - المرحلة التعليمية</title>
+  <style>
+    :root {
+      --primary: #be185d;
+      --bg: #1a1a1a;
+      --card: #2a2a2a;
+      --muted: #888;
+      --text: #fff;
+      --accent: #ffe6f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 20px;
+    }
+
+    #menuBtn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h2 {
+      margin: 20px 0 15px;
+      font-size: 24px;
+      color: var(--primary);
+    }
+
+    .level-box {
+      background-color: var(--card);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-right: 4px solid var(--primary);
+    }
+
+    .level-box h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .subject-card {
+      background-color: var(--accent);
+      color: var(--primary);
+      padding: 15px;
+      border-radius: 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(190, 24, 93, 0.3);
+    }
+
+    .subject-card h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .subject-card p {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .semester-label {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      margin-right: 8px;
+    }
+
+    footer {
+      background-color: var(--card);
+      padding: 15px;
+      text-align: center;
+      margin-top: 30px;
+      border-top: 1px solid var(--primary);
+      font-size: 12px;
+    }
+
+    #sidebar {
+      position: fixed;
+      right: -250px;
+      top: 0;
+      width: 250px;
+      height: 100vh;
+      background-color: var(--card);
+      transition: right 0.3s;
+      z-index: 1000;
+      overflow-y: auto;
+      border-left: 2px solid var(--primary);
+    }
+
+    #sidebar.open {
+      right: 0;
+    }
+
+    #sidebar nav {
+      padding: 20px;
+    }
+
+    #sidebar nav a {
+      display: block;
+      padding: 10px;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      transition: background-color 0.3s;
+    }
+
+    #sidebar nav a:hover {
+      background-color: var(--primary);
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    #overlay.open {
+      display: block;
+    }
+
+    @media (max-width: 800px) {
+      #menuBtn {
+        display: block;
+      }
+
+      main {
+        padding: 15px;
+      }
+
+      .subjects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button id="menuBtn">☰</button>
+    <h1>الروضة</h1>
+  </header>
+
+  <main>
+    <p style="color: var(--muted); margin-bottom: 20px;">
+      <a href="school-learning.html" style="color: var(--primary); text-decoration: none;">العودة للمراحل</a>
+    </p>
+
+    <h2>المستوى الأول: روضة الأطفال</h2>
+
+    <div class="level-box">
+      <h3>الفصل الدراسي الأول</h3>
+      
+      <div class="semester-label">الفصل الأول</div>
+
+      <div class="subjects-grid">
+        <div class="subject-card">
+          <h4>القاعدة النورانية</h4>
+          <p>تعلم أساسيات القراءة والكتابة</p>
+        </div>
+        <div class="subject-card">
+          <h4>الإنجليزية للأطفال</h4>
+          <p>تعلم اللغة الإنجليزية بطريقة مرحة</p>
+        </div>
+        <div class="subject-card">
+          <h4>الأرقام للأطفال</h4>
+          <p>تعلم الأرقام والعمليات الأساسية</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background-color: var(--card); padding: 15px; border-radius: 6px; color: var(--muted); text-align: center;">
+      <p>الفصل الدراسي الثاني قريباً...</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 منصة التعليم العربية. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <aside id="sidebar">
+    <nav>
+      <a href="index.html">الصفحة الرئيسية</a>
+      <a href="school-learning.html">التعلم المدرسي</a>
+      <a href="self-learning.html">التعلم الذاتي</a>
+      <a href="track.html">المسارات</a>
+      <a href="settings.html">الإعدادات</a>
+      <a href="developer.html">معلومات المطور</a>
+    </nav>
+  </aside>
+
+  <div id="overlay"></div>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function open() {
+      sidebar.classList.add('open');
+      overlay.classList.add('open');
+    }
+
+    function close() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+
+    menuBtn.addEventListener('click', open);
+    overlay.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+
+    // Close sidebar when clicking a nav link
+    sidebar.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', close);
+    });
+  </script>
+</body>
+</html>

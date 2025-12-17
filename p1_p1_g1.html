@@ -1,563 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل الدراسة: مصطلح "العلم" في اللغة العربية</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-/* إعدادات عامة */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', 'Segoe UI', Tahoma, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #3494E6, #EC6EAD);
-    direction: rtl;
-}
-
-/* الترويسة */
-header {
-    background: linear-gradient(135deg, #3494E6, #EC6EAD);
-    color: white;
-    padding: 1.5rem 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-}
-
-/* التنقل */
-#main-nav ul {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    flex-wrap: wrap;
-}
-
-#main-nav li {
-    margin: 0 0.5rem;
-}
-
-#main-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-#main-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* المحتوى الرئيسي */
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.section {
-    margin-bottom: 3rem;
-    background-color: white;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.section h2 {
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #eaeaea;
-}
-
-.content-box {
-    background-color: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
-    border-right: 4px solid #4a6b8a;
-}
-
-.content-box h3 {
-    color: #4a6b8a;
-    margin-bottom: 0.5rem;
-}
-
-/* بطاقات الاشتقاقات */
-.cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.card {
-    background-color: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    border-top: 4px solid #4a6b8a;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.card h3 {
-    color: #2c3e50;
-    margin-bottom: 0.75rem;
-    font-size: 1.1rem;
-}
-
-/* الشواهد */
-.evidence-box {
-    background-color: #f0f7ff;
-    padding: 1.5rem;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
-    border-right: 4px solid #5a8dee;
-}
-
-.evidence-box h3 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-}
-
-.evidence-box ul {
-    padding-right: 1.5rem;
-}
-
-.evidence-box li {
-    margin-bottom: 0.5rem;
-}
-
-blockquote {
-    background-color: #f8f9fa;
-    border-right: 4px solid #5a8dee;
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    font-style: italic;
-    border-radius: 4px;
-}
-
-/* الجدول */
-.table-container {
-    overflow-x: auto;
-    margin-top: 1.5rem;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-}
-
-th, td {
-    padding: 0.75rem 1rem;
-    text-align: right;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #4a6b8a;
-    color: white;
-    font-weight: bold;
-}
-
-tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-tr:hover {
-    background-color: #e9f7fe;
-}
-
-/* المصادر */
-.sources-list {
-    list-style-type: none;
-    padding-right: 0;
-}
-
-.sources-list li {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #eee;
-}
-
-.source-title {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-/* الملخص */
-.summary-box {
-    background: linear-gradient(135deg, #f0f7ff, #e6f3ff);
-    padding: 2rem;
-    border-radius: 8px;
-    border-right: 4px solid #4a6b8a;
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
-
-/* التذييل */
-footer {
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 1.5rem;
-    margin-top: 2rem;
-    position: relative;
-}
-
-#scroll-top {
-    background-color: #4a6b8a;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: background-color 0.3s;
-}
-
-#scroll-top:hover {
-    background-color: #5a8dee;
-}
-
-/* التجاوب مع الشاشات المختلفة */
-@media (max-width: 768px) {
-    #main-nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    #main-nav li {
-        margin: 0.25rem 0;
-    }
-    
-    .cards-container {
-        grid-template-columns: 1fr;
-    }
-    
-    main {
-        padding: 1rem;
-    }
-    
-    .section {
-        padding: 1.5rem;
-    }
-}
-    </style>
-</head>
-<body>
-    <header>
-        <h1>دليل الدراسة: مصطلح "العلم" في اللغة العربية</h1>
-        <nav id="main-nav">
-            <ul>
-                <li><a href="#intro">مقدمة</a></li>
-                <li><a href="#meaning">المعنى اللغوي والجذر</a></li>
-                <li><a href="#derivations">الاشتقاقات والصيغ</a></li>
-                <li><a href="#evidences">الشواهد والأدلة</a></li>
-                <li><a href="#terms">المصطلحات المقابلة</a></li>
-                <li><a href="#sources">المصادر والمراجع</a></li>
-                <li><a href="#summary">الملخص</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="intro" class="section">
-            <h2>مقدمة</h2>
-            <p>مصطلح "العلم" في اللغة العربية يحمل ثراءً ودلالات متشعبة وكبيرة. بناءً على البحث الذي أجريته، سأقدم لك تعريفه اللغوي واشتقاقاته بالتفصيل المطلوب، مدعوماً بالشواهد والأدلة من مصادر اللغة الموثوقة.</p>
-        </section>
-
-        <section id="meaning" class="section">
-            <h2>🗣️ المعنى اللغوي والجذر الأساسي</h2>
-            <div class="content-box">
-                <h3>الجذر والأصل الدلالي</h3>
-                <p>يجمع علماء اللغة على أن كلمة "العلم" تُشتق من الجذر الثلاثي (ع ل م). ويشير ابن فارس في "معجم مقاييس اللغة" إلى أن هذا الأصل الصحيح يدل على أثرٍ بالشيء يتميَّز به عن غيره. فـ "العَلَم" هو العلامة أو الإشارة التي تُوضع لتمييز شيء ما، مثل عَلَم الجبل الذي يُرى من بعيد.</p>
-                
-                <h3>التعريف اللغوي</h3>
-                <p>في أبسط تعريفاته اللغوية، هو نقيض الجهل. وقد عرّفه العلماء لغةً بأنه "إدراك الشيء على حقيقته إدراكاً جازماً". وهذا الإدراك ليس مجرد شعور عابر، بل هو وصول النفس إلى المعنى بتمامه.</p>
-            </div>
-        </section>
-
-        <section id="derivations" class="section">
-            <h2>🔤 الاشتقاقات والصيغ</h2>
-            <p>من الجذر (ع ل م) تتفرع العديد من الصيغ والمشتقات، كل منها يحمل دلالة خاصة:</p>
-            
-            <div class="cards-container">
-                <div class="card">
-                    <h3>عَلِمَ (يَعْلَمُ)</h3>
-                    <p>هو الفعل الأساسي، ويعني صار عالماً ووصل إلى المعرفة. نقول: "عَلِمَ الرجلُ الأمرَ" أي عرفه وتيقنه.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>أَعْلَمَ (يُعْلِمُ)</h3>
-                    <p>فعل متعدٍّ بمعنى الإخبار والإبلاغ. نقول: "أَعْلَمَهُ بالخبر" أي جعله يعلمه وأطلعه عليه.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>عَلَّمَ (يُعَلِّمُ)</h3>
-                    <p>فعل يدل على التكرار والإفادة. نقول: "عَلَّمَ الطالبَ النحوَ" أي أفهمه إياه ودرَّبه عليه بشكل متكرر ليرسخ في ذهنه.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>اسْتَعْلَمَ (يَسْتَعْلِمُ)</h3>
-                    <p>طلب العلم والسؤال عنه. نقول: "اسْتَعْلَمَ عن الأمر" أي سأل ليعرف حقيقته.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>العِلْم (مصدر)</h3>
-                    <p>وهو اسم المصدر، ويمثل المعرفة ذاتها.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>العَالِم (اسم فاعل)</h3>
-                    <p>من اتصف بالعلم.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>المَعْلُوم (اسم مفعول)</h3>
-                    <p>الشيء الذي تم إدراكه ومعرفته.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>العَلَم (اسم)</h3>
-                    <p>وهو العلامة أو الإشارة المميزة، ويستخدم أيضاً في النحو للدلالة على الأسماء الخاصة مثل "محمد" أو "القاهرة".</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="evidences" class="section">
-            <h2>📚 شواهد وأدلة من القرآن والشعر</h2>
-            
-            <div class="evidence-box">
-                <h3>من القرآن الكريم:</h3>
-                <ul>
-                    <li>قوله تعالى: ﴿فَإِنْ عَلِمْتُمُوهُنَّ مُؤْمِنَاتٍ فَلَا تَرْجِعُوهُنَّ إِلَى الْكُفَّارِ﴾ [الممتحنة: 10]. وقد ذكر المفسرون أن "علمتم" هنا قد تأتي بمعنى ظننتم، مما يظهر سعة الاستخدام.</li>
-                    <li>كما أن وصف الله تعالى لنزول عيسى عليه السلام بأنه ﴿وَإِنَّهُ لَعِلْمٌ لِّلسَّاعَةِ﴾ [الزخرف: 61] يؤكد على المعنى الأصلي للكلمة وهو العلامة والدليل.</li>
-                </ul>
-            </div>
-            
-            <div class="evidence-box">
-                <h3>من الشعر الجاهلي، زهير بن أبي سلمى:</h3>
-                <blockquote>
-                    <p>وأَعْلَمُ مَا فِي الْيَوْمِ وَالأَمْسِ قَبْلَهُ ... وَلَكنَّنِي عَنْ عِلْمِ مَا فِي غَدٍ عَمِي</p>
-                </blockquote>
-                <p>وهذا البيت يوضح استخدام "أعلم" و "علم" بالمعنى اللغوي الدقيق للدراية والمعرفة.</p>
-            </div>
-        </section>
-
-        <section id="terms" class="section">
-            <h2>📖 مصطلحات مقابلة وتعاريف متخصصة</h2>
-            <p>يميز العلماء بين "العلم" وبين مصطلحات أخرى قريبة منه. ويوضح الجدول التالي هذه الفروقات باستخدام مثال "فتح مكة":</p>
-            
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>المصطلح</th>
-                            <th>التعريف</th>
-                            <th>المثال</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>العلم</td>
-                            <td>إدراك الشيء على حقيقته إدراكاً جازماً.</td>
-                            <td>القول: "فتح مكة في العام الثامن".</td>
-                        </tr>
-                        <tr>
-                            <td>الجهل البسيط</td>
-                            <td>عدم الإدراك بشكل كلي.</td>
-                            <td>القول: "لا أدري".</td>
-                        </tr>
-                        <tr>
-                            <td>الجهل المركب</td>
-                            <td>إدراك الشيء على غير حقيقته.</td>
-                            <td>القول: "فتح مكة في العام التاسع".</td>
-                        </tr>
-                        <tr>
-                            <td>الظن</td>
-                            <td>ترجيح الاحتمال الراجح مع ذكر المرجوح.</td>
-                            <td>القول: "كان في الثامن ويحتمل في السابع".</td>
-                        </tr>
-                        <tr>
-                            <td>الوهم</td>
-                            <td>ترجيح الاحتمال المرجوح مع ذكر الراجح.</td>
-                            <td>القول: "كان في السابع ويحتمل في الثامن".</td>
-                        </tr>
-                        <tr>
-                            <td>الشك</td>
-                            <td>عدم ترجيح أي من الاحتمالين.</td>
-                            <td>القول: "ربما في السابع أو الثامن".</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="sources" class="section">
-            <h2>📚 أهم المصادر والمراجع</h2>
-            <p>للبحث بشكل أعمق، يمكنك الرجوع إلى هذه الكتب الأساسية في اللغة والتي تم الاستشهاد بها في النتائج:</p>
-            
-            <ul class="sources-list">
-                <li><span class="source-title">"معجم مقاييس اللغة" لابن فارس:</span> للرجوع إلى الجذور والأصول اللغوية.</li>
-                <li><span class="source-title">"لسان العرب" لابن منظور:</span> للمعاني التفصيلية والاستخدامات.</li>
-                <li><span class="source-title">"العين" للخليل بن أحمد:</span> من أقدم معاجم اللغة.</li>
-                <li><span class="source-title">"المصباح المنير" للفيومي:</span> يوضح الفروق الدقيقة بين "العلم" و"المعرفة".</li>
-                <li><span class="source-title">"تاج العروس" للزبيدي:</span> يعتبر من أكثر المعاجم شمولاً.</li>
-            </ul>
-        </section>
-
-        <section id="summary" class="section">
-            <h2>💎 ملخص الوصف</h2>
-            <div class="summary-box">
-                <p>يتجلى من هذا التفصيل أن كلمة "العلم" في اللغة العربية لم تكن مجرد دلالة على المعرفة، بل انبنت على مفهوم العلامة والإدراك الجازم المميز للحقيقة. وقد تفرع من هذا الجذر شبكة غنية من المشتقات والصيغ التي تغطي كافة عمليات التعلم والتعليم ونقل المعرفة.</p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>دليل الدراسة - مصطلح "العلم" في اللغة العربية</p>
-        <button id="scroll-top">↑ العودة إلى الأعلى</button>
-    </footer>
-    <script>
-// تنفيذ التنقل السلس
-document.addEventListener('DOMContentLoaded', function() {
-    // إضافة تأثير التنقل السلس للروابط الداخلية
-    const navLinks = document.querySelectorAll('#main-nav a');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 20,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // زر العودة إلى الأعلى
-    const scrollTopBtn = document.getElementById('scroll-top');
-    
-    // إظهار/إخفاء زر العودة للأعلى
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            scrollTopBtn.style.display = 'block';
-        } else {
-            scrollTopBtn.style.display = 'none';
-        }
-    });
-    
-    // حدث النقر على زر العودة للأعلى
-    scrollTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    // إضافة تأثيرات للبطاقات عند التمرير
-    const cards = document.querySelectorAll('.card');
-    
-    function checkCards() {
-        cards.forEach(card => {
-            const cardTop = card.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (cardTop < windowHeight - 100) {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }
-        });
-    }
-    
-    // إعداد البطاقات للرسوم المتحركة
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s, transform 0.5s';
-    });
-    
-    // التحقق من البطاقات عند التحميل وعند التمرير
-    window.addEventListener('load', checkCards);
-    window.addEventListener('scroll', checkCards);
-    
-    // إضافة تأثيرات للعناصر عند التمرير
-    const sections = document.querySelectorAll('.section');
-    
-    function checkSections() {
-        sections.forEach(section => {
-            const sectionTop = section.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (sectionTop < windowHeight - 100) {
-                section.style.opacity = '1';
-                section.style.transform = 'translateY(0)';
-            }
-        });
-    }
-    
-    // إعداد الأقسام للرسوم المتحركة
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.6s, transform 0.6s';
-    });
-    
-    // التحقق من الأقسام عند التحميل وعند التمرير
-    window.addEventListener('load', checkSections);
-    window.addEventListener('scroll', checkSections);
-    
-    // إضافة تأثير للجدول
-    const tableRows = document.querySelectorAll('tbody tr');
-    
-    function checkTableRows() {
-        tableRows.forEach((row, index) => {
-            const rowTop = row.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (rowTop < windowHeight - 100) {
-                setTimeout(() => {
-                    row.style.opacity = '1';
-                    row.style.transform = 'translateX(0)';
-                }, index * 100);
-            }
-        });
-    }
-    
-    // إعداد صفوف الجدول للرسوم المتحركة
-    tableRows.forEach(row => {
-        row.style.opacity = '0';
-        row.style.transform = 'translateX(20px)';
-        row.style.transition = 'opacity 0.4s, transform 0.4s';
-    });
-    
-    // التحقق من صفوف الجدول عند التحميل وعند التمرير
-    window.addEventListener('load', checkTableRows);
-    window.addEventListener('scroll', checkTableRows);
-});
-    </script>
-    <script src="script.js"></script>
-</body>
-</html>

@@ -109,6 +109,32 @@
       font-size: 14px;
     }
 
+    /* Rating */
+    .rating {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+      margin: 8px 0;
+    }
+    .rating .stars { color: #f59e0b; font-size: 16px; }
+    .rating small { color: var(--muted); font-size: 12px; }
+
+    /* Progress Bar */
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(190, 24, 93, 0.1);
+      border-radius: 3px;
+      margin: 8px 0;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #a01552);
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+
     .lessons-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -192,6 +218,33 @@
       margin-top: 30px;
       border-top: 1px solid var(--primary);
       font-size: 12px;
+    }
+
+    #backToTop {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(190, 24, 93, 0.3);
+    }
+    #backToTop:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(190, 24, 93, 0.4);
+    }
+    #backToTop.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #sidebar {
@@ -284,8 +337,14 @@
       <!-- بطاقة الدروس -->
       <div class="content-card">
         <h3>📚 الدروس (5 حروف في كل درس)</h3>
-        <p>تعلم الحروف الإنجليزية مع القراءة والكتابة</p>
-        <div class="lessons-list">
+        <p>تعلم الحروف الإنجليزية مع القراءة والكتابة</p>        <div class="rating">
+          <span class="stars">★★★★★</span>
+          <small>(980 تقييم)</small>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 72%;"></div>
+        </div>
+        <small style="color: var(--muted);">72% من الأطفال أحبوا الطريقة</small>        <div class="lessons-list">
           <button class="lesson-btn" onclick="openLesson(1)">الدرس 1</button>
           <button class="lesson-btn" onclick="openLesson(2)">الدرس 2</button>
           <button class="lesson-btn" onclick="openLesson(3)">الدرس 3</button>
@@ -299,6 +358,14 @@
       <div class="content-card">
         <h3>🎮 الألعاب التفاعلية</h3>
         <p>تعلم اللغة الإنجليزية بطريقة ممتعة</p>
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+          <small>(1,123 تقييم)</small>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 88%;"></div>
+        </div>
+        <small style="color: var(--muted);">88% نسبة الاستمتاع والتفاعل</small>
         <div class="games-grid">
           <div class="game-card" onclick="startGame('matching')">🎲 مطابقة الحروف</div>
           <div class="game-card" onclick="startGame('spelling')">✏️ تهجئة الكلمات</div>
@@ -311,7 +378,15 @@
       <div class="content-card">
         <h3>✏️ الاختبار الشامل</h3>
         <p>اختبر مهاراتك في جميع الدروس</p>
-        <button class="action-btn" onclick="startComprehensiveTest()">بدء الاختبار</button>
+        <div class="rating">
+          <span class="stars">★★★★☆</span>
+          <small>(567 تقييم)</small>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 81%;"></div>
+        </div>
+        <small style="color: var(--muted);">81% يجتازون الاختبار بنجاح</small>
+        <button class="action-btn" onclick="startComprehensiveTest()" style="display: block; width: 100%; margin-top: 12px;">بدء الاختبار</button>
         <p style="margin-top: 15px; font-size: 12px;">عدد الأسئلة: 25 سؤال بالصور والكلمات</p>
       </div>
     </div>
@@ -340,6 +415,8 @@
   <footer>
     <p>&copy; 2025 منصة التعليم العربية. جميع الحقوق محفوظة.</p>
   </footer>
+
+  <button id="backToTop" title="العودة للأعلى">↑</button>
 
   <aside id="sidebar">
     <nav>
@@ -460,6 +537,20 @@
     function startComprehensiveTest() {
       alert(`✏️ الاختبار الشامل\n\n25 سؤال شامل يغطي جميع الحروف والكلمات\nسيتم قياس مهارات القراءة والكتابة`);
     }
+
+    // Back to top button
+    window.addEventListener('scroll', () => {
+      const backToTop = document.getElementById('backToTop');
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 </body>
 </html>

@@ -18,10 +18,12 @@
 
     /* Stages cards */
     .stages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px}
-    .stage-card{background:#fff;padding:10px;border-radius:10px;box-shadow:0 8px 20px rgba(2,8,23,0.04);border:1px solid rgba(7,32,42,0.03);text-align:center}
+    .stage-card{background:#fff;padding:10px;border-radius:10px;box-shadow:0 8px 20px rgba(2,8,23,0.04);border:1px solid rgba(7,32,42,0.03);text-align:center;transition:all 0.3s}
+    .stage-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(30,144,255,0.15)}
     .stage-card .thumb{width:100%;height:110px;display:block;border-radius:8px;object-fit:cover;background:linear-gradient(135deg,#e6f0ff,#f3f7ff)}
-    .stage-card h3{margin:10px 0 6px;font-size:16px}
-    .stage-card a{display:inline-block;margin-top:6px;background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;text-decoration:none}
+    .stage-card h3{margin:10px 0 6px;font-size:16px;color:var(--accent)}
+    .stage-card a{display:inline-block;margin-top:6px;background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;text-decoration:none;transition:all 0.3s}
+    .stage-card a:hover{background:#1a80f0;transform:translateY(-2px)}
     /* sidebar */
     .menu-btn{background:transparent;border:0;color:#071126;font-size:20px;padding:6px;display:inline-block}
     .sidebar{position:fixed;top:0;left:0;height:100%;width:260px;background:var(--card);box-shadow:2px 0 20px rgba(16,24,40,.08);transform:translateX(-110%);transition:transform .25s ease;z-index:60;padding:80px 16px 16px}

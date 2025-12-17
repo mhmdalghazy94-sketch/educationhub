@@ -6,51 +6,77 @@
 	<title>EduSite — الصفحة الرئيسية</title>
 	<style>
 		:root{
-			--primary:#6a2bd8; /* edraak-like purple */
+			--primary:#6a2bd8;
 			--primary-2:#4b22b8;
 			--bg:#fbfdff;
 			--muted:#5b6b75;
 			--card:#ffffff;
 			--glass:rgba(255,255,255,0.6);
+			--success:#10b981;
+			--warning:#f59e0b;
 		}
+		@keyframes slideIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
+		@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 		*{box-sizing:border-box}
 		body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Tahoma,Arial,sans-serif;margin:0;background:var(--bg);color:#07202a}
 
 		/* Header */
-		header{background:#fff;border-bottom:1px solid rgba(7,32,42,0.06);padding:8px 12px;position:sticky;top:0;z-index:90}
+		header{background:#fff;border-bottom:1px solid rgba(7,32,42,0.06);padding:8px 12px;position:sticky;top:0;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
 		.header-inner{max-width:1200px;margin:6px auto;padding:0 12px;display:flex;align-items:center;gap:16px;justify-content:space-between}
-		.logo{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--primary-2);font-size:18px}
-		.logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:inline-block}
+		.logo{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--primary-2);font-size:18px;cursor:pointer;transition:transform 0.3s}
+		.logo:hover{transform:scale(1.05)}
+		.logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:inline-block;box-shadow:0 4px 12px rgba(106,43,216,0.3)}
 		.nav{display:flex;gap:8px;align-items:center}
-		.nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
-		.nav a.cta{background:var(--primary);color:#fff}
-		.search{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:var(--glass);border:1px solid rgba(7,32,42,0.04)}
-		.search input{border:0;background:transparent;outline:none;padding:6px;width:220px}
+		.nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;transition:all 0.3s}
+		.nav a:hover{background:rgba(106,43,216,0.1);color:var(--primary)}
+		.nav a.cta{background:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(106,43,216,0.3)}
+		.nav a.cta:hover{background:var(--primary-2);transform:translateY(-2px)}
+		.search{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:var(--glass);border:1px solid rgba(7,32,42,0.04);transition:all 0.3s}
+		.search:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px rgba(106,43,216,0.1)}
+		.search input{border:0;background:transparent;outline:none;padding:6px;width:220px;color:#07202a}
+		.search input::placeholder{color:var(--muted)}
 
 		/* Hero */
 		.hero-wrap{max-width:1200px;margin:18px auto;padding:8px 12px;display:flex;gap:18px;align-items:center;justify-content:space-between}
-		.hero{flex:1;background:linear-gradient(90deg,var(--primary),var(--primary-2));color:#fff;padding:36px;border-radius:14px;box-shadow:0 14px 40px rgba(11,20,40,0.08)}
-		.hero h1{font-size:28px;margin:0 0 8px}
-		.hero p{margin:0 0 16px;opacity:.95}
-		.hero .cta{background:#fff;color:var(--primary-2);padding:12px 16px;border-radius:12px;font-weight:800;text-decoration:none}
+		.hero{flex:1;background:linear-gradient(90deg,var(--primary),var(--primary-2));color:#fff;padding:36px;border-radius:14px;box-shadow:0 14px 40px rgba(11,20,40,0.08);position:relative;overflow:hidden}
+		.hero::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.1) 1px,transparent 1px);background-size:20px 20px;animation:moveBackground 20s linear infinite}
+		@keyframes moveBackground{0%{transform:translate(0,0)}100%{transform:translate(20px,20px)}}
+		.hero h1{font-size:28px;margin:0 0 8px;position:relative;z-index:1}
+		.hero p{margin:0 0 16px;opacity:.95;position:relative;z-index:1}
+		.hero .cta{background:#fff;color:var(--primary-2);padding:12px 16px;border-radius:12px;font-weight:800;text-decoration:none;display:inline-block;transition:all 0.3s;position:relative;z-index:1}
+		.hero .cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.2)}
 		.hero-aside{width:300px;display:none}
 
 		/* Grade tiles */
 		.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:16px}
-		.tile{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));padding:14px;border-radius:10px;color:#fff;text-align:center}
+		.tile{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));padding:14px;border-radius:10px;color:#fff;text-align:center;transition:all 0.3s;cursor:pointer}
+		.tile:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,0.2)}
 		.tile small{display:block;opacity:.9}
 
 		/* Courses grid */
 		.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
-		.card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 26px rgba(2,8,23,0.04);border:1px solid rgba(7,32,42,0.03)}
-		.card h3{margin:0 0 6px}
-		.card p{color:var(--muted);margin:0 0 10px}
-		.card .btn{display:inline-block;background:var(--primary);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none}
+		.card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 26px rgba(2,8,23,0.04);border:1px solid rgba(7,32,42,0.03);transition:all 0.3s;position:relative;overflow:hidden}
+		.card::before{content:'';position:absolute;top:0;right:0;width:100%;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-2));transform:scaleX(0);transform-origin:right;transition:transform 0.3s}
+		.card:hover{box-shadow:0 12px 32px rgba(2,8,23,0.08);transform:translateY(-4px)}
+		.card:hover::before{transform:scaleX(1)}
+		.card h3{margin:0 0 6px;color:var(--primary)}
+		.card p{color:var(--muted);margin:0 0 10px;font-size:14px}
+		.card .btn{display:inline-block;background:var(--primary);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;transition:all 0.3s}
+		.card .btn:hover{background:var(--primary-2);transform:translateY(-2px)}
+
+		/* Progress Bar */
+		.progress-bar{width:100%;height:4px;background:rgba(7,32,42,0.1);border-radius:2px;margin:8px 0;overflow:hidden}
+		.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary-2));border-radius:2px;transition:width 0.3s}
 
 		/* Sidebar */
 		.sidebar{padding:16px}
 
-		footer{max-width:1200px;margin:18px auto;padding:12px;color:var(--muted);text-align:center}
+		/* Back to top button */
+		#backToTop{position:fixed;bottom:20px;left:20px;width:50px;height:50px;background:var(--primary);color:#fff;border:none;border-radius:50%;font-size:24px;cursor:pointer;display:none;z-index:999;transition:all 0.3s;box-shadow:0 4px 12px rgba(106,43,216,0.3)}
+		#backToTop:hover{transform:scale(1.1);box-shadow:0 6px 16px rgba(106,43,216,0.4)}
+		#backToTop.show{display:flex;align-items:center;justify-content:center}
+
+		footer{max-width:1200px;margin:18px auto;padding:12px;color:var(--muted);text-align:center;border-top:1px solid rgba(7,32,42,0.06)}
 
 		@media(min-width:980px){
 			.hero-wrap{padding:24px 12px}
@@ -58,7 +84,8 @@
 		}
 
 		/* Sidebar layout */
-		.menu-btn{background:transparent;border:0;color:#07202a;font-size:20px;padding:6px;display:inline-block}
+		.menu-btn{background:transparent;border:0;color:#07202a;font-size:20px;padding:6px;display:inline-block;transition:all 0.3s}
+		.menu-btn:hover{transform:scale(1.2);color:var(--primary)}
 		.sidebar{position:fixed;top:0;left:0;height:100%;width:260px;background:var(--card);box-shadow:2px 0 20px rgba(16,24,40,.08);transform:translateX(-110%);transition:transform .25s ease;z-index:60;padding:80px 16px 16px}
 		.sidebar.open{transform:translateX(0)}
 		.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
@@ -127,25 +154,60 @@
 			<p>هذه صفحة تعليمية بسيطة باللغة العربية تعرض: دروس موجزة، أمثلة تنفيذية، واختبار تفاعلي قصير. يمكنك تعديل المحتوى أو إضافة دروس جديدة بسهولة.</p>
 		</section>
 
-	    <section class="grid" aria-label="الدروس">
-			<article class="card">
-				<h3>درس 1 — الفكرة الأساسية</h3>
-				<p>شرح مختصر عن الفكرة مع نقاط رئيسية سهلة القراءة.</p>
-			</article>
-			<article class="card">
-				<h3>درس 2 — خطوات عملية</h3>
-				<p>خطوات قابلة للتطبيق ومثال سريع لتوضيح الفكرة.</p>
-			</article>
-			<article class="card">
-				<h3>درس 3 — نصائح وممارسات</h3>
-				<p>نصائح مهمة لتجنب الأخطاء الشائعة وتحسين الفهم.</p>
-			</article>
-			<article class="card">
-				<h3>مسار التعليم</h3>
-				<p>مسار منظم يغطي <strong>التعليم المدرسي</strong> و<strong>التعلم الذاتي</strong> مع موارد وخطة بسيطة للبدء.</p>
-				<p style="margin-top:10px"><a href="track.html" style="text-decoration:none;background:var(--primary);color:#fff;padding:8px 12px;border-radius:8px;display:inline-block">افتح المسار</a></p>
-			</article>
-		</section>
+<div class="grid">
+					<div class="card">
+						<h3>🌍 مقدمة إلى العالم</h3>
+						<p>تعرف على أساسيات التعلم والدراسة المنظمة.</p>
+						<div style="display:flex;gap:4px;align-items:center;margin:8px 0">
+							<span style="color:#f59e0b">★★★★★</span>
+							<small style="color:var(--muted)">(245)</small>
+						</div>
+						<div style="width:100%;height:4px;background:rgba(106,43,216,0.1);border-radius:2px;margin:8px 0">
+							<div style="height:100%;width:80%;background:linear-gradient(90deg,var(--primary),var(--primary-2));border-radius:2px"></div>
+						</div>
+						<small style="color:var(--muted)">80% مكتمل</small>
+						<a href="#" class="btn" style="display:block;margin-top:10px;text-align:center">ابدأ الآن</a>
+					</div>
+					<div class="card">
+						<h3>💡 أساسيات التفكير النقدي</h3>
+						<p>تطوير مهارات التحليل والاستنتاج المنطقي.</p>
+						<div style="display:flex;gap:4px;align-items:center;margin:8px 0">
+							<span style="color:#f59e0b">★★★★☆</span>
+							<small style="color:var(--muted)">(189)</small>
+						</div>
+						<div style="width:100%;height:4px;background:rgba(106,43,216,0.1);border-radius:2px;margin:8px 0">
+							<div style="height:100%;width:45%;background:linear-gradient(90deg,var(--primary),var(--primary-2));border-radius:2px"></div>
+						</div>
+						<small style="color:var(--muted)">45% مكتمل</small>
+						<a href="#" class="btn" style="display:block;margin-top:10px;text-align:center">ابدأ الآن</a>
+					</div>
+					<div class="card">
+						<h3>🚀 المشاريع العملية</h3>
+						<p>تطبيق معارفك في مشاريع حقيقية ومفيدة.</p>
+						<div style="display:flex;gap:4px;align-items:center;margin:8px 0">
+							<span style="color:#f59e0b">★★★★★</span>
+							<small style="color:var(--muted)">(312)</small>
+						</div>
+						<div style="width:100%;height:4px;background:rgba(106,43,216,0.1);border-radius:2px;margin:8px 0">
+							<div style="height:100%;width:25%;background:linear-gradient(90deg,var(--primary),var(--primary-2));border-radius:2px"></div>
+						</div>
+						<small style="color:var(--muted)">25% مكتمل</small>
+						<a href="#" class="btn" style="display:block;margin-top:10px;text-align:center">ابدأ الآن</a>
+					</div>
+					<div class="card">
+						<h3>🎨 الإبداع والابتكار</h3>
+						<p>اطلق العنان لإبداعك وطور مشاريعك الخاصة.</p>
+						<div style="display:flex;gap:4px;align-items:center;margin:8px 0">
+							<span style="color:#f59e0b">★★★★★</span>
+							<small style="color:var(--muted)">(267)</small>
+						</div>
+						<div style="width:100%;height:4px;background:rgba(106,43,216,0.1);border-radius:2px;margin:8px 0">
+							<div style="height:100%;width:90%;background:linear-gradient(90deg,var(--primary),var(--primary-2));border-radius:2px"></div>
+						</div>
+						<small style="color:var(--muted)">90% مكتمل</small>
+						<a href="#" class="btn" style="display:block;margin-top:10px;text-align:center">ابدأ الآن</a>
+					</div>
+			</div>
 
 		<section id="examples" class="card example" style="margin-top:12px">
 			<h2>أمثلة</h2>
@@ -171,6 +233,28 @@ document.getElementById('sayHello').addEventListener('click',()=>alert('مرحب
 				<div id="result" aria-live="polite" style="font-weight:600"></div>
 			</div>
 		</section>
+
+		<section style="margin-top:20px;background:linear-gradient(135deg,rgba(106,43,216,0.1),rgba(75,34,184,0.05));padding:20px;border-radius:12px;border:1px solid rgba(106,43,216,0.2)">
+			<h3 style="color:var(--primary);margin-top:0">📊 إحصائيات المنصة</h3>
+			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+				<div style="text-align:center;padding:12px">
+					<div style="font-size:28px;font-weight:800;color:var(--primary)">1000+</div>
+					<small style="color:var(--muted)">درس تعليمي</small>
+				</div>
+				<div style="text-align:center;padding:12px">
+					<div style="font-size:28px;font-weight:800;color:var(--primary)">50K+</div>
+					<small style="color:var(--muted)">طالب نشط</small>
+				</div>
+				<div style="text-align:center;padding:12px">
+					<div style="font-size:28px;font-weight:800;color:var(--primary)">95%</div>
+					<small style="color:var(--muted)">رضا المستخدمين</small>
+				</div>
+				<div style="text-align:center;padding:12px">
+					<div style="font-size:28px;font-weight:800;color:var(--primary)">24/7</div>
+					<small style="color:var(--muted)">دعم فني</small>
+				</div>
+			</div>
+		</section>
 		</main>
 	</div>
 
@@ -179,7 +263,7 @@ document.getElementById('sayHello').addEventListener('click',()=>alert('مرحب
 			<small>صُمِّمت لأغراض تعليمية — يمكنك التعديل والانتشار.</small>
 		</div>
 	</footer>
-
+	<button id="backToTop" title="العودة للأعلى">↑</button>
 	<script>
 		document.getElementById('submitBtn').addEventListener('click',function(){
 			const sel = document.querySelector('input[name="q1"]:checked');
@@ -187,6 +271,30 @@ document.getElementById('sayHello').addEventListener('click',()=>alert('مرحب
 			if(!sel){ out.textContent = 'اختر إجابة أولًا.'; out.style.color='#b45309'; return }
 			if(sel.value === 'a'){ out.textContent='صحيح! الخاصية هي `dir`.'; out.style.color='#065f46' }
 			else{ out.textContent='خطأ — حاول مرة أخرى.'; out.style.color='#b91c1c' }
+		});
+
+		// Back to top button
+		window.addEventListener('scroll', () => {
+			const backToTop = document.getElementById('backToTop');
+			if (window.pageYOffset > 300) {
+				backToTop.classList.add('show');
+			} else {
+				backToTop.classList.remove('show');
+			}
+		});
+
+		document.getElementById('backToTop').addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
+
+		// Search functionality
+		document.querySelector('.search input').addEventListener('input', function(e) {
+			const query = e.target.value.toLowerCase();
+			const cards = document.querySelectorAll('.grid .card');
+			cards.forEach(card => {
+				const text = card.textContent.toLowerCase();
+				card.style.display = text.includes(query) ? 'block' : 'none';
+			});
 		});
 
 		// Sidebar toggle behavior
@@ -201,11 +309,8 @@ document.getElementById('sayHello').addEventListener('click',()=>alert('مرحب
 				if(sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
 			});
 			overlay.addEventListener('click',closeSidebar);
-			// close on Escape
 			document.addEventListener('keydown',function(e){ if(e.key === 'Escape') closeSidebar(); });
-			// close sidebar when clicking a sidebar link (mobile)
 			sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',function(){ if(window.innerWidth<980) closeSidebar(); }))
-			// active link highlighting
 			function setActiveFromHash(){
 				const hash = location.hash || '#lessons';
 				sidebar.querySelectorAll('a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===hash));

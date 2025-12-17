@@ -109,6 +109,32 @@
       font-size: 14px;
     }
 
+    /* Rating */
+    .rating {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+      margin: 8px 0;
+    }
+    .rating .stars { color: #f59e0b; font-size: 16px; }
+    .rating small { color: var(--muted); font-size: 12px; }
+
+    /* Progress Bar */
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(190, 24, 93, 0.1);
+      border-radius: 3px;
+      margin: 8px 0;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #a01552);
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+
     .lessons-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -166,6 +192,33 @@
       margin-top: 30px;
       border-top: 1px solid var(--primary);
       font-size: 12px;
+    }
+
+    #backToTop {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(190, 24, 93, 0.3);
+    }
+    #backToTop:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(190, 24, 93, 0.4);
+    }
+    #backToTop.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #sidebar {
@@ -258,8 +311,14 @@
       <!-- بطاقة الدروس -->
       <div class="content-card">
         <h3>📚 الدروس</h3>
-        <p>17 درس تعليمي مع فيديوهات شرح</p>
-        <div class="lessons-list">
+        <p>17 درس تعليمي مع فيديوهات شرح</p>        <div class="rating">
+          <span class="stars">★★★★★</span>
+          <small>(1,240 تقييم)</small>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 65%;"></div>
+        </div>
+        <small style="color: var(--muted);">65% من الطلاب أكملوا الدروس</small>        <div class="lessons-list">
           <button class="lesson-btn" onclick="playLesson(1)">الدرس 1</button>
           <button class="lesson-btn" onclick="playLesson(2)">الدرس 2</button>
           <button class="lesson-btn" onclick="playLesson(3)">الدرس 3</button>
@@ -284,7 +343,15 @@
       <div class="content-card">
         <h3>📖 كتاب القاعدة النورانية</h3>
         <p>حمّل الكتاب الكامل بصيغة PDF</p>
-        <a href="#" class="download-btn">⬇️ تحميل الكتاب</a>
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+          <small>(856 تقييم)</small>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 92%;"></div>
+        </div>
+        <small style="color: var(--muted);">92% رضا المستخدمين</small>
+        <a href="#" class="download-btn" style="display: block; margin-top: 12px;">⬇️ تحميل الكتاب</a>
         <p style="margin-top: 15px; font-size: 12px;">الحجم: ~5 MB</p>
       </div>
 
@@ -292,7 +359,15 @@
       <div class="content-card">
         <h3>✏️ اختبار المادة</h3>
         <p>اختبر معلوماتك في القاعدة النورانية</p>
-        <button class="test-btn" onclick="startTest()">بدء الاختبار</button>
+        <div class="rating">
+          <span class="stars">★★★★☆</span>
+          <small>(654 تقييم)</small>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 78%;"></div>
+        </div>
+        <small style="color: var(--muted);">78% نسبة النجاح</small>
+        <button class="test-btn" onclick="startTest()" style="display: block; width: 100%; margin-top: 12px;">بدء الاختبار</button>
         <p style="margin-top: 15px; font-size: 12px;">عدد الأسئلة: 20 سؤال</p>
       </div>
     </div>
@@ -312,6 +387,8 @@
   <footer>
     <p>&copy; 2025 منصة التعليم العربية. جميع الحقوق محفوظة.</p>
   </footer>
+
+  <button id="backToTop" title="العودة للأعلى">↑</button>
 
   <aside id="sidebar">
     <nav>
@@ -374,6 +451,20 @@
     function startTest() {
       alert('الاختبار قريباً! سيتم إطلاق الاختبار التفاعلي قريباً.');
     }
+
+    // Back to top button
+    window.addEventListener('scroll', () => {
+      const backToTop = document.getElementById('backToTop');
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 </body>
 </html>

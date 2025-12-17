@@ -5,24 +5,58 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>صفحة تعليمية</title>
 	<style>
-		:root{--accent:#1e90ff;--bg:#e2eaee;--card:#ffffff}
+		:root{
+			--accent:#1e90ff;
+			--accent-2:#36b3ff;
+			--bg:#f6fbff;
+			--muted:#6b7280;
+			--card:#ffffff;
+			--glass:rgba(255,255,255,0.6)
+		}
 		*{box-sizing:border-box}
-		body{font-family:Tahoma,Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#111}
-		header{background:linear-gradient(90deg,var(--accent),#36b3ff);color:#fff;padding:28px 16px}
-		.container{max-width:980px;margin:20px auto;padding:0 16px}
-		h1,h2{margin:0 0 8px}
-		p.lead{margin:6px 0 0;opacity:.95}
-		nav{display:flex;gap:12px;align-items:center;justify-content:flex-end}
-		nav a{color:rgba(255,255,255,.95);text-decoration:none;padding:6px 10px;border-radius:6px}
-		nav a:hover{background:rgba(255,255,255,.08)}
+		body{font-family:Inter,Segoe UI,Roboto,Tahoma,Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#0f172a;line-height:1.5}
+		header{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:18px 16px;position:sticky;top:0;z-index:80}
+		.container{max-width:1100px;margin:20px auto;padding:0 16px}
+		h1,h2{margin:0 0 10px}
+		p.lead{margin:6px 0 0;opacity:.97}
+		nav{display:flex;gap:14px;align-items:center;justify-content:flex-end}
+		nav a{color:rgba(255,255,255,.98);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;transition:background .18s,transform .12s}
+		nav a:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
 		.hero{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
-		.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
-		.card{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 6px 16px rgba(16,24,40,.06)}
-		code{background:#f3f4f6;padding:2px 6px;border-radius:6px;font-family:monospace}
+		.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
+		.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.03)}
+		code{background:#f3f4f6;padding:4px 8px;border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 		.example pre{white-space:pre-wrap;background:#0f1724;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto}
 		.quiz button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
-		footer{padding:20px 0;text-align:center;color:#555}
+		footer{padding:26px 0;text-align:center;color:var(--muted)}
+		/* small utilities */
+		.text-muted{color:var(--muted)}
+		.button-ghost{background:transparent;border:1px solid rgba(255,255,255,.12);padding:8px 10px;border-radius:8px;color:#fff}
+		/* header search */
+		.header-actions{display:flex;gap:8px;align-items:center}
+		.header-search{background:var(--glass);padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.06);backdrop-filter:blur(6px)}
+		.header-search input{border:0;background:transparent;color:#fff;outline:none}
 		@media (min-width:800px){.hero{flex-direction:row;justify-content:space-between;align-items:center}}
+
+		/* Sidebar layout */
+		.menu-btn{background:transparent;border:0;color:#fff;font-size:20px;padding:6px;display:inline-block}
+		.sidebar{position:fixed;top:0;left:0;height:100%;width:280px;background:var(--card);box-shadow:2px 0 24px rgba(16,24,40,.12);transform:translateX(-115%);transition:transform .28s cubic-bezier(.2,.9,.2,1);z-index:60;padding:80px 18px 18px}
+		.sidebar.open{transform:translateX(0)}
+		.sidebar h3{margin:0 0 6px}
+		.sidebar nav ul{list-style:none;padding:0;margin:12px 0}
+		.sidebar nav a{display:flex;gap:10px;align-items:center;padding:10px;border-radius:8px;color:#0f172a;text-decoration:none}
+		.sidebar nav a:hover{background:rgba(14,38,60,.04)}
+		.sidebar nav a .icon{font-size:16px;color:var(--accent)}
+		.sidebar nav a.active{background:linear-gradient(90deg,rgba(30,144,255,.08),rgba(54,179,255,.06));border-left:3px solid var(--accent);padding-left:8px}
+		.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .22s;z-index:50}
+		.overlay.show{opacity:1;pointer-events:auto}
+		.layout{display:block}
+		@media (min-width:980px){
+			.layout{display:grid;grid-template-columns:280px 1fr;gap:28px}
+			.sidebar{position:relative;transform:none;box-shadow:none;padding:20px;top:auto;height:auto;width:auto}
+			.overlay{display:none}
+			.menu-btn{display:none}
+		}
 
 		/* Sidebar layout */
 		.menu-btn{background:transparent;border:0;color:#fff;font-size:20px;padding:6px;display:inline-block}
@@ -52,24 +86,32 @@
 					<h1>مرحبًا بك في الصفحة التعليمية</h1>
 					<p class="lead">دروس قصيرة وأمثلة عملية مع اختبار سريع لمراجعة ما تعلمته.</p>
 				</div>
-				<div style="text-align:left;display:flex;gap:8px;align-items:center">
+				<div style="text-align:left;display:flex;gap:12px;align-items:center">
 					<button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
-					<a href="#quiz" style="background:#fff;color:var(--accent);padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600">ابدأ الاختبار</a>
+					<div class="header-actions">
+						<div class="header-search" role="search" aria-label="بحث">
+							<input type="search" placeholder="ابحث عن درس أو مثال" aria-label="بحث">
+						</div>
+						<a href="#quiz" class="button-ghost">ابدأ الاختبار</a>
+						<a href="settings.html" class="button-ghost" aria-label="الإعدادات">⚙️ إعدادات</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</header>
 
 	<div class="layout container">
-		<aside id="sidebar" class="sidebar" aria-label="القائمة الجانبية">
+		<aside id="sidebar" class="sidebar" aria-label="القائمة الجانبية" aria-hidden="true">
 			<h3 style="margin-top:0">القائمة</h3>
 			<nav>
-				<ul style="list-style:none;padding:0;margin:12px 0;line-height:2">
-					<li><a href="#lessons">الدروس</a></li>
-					<li><a href="#examples">أمثلة</a></li>
-					<li><a href="#quiz">اختبار سريع</a></li>
-					<li><a href="#">عن الموقع</a></li>
-				</ul>
+					<ul style="list-style:none;padding:0;margin:12px 0;line-height:1.9">
+						<li><a href="#lessons"><span class="icon">📘</span>الدروس</a></li>
+						<li><a href="#examples"><span class="icon">💡</span>أمثلة</a></li>
+						<li><a href="#quiz"><span class="icon">📝</span>اختبار سريع</a></li>
+						<li><a href="#"><span class="icon">ℹ️</span>عن الموقع</a></li>
+						<li><a href="settings.html"><span class="icon">⚙️</span>الإعدادات</a></li>
+						<li><a href="developer.html"><span class="icon">🧑‍💻</span>مطور الموقع</a></li>
+					</ul>
 			</nav>
 		</aside>
 		<div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
@@ -142,14 +184,23 @@ document.getElementById('sayHello').addEventListener('click',()=>alert('مرحب
 			const sidebar = document.getElementById('sidebar');
 			const overlay = document.getElementById('overlay');
 			if(!menuBtn || !sidebar || !overlay) return;
-			function openSidebar(){ sidebar.classList.add('open'); overlay.classList.add('show'); sidebar.setAttribute('aria-hidden','false'); overlay.setAttribute('aria-hidden','false') }
-			function closeSidebar(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); sidebar.setAttribute('aria-hidden','true'); overlay.setAttribute('aria-hidden','true') }
+			function openSidebar(){ sidebar.classList.add('open'); overlay.classList.add('show'); sidebar.setAttribute('aria-hidden','false'); overlay.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true') }
+			function closeSidebar(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); sidebar.setAttribute('aria-hidden','true'); overlay.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false') }
 			menuBtn.addEventListener('click',function(e){
 				if(sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
 			});
 			overlay.addEventListener('click',closeSidebar);
 			// close on Escape
 			document.addEventListener('keydown',function(e){ if(e.key === 'Escape') closeSidebar(); });
+			// close sidebar when clicking a sidebar link (mobile)
+			sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',function(){ if(window.innerWidth<980) closeSidebar(); }))
+			// active link highlighting
+			function setActiveFromHash(){
+				const hash = location.hash || '#lessons';
+				sidebar.querySelectorAll('a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===hash));
+			}
+			window.addEventListener('hashchange', setActiveFromHash);
+			setActiveFromHash();
 		})();
 	</script>
 </body>

@@ -1,0 +1,95 @@
+	<!doctype html>
+	<html lang="ar" dir="rtl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>الإعدادات — الصفحة التعليمية</title>
+		<style>
+			:root{--accent:#1e90ff;--bg:#f6fbff;--card:#fff;--muted:#6b7280}
+			body{font-family:Inter,Segoe UI,Roboto,Tahoma,Arial;margin:0;background:var(--bg);color:#071126}
+			head{position:sticky;top:0;background:linear-gradient(90deg,var(--accent),#36b3ff);color:#fff;padding:14px 16px}
+			.container{max-width:980px;margin:18px auto;padding:0 16px}
+			.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 24px rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.03)}
+			.form-row{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+			label{font-weight:600}
+			input,select{padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,.08)}
+			.actions{display:flex;gap:10px;align-items:center;margin-top:12px}
+			.save{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+			.cancel{background:transparent;border:1px solid rgba(15,23,42,.06);padding:10px 12px;border-radius:8px}
+			.footer{margin-top:18px;color:var(--muted);font-size:13px}
+			@media(min-width:800px){.form-row{flex-direction:row;gap:18px}.form-row>div{flex:1}}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<h2 style="margin:0">الإعدادات</h2>
+			</div>
+		</header>
+		<main class="container" role="main">
+			<section class="card">
+				<h3>الإعدادات العامة</h3>
+				<p class="text-muted">ضبط تفضيلات الحساب والمظهر.</p>
+				<form id="settingsForm" onsubmit="return false;">
+					<div class="form-row">
+						<div>
+							<label for="displayName">الاسم الظاهر</label>
+							<input id="displayName" type="text" placeholder="أدخل الاسم الظاهر">
+						</div>
+						<div>
+							<label for="email">البريد الإلكتروني</label>
+							<input id="email" type="email" placeholder="you@example.com">
+						</div>
+					</div>
+					<div class="form-row">
+						<div>
+							<label for="language">اللغة</label>
+							<select id="language">
+								<option value="ar">العربية</option>
+								<option value="en">English</option>
+							</select>
+						</div>
+						<div>
+							<label for="theme">المظهر</label>
+							<select id="theme">
+								<option value="light">فاتح</option>
+								<option value="dark">داكن</option>
+							</select>
+						</div>
+					</div>
+					<div class="actions">
+						<button class="save" id="saveBtn">حفظ الإعدادات</button>
+						<button class="cancel" id="resetBtn">إعادة</button>
+						<div id="msg" style="font-weight:600;color:green"></div>
+					</div>
+				</form>
+				<div class="footer">الإعدادات تُحفظ محليًا في هذا المثال (localStorage).</div>
+			</section>
+		</main>
+		<script>
+			// load/save to localStorage
+			const form = document.getElementById('settingsForm');
+			const msg = document.getElementById('msg');
+			function load(){
+				const s = JSON.parse(localStorage.getItem('edu_settings')||'{}');
+				document.getElementById('displayName').value = s.displayName||'';
+				document.getElementById('email').value = s.email||'';
+				document.getElementById('language').value = s.language||'ar';
+				document.getElementById('theme').value = s.theme||'light';
+			}
+			function save(){
+				const s = {
+					displayName:document.getElementById('displayName').value,
+					email:document.getElementById('email').value,
+					language:document.getElementById('language').value,
+					theme:document.getElementById('theme').value
+				};
+				localStorage.setItem('edu_settings', JSON.stringify(s));
+				msg.textContent='تم الحفظ.'; setTimeout(()=>msg.textContent='',2200);
+			}
+			document.getElementById('saveBtn').addEventListener('click', save);
+			document.getElementById('resetBtn').addEventListener('click', function(){ localStorage.removeItem('edu_settings'); load(); msg.textContent='تمت إعادة الإعدادات.'; setTimeout(()=>msg.textContent='',2200)});
+			load();
+		</script>
+	</body>
+	</html>

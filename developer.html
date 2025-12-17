@@ -1,0 +1,62 @@
+	<!doctype html>
+	<html lang="ar" dir="rtl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>مطور الموقع</title>
+		<style>
+			:root{--accent:#1e90ff;--bg:#f6fbff;--card:#fff;--muted:#6b7280}
+			body{font-family:Inter,Segoe UI,Roboto,Tahoma,Arial;margin:0;background:var(--bg);color:#071126}
+			head{background:linear-gradient(90deg,var(--accent),#36b3ff);color:#fff;padding:16px;position:sticky;top:0}
+			.container{max-width:900px;margin:20px auto;padding:0 16px}
+			.card{background:var(--card);padding:22px;border-radius:14px;box-shadow:0 14px 40px rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.03)}
+			.profile{display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center}
+			.avatar{width:140px;height:140px;border-radius:18px;overflow:hidden;box-shadow:0 8px 26px rgba(2,6,23,.08);border:4px solid #fff}
+			.avatar svg{width:100%;height:100%;display:block}
+			h3{margin:0}
+			.meta{color:var(--muted);font-size:14px}
+			.bio{margin-top:8px;line-height:1.6}
+			.info{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+			.info a{color:var(--accent);text-decoration:none}
+			.back{display:inline-block;margin-top:14px;background:transparent;border:1px solid rgba(15,23,42,.06);padding:8px 12px;border-radius:8px;text-decoration:none;color:#071126}
+			@media(min-width:720px){.profile{flex-direction:row;align-items:center;text-align:right}.profile .meta-and-bio{flex:1;padding-right:18px;text-align:right}.info{grid-template-columns:1fr 1fr}}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="container"><h2 style="margin:0">معلومات المطور</h2></div>
+		</header>
+		<main class="container">
+			<section class="card">
+				<div class="profile">
+					<div class="avatar" aria-hidden="true">
+						<!-- inline SVG avatar -->
+						<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="صورة مطور">
+							<defs>
+								<linearGradient id="g" x1="0" x2="1">
+									<stop offset="0" stop-color="#1e90ff"/>
+									<stop offset="1" stop-color="#36b3ff"/>
+								</linearGradient>
+							</defs>
+							<rect width="120" height="120" rx="18" fill="url(#g)" />
+							<g transform="translate(20,26)" fill="#fff">
+								<circle cx="40" cy="20" r="16" opacity="0.98"/>
+								<path d="M6 78c4-12 20-20 34-20s30 8 34 20" opacity="0.95"/>
+							</g>
+						</svg>
+					</div>
+					<div class="meta-and-bio">
+						<h3>أحمد النجار</h3>
+						<div class="meta">مطور واجهات ويب — مصمم تجارب المستخدم</div>
+						<p class="bio">أحمد مهندس برمجيات مهتم ببناء واجهات مستخدم بسيطة وسريعة. خبرة في HTML، CSS، JavaScript، وتصميم واجهات للمستخدمين العرب.</p>
+						<div class="info">
+							<div><strong>البريد:</strong> <a href="mailto:ahmed@example.com">ahmed@example.com</a></div>
+							<div><strong>الموقع:</strong> <a href="#">www.example.com</a></div>
+						</div>
+						<a class="back" href="index.html">← العودة إلى الصفحة الرئيسية</a>
+					</div>
+				</div>
+			</section>
+		</main>
+	</body>
+	</html>

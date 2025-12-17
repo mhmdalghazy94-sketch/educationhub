@@ -381,9 +381,10 @@
         <h3 id="videoTitle" style="color: var(--accent); margin: 0;"></h3>
         <button onclick="closeVideo()" style="background: none; border: none; color: var(--text); font-size: 24px; cursor: pointer;">×</button>
       </div>
-      <div style="background-color: var(--bg); padding: 20px; border-radius: 6px; text-align: center;">
-        <p id="videoContent" style="color: var(--muted);">محتوى الفيديو سيتم عرضه هنا</p>
+      <div style="background-color: var(--bg); padding: 0; border-radius: 6px; overflow: hidden;">
+        <iframe id="videoPlayer" width="100%" height="400" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display: block;"></iframe>
       </div>
+      <p id="videoDescription" style="color: var(--muted); margin-top: 15px; font-size: 14px;"></p>
     </div>
   </main>
 
@@ -431,28 +432,53 @@
       link.addEventListener('click', close);
     });
 
+    // بيانات الدروس مع روابط YouTube
+    const lessons = {
+      1: { title: 'الدرس 1: الحروف الهجائية الأساسية', videoId: 'wO2DRVC-g9w' },
+      2: { title: 'الدرس 2: الحركات', videoId: null },
+      3: { title: 'الدرس 3: السكون والتشديد', videoId: null },
+      4: { title: 'الدرس 4: الهمزة', videoId: null },
+      5: { title: 'الدرس 5: الألف الممدودة والمقصورة', videoId: null },
+      6: { title: 'الدرس 6: الراء والغنة', videoId: null },
+      7: { title: 'الدرس 7: الميم الساكنة', videoId: null },
+      8: { title: 'الدرس 8: النون الساكنة والتنوين', videoId: null },
+      9: { title: 'الدرس 9: المدود', videoId: null },
+      10: { title: 'الدرس 10: أحكام اللام الساكنة', videoId: null },
+      11: { title: 'الدرس 11: الإدغام', videoId: null },
+      12: { title: 'الدرس 12: القلب', videoId: null },
+      13: { title: 'الدرس 13: الإخفاء', videoId: null },
+      14: { title: 'الدرس 14: أحكام النون الساكنة والتنوين', videoId: null },
+      15: { title: 'الدرس 15: الفواصل والوقف', videoId: null },
+      16: { title: 'الدرس 16: تطبيقات عملية', videoId: null },
+      17: { title: 'الدرس 17: مراجعة شاملة', videoId: null }
+    };
+
     function playLesson(lessonNumber) {
-      const modal = document.getElementById('videoModal');
-      const title = document.getElementById('videoTitle');
-      const content = document.getElementById('videoContent');
+      const lesson = lessons[lessonNumber];
+      if (!lesson || !lesson.videoId) {
+        alert(`الدرس ${lessonNumber} قريباً!\n\nسيتم إضافة الفيديو قريباً.`);
+        return;
+      }
       
-      title.textContent = `الدرس ${lessonNumber} - القاعدة النورانية`;
-      content.innerHTML = `
-        <div style="color: var(--text); font-size: 16px;">
-          <p>🎥 فيديو تعليمي للدرس ${lessonNumber}</p>
-          <p style="color: var(--muted); margin-top: 10px;">مدة الفيديو: حوالي 10 دقائق</p>
-        </div>
-      `;
-      modal.style.display = 'block';
-      window.scrollTo(0, modal.offsetTop);
+      document.getElementById('videoTitle').textContent = lesson.title;
+      document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${lesson.videoId}?list=PLDGSJOlM3XL8aPMnm4riNMab33Jnra0hz`;
+      document.getElementById('videoDescription').textContent = `شاهد هذا الدرس من القاعدة النورانية وتعلم أحكام التجويد الأساسية.`;
+      
+      document.getElementById('videoModal').style.display = 'block';
+      window.scrollTo(0, document.getElementById('videoModal').offsetTop - 50);
     }
 
     function closeVideo() {
       document.getElementById('videoModal').style.display = 'none';
+      document.getElementById('videoPlayer').src = '';
     }
 
-    function startTest() {
-      alert('الاختبار قريباً! سيتم إطلاق الاختبار التفاعلي قريباً.');
+    function reviewLesson() {
+      alert('📖 مراجعة الدرس\n\nسيتم إضافة ميزة المراجعة قريباً.');
+    }
+
+    function testLesson() {
+      alert('✏️ اختبار الدرس\n\nسيتم إضافة اختبار تفاعلي قريباً.');
     }
 
     // Back to top button

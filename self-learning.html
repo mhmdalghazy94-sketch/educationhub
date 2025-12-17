@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>مسار التعلم الذاتي</title>
+  <style>
+    :root{--accent:#0ea5a4;--bg:#f6fbff;--card:#fff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{font-family:Inter,Segoe UI,Roboto,Tahoma,Arial;margin:0;background:var(--bg);color:#071126}
+    header{background:linear-gradient(90deg,var(--accent),#36b3ff);color:#fff;padding:8px 12px;position:sticky;top:0}
+    .container{max-width:1000px;margin:12px auto;padding:0 12px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.03)}
+    h1,h2{margin:0 0 8px}
+    .lead{color:var(--muted);margin-bottom:12px}
+    .resource{background:#f9fafb;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,.03)}
+    .back{display:inline-block;margin-top:12px;background:transparent;border:1px solid rgba(15,23,42,.06);padding:8px 12px;border-radius:8px;text-decoration:none;color:#071126}
+    /* sidebar */
+    .menu-btn{background:transparent;border:0;color:#071126;font-size:20px;padding:6px;display:inline-block}
+    .sidebar{position:fixed;top:0;left:0;height:100%;width:260px;background:var(--card);box-shadow:2px 0 20px rgba(16,24,40,.08);transform:translateX(-110%);transition:transform .25s ease;z-index:60;padding:80px 16px 16px}
+    .sidebar.open{transform:translateX(0)}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+    .overlay.show{opacity:1;pointer-events:auto}
+    @media(min-width:800px){.sidebar{position:relative;transform:none;padding:24px}} 
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
+      <h2 style="margin:0;display:inline-block;margin-right:10px;">مسار التعلم الذاتي</h2>
+    </div>
+  </header>
+
+  <aside id="sidebar" class="sidebar" aria-label="القائمة الجانبية" aria-hidden="true">
+    <h3 style="margin-top:0">القائمة</h3>
+    <nav>
+      <ul style="list-style:none;padding:0;margin:12px 0;line-height:1.9">
+        <li><a href="index.html">الصفحة الرئيسية</a></li>
+        <li><a href="track.html">مسار التعليم</a></li>
+        <li><a href="school-learning.html">التعليم المدرسي</a></li>
+        <li><a href="settings.html">الإعدادات</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
+
+  <main class="container">
+    <section class="card">
+      <h1>التعلم الذاتي — خطة مفصّلة</h1>
+      <p class="lead">خطة للتعلم الذاتي بناءً على المشاريع، الموارد المجانية، وجدولة التعلم.</p>
+      <h2>أهداف المسار</h2>
+      <ul>
+        <li>تحديد هدف واضح ومشروع عملي للتدرّب عليه.</li>
+        <li>بناء محفظة أعمال صغيرة (مشاريع، تقارير، أمثلة).</li>
+        <li>تعلم أدوات البحث والتوثيق الذاتي.</li>
+      </ul>
+      <h2>خطة 8 أسابيع — مثال</h2>
+      <ol>
+        <li>اختيار موضوع ومصدر/دورة مناسبة.</li>
+        <li>مشروع تطبيقي بسيط كل أسبوعين.</li>
+        <li>مراجعة ومشاركة العمل في مجتمع للتعلم.</li>
+      </ol>
+      <div class="resource">مواقع مقترحة: Khan Academy, Coursera, freeCodeCamp، ومجتمعات محلية.</div>
+      <a class="back" href="track.html">← العودة إلى صفحة المسارات</a>
+    </section>
+  </main>
+
+  <script>
+    (function(){
+      const menuBtn = document.getElementById('menuBtn');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      if(!menuBtn||!sidebar||!overlay) return;
+      function open(){sidebar.classList.add('open');overlay.classList.add('show');sidebar.setAttribute('aria-hidden','false')}
+      function close(){sidebar.classList.remove('open');overlay.classList.remove('show');sidebar.setAttribute('aria-hidden','true')}
+      menuBtn.addEventListener('click',()=>{ if(sidebar.classList.contains('open')) close(); else open(); });
+      overlay.addEventListener('click',close);
+      document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+    })();
+  </script>
+</body>
+</html>

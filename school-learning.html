@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>مسار التعليم المدرسي</title>
+  <style>
+    :root{--accent:#1e90ff;--bg:#f6fbff;--card:#fff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{font-family:Inter,Segoe UI,Roboto,Tahoma,Arial;margin:0;background:var(--bg);color:#071126}
+    header{background:linear-gradient(90deg,var(--accent),#36b3ff);color:#fff;padding:8px 12px;position:sticky;top:0}
+    .container{max-width:1000px;margin:12px auto;padding:0 12px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.03)}
+    h1,h2{margin:0 0 8px}
+    .lead{color:var(--muted);margin-bottom:12px}
+    .resource{background:#f9fafb;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,.03)}
+    .back{display:inline-block;margin-top:12px;background:transparent;border:1px solid rgba(15,23,42,.06);padding:8px 12px;border-radius:8px;text-decoration:none;color:#071126}
+
+    /* Stages cards */
+    .stages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px}
+    .stage-card{background:#fff;padding:10px;border-radius:10px;box-shadow:0 8px 20px rgba(2,8,23,0.04);border:1px solid rgba(7,32,42,0.03);text-align:center}
+    .stage-card .thumb{width:100%;height:110px;display:block;border-radius:8px;object-fit:cover;background:linear-gradient(135deg,#e6f0ff,#f3f7ff)}
+    .stage-card h3{margin:10px 0 6px;font-size:16px}
+    .stage-card a{display:inline-block;margin-top:6px;background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;text-decoration:none}
+    /* sidebar */
+    .menu-btn{background:transparent;border:0;color:#071126;font-size:20px;padding:6px;display:inline-block}
+    .sidebar{position:fixed;top:0;left:0;height:100%;width:260px;background:var(--card);box-shadow:2px 0 20px rgba(16,24,40,.08);transform:translateX(-110%);transition:transform .25s ease;z-index:60;padding:80px 16px 16px}
+    .sidebar.open{transform:translateX(0)}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+    .overlay.show{opacity:1;pointer-events:auto}
+    @media(min-width:800px){.sidebar{position:relative;transform:none;padding:24px}} 
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
+      <h2 style="margin:0;display:inline-block;margin-right:10px;">مسار التعليم المدرسي</h2>
+    </div>
+  </header>
+
+  <aside id="sidebar" class="sidebar" aria-label="القائمة الجانبية" aria-hidden="true">
+    <h3 style="margin-top:0">القائمة</h3>
+    <nav>
+      <ul style="list-style:none;padding:0;margin:12px 0;line-height:1.9">
+        <li><a href="index.html">الصفحة الرئيسية</a></li>
+        <li><a href="track.html">مسار التعليم</a></li>
+        <li><a href="self-learning.html">التعلم الذاتي</a></li>
+        <li><a href="settings.html">الإعدادات</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
+
+  <main class="container">
+    <section class="card">
+      <h1>التعليم المدرسي — خطة مفصّلة</h1>
+      <p class="lead">خطة مركّزة على المناهج الرسمية، تنظيم الوقت، وأساليب المذاكرة الفعّالة.</p>
+      <h2>أهداف المسار</h2>
+      <ul>
+        <li>تثبيت المفاهيم الأساسية حسب المنهج.</li>
+        <li>تحسين الأداء في الاختبارات المدرسية.</li>
+        <li>تنمية مهارات الدراسة الجماعية والانضباط.</li>
+      </ul>
+      <h2>خطة 8 أسابيع — مثال</h2>
+      <ol>
+        <li>مراجعة الفصل الأول ومراسلة المعلم للمواضيع الصعبة.</li>
+        <li>تلخيص كل درس في ورقة ملخص.</li>
+        <li>حل أسئلة سابقة واختبارات قصيرة أسبوعية.</li>
+      </ol>
+      <div class="resource">ملاحظة: عدّل الخطة بحسب مستوى الطالب وساعات الدراسة المتاحة.</div>
+      
+      <h2 style="margin-top:18px">المراحل الدراسية</h2>
+      <div class="stages-grid" aria-label="المراحل الدراسية">
+        <div class="stage-card">
+          <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='100%' height='100%' fill='%23e6f0ff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='28' fill='%234b22b8' font-family='Arial'>الابتدائية</text></svg>" alt="المرحلة الابتدائية">
+          <h3>المرحلة الابتدائية</h3>
+          <a href="#">فتح</a>
+        </div>
+        <div class="stage-card">
+          <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='100%' height='100%' fill='%23fff4e6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='28' fill='%23b45309' font-family='Arial'>المتوسطة</text></svg>" alt="المرحلة المتوسطة">
+          <h3>المرحلة المتوسطة</h3>
+          <a href="#">فتح</a>
+        </div>
+        <div class="stage-card">
+          <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='100%' height='100%' fill='%23e8fff3'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='28' fill='%230965f4' font-family='Arial'>الثانوية</text></svg>" alt="المرحلة الثانوية">
+          <h3>المرحلة الثانوية</h3>
+          <a href="#">فتح</a>
+        </div>
+      </div>
+
+      <a class="back" href="track.html">← العودة إلى صفحة المسارات</a>
+    </section>
+  </main>
+
+  <script>
+    (function(){
+      const menuBtn = document.getElementById('menuBtn');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      if(!menuBtn||!sidebar||!overlay) return;
+      function open(){sidebar.classList.add('open');overlay.classList.add('show');sidebar.setAttribute('aria-hidden','false')}
+      function close(){sidebar.classList.remove('open');overlay.classList.remove('show');sidebar.setAttribute('aria-hidden','true')}
+      menuBtn.addEventListener('click',()=>{ if(sidebar.classList.contains('open')) close(); else open(); });
+      overlay.addEventListener('click',close);
+      document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+    })();
+  </script>
+</body>
+</html>

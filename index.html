@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>صفحة تعليمية</title>
+	<style>
+		:root{--accent:#1e90ff;--bg:#e2eaee;--card:#ffffff}
+		*{box-sizing:border-box}
+		body{font-family:Tahoma,Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#111}
+		header{background:linear-gradient(90deg,var(--accent),#36b3ff);color:#fff;padding:28px 16px}
+		.container{max-width:980px;margin:20px auto;padding:0 16px}
+		h1,h2{margin:0 0 8px}
+		p.lead{margin:6px 0 0;opacity:.95}
+		nav{display:flex;gap:12px;align-items:center;justify-content:flex-end}
+		nav a{color:rgba(255,255,255,.95);text-decoration:none;padding:6px 10px;border-radius:6px}
+		nav a:hover{background:rgba(255,255,255,.08)}
+		.hero{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+		.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+		.card{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 6px 16px rgba(16,24,40,.06)}
+		code{background:#f3f4f6;padding:2px 6px;border-radius:6px;font-family:monospace}
+		.example pre{white-space:pre-wrap;background:#0f1724;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto}
+		.quiz button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+		footer{padding:20px 0;text-align:center;color:#555}
+		@media (min-width:800px){.hero{flex-direction:row;justify-content:space-between;align-items:center}}
+
+		/* Sidebar layout */
+		.menu-btn{background:transparent;border:0;color:#fff;font-size:20px;padding:6px;display:inline-block}
+		.sidebar{position:fixed;top:0;left:0;height:100%;width:260px;background:var(--card);box-shadow:2px 0 20px rgba(16,24,40,.12);transform:translateX(-110%);transition:transform .25s ease;z-index:60;padding:80px 16px 16px}
+		.sidebar.open{transform:translateX(0)}
+		.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+		.overlay.show{opacity:1;pointer-events:auto}
+		.layout{display:block}
+		@media (min-width:800px){
+			.layout{display:grid;grid-template-columns:260px 1fr;gap:20px}
+			.sidebar{position:relative;transform:none;box-shadow:none;padding:24px;top:auto;height:auto;width:auto}
+			.overlay{display:none}
+			.menu-btn{display:none}
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="container">
+			<nav aria-label="الرئيسية">
+				<a href="#lessons">الدروس</a>
+				<a href="#examples">أمثلة</a>
+				<a href="#quiz">اختبار سريع</a>
+			</nav>
+			<div class="hero">
+				<div>
+					<h1>مرحبًا بك في الصفحة التعليمية</h1>
+					<p class="lead">دروس قصيرة وأمثلة عملية مع اختبار سريع لمراجعة ما تعلمته.</p>
+				</div>
+				<div style="text-align:left;display:flex;gap:8px;align-items:center">
+					<button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
+					<a href="#quiz" style="background:#fff;color:var(--accent);padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600">ابدأ الاختبار</a>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="layout container">
+		<aside id="sidebar" class="sidebar" aria-label="القائمة الجانبية">
+			<h3 style="margin-top:0">القائمة</h3>
+			<nav>
+				<ul style="list-style:none;padding:0;margin:12px 0;line-height:2">
+					<li><a href="#lessons">الدروس</a></li>
+					<li><a href="#examples">أمثلة</a></li>
+					<li><a href="#quiz">اختبار سريع</a></li>
+					<li><a href="#">عن الموقع</a></li>
+				</ul>
+			</nav>
+		</aside>
+		<div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
+		<main class="content" role="main">
+			<section id="lessons" class="card" style="margin-top:-40px">
+			<h2>مقدمة سريعة</h2>
+			<p>هذه صفحة تعليمية بسيطة باللغة العربية تعرض: دروس موجزة، أمثلة تنفيذية، واختبار تفاعلي قصير. يمكنك تعديل المحتوى أو إضافة دروس جديدة بسهولة.</p>
+		</section>
+
+		<section class="grid" aria-label="الدروس">
+			<article class="card">
+				<h3>درس 1 — الفكرة الأساسية</h3>
+				<p>شرح مختصر عن الفكرة مع نقاط رئيسية سهلة القراءة.</p>
+			</article>
+			<article class="card">
+				<h3>درس 2 — خطوات عملية</h3>
+				<p>خطوات قابلة للتطبيق ومثال سريع لتوضيح الفكرة.</p>
+			</article>
+			<article class="card">
+				<h3>درس 3 — نصائح وممارسات</h3>
+				<p>نصائح مهمة لتجنب الأخطاء الشائعة وتحسين الفهم.</p>
+			</article>
+		</section>
+
+		<section id="examples" class="card example" style="margin-top:12px">
+			<h2>أمثلة</h2>
+			<p>مثال شفرة صغير يوضح كيفية عرض رسالة في الصفحة:</p>
+			<pre>&lt;button id="sayHello"&gt;اضغط هنا&lt;/button&gt;
+&lt;script&gt;
+document.getElementById('sayHello').addEventListener('click',()=>alert('مرحبًا!'))
+&lt;/script&gt;
+			</pre>
+		</section>
+
+		<section id="quiz" class="card quiz" style="margin-top:12px">
+			<h2>اختبار سريع</h2>
+			<p>اختر الإجابة الصحيحة من بين الخيارات التالية:</p>
+			<div id="question">ما هي خاصية HTML المسؤولة عن اتجاه النص من اليمين إلى اليسار؟</div>
+			<div style="margin:12px 0">
+				<label><input type="radio" name="q1" value="a"> &nbsp; `dir`</label><br>
+				<label><input type="radio" name="q1" value="b"> &nbsp; `lang`</label><br>
+				<label><input type="radio" name="q1" value="c"> &nbsp; `charset`</label>
+			</div>
+			<div style="display:flex;gap:8px;align-items:center">
+				<button id="submitBtn">تحقق</button>
+				<div id="result" aria-live="polite" style="font-weight:600"></div>
+			</div>
+		</section>
+		</main>
+	</div>
+
+	<footer>
+		<div class="container">
+			<small>صُمِّمت لأغراض تعليمية — يمكنك التعديل والانتشار.</small>
+		</div>
+	</footer>
+
+	<script>
+		document.getElementById('submitBtn').addEventListener('click',function(){
+			const sel = document.querySelector('input[name="q1"]:checked');
+			const out = document.getElementById('result');
+			if(!sel){ out.textContent = 'اختر إجابة أولًا.'; out.style.color='#b45309'; return }
+			if(sel.value === 'a'){ out.textContent='صحيح! الخاصية هي `dir`.'; out.style.color='#065f46' }
+			else{ out.textContent='خطأ — حاول مرة أخرى.'; out.style.color='#b91c1c' }
+		});
+
+		// Sidebar toggle behavior
+		(function(){
+			const menuBtn = document.getElementById('menuBtn');
+			const sidebar = document.getElementById('sidebar');
+			const overlay = document.getElementById('overlay');
+			if(!menuBtn || !sidebar || !overlay) return;
+			function openSidebar(){ sidebar.classList.add('open'); overlay.classList.add('show'); sidebar.setAttribute('aria-hidden','false'); overlay.setAttribute('aria-hidden','false') }
+			function closeSidebar(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); sidebar.setAttribute('aria-hidden','true'); overlay.setAttribute('aria-hidden','true') }
+			menuBtn.addEventListener('click',function(e){
+				if(sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
+			});
+			overlay.addEventListener('click',closeSidebar);
+			// close on Escape
+			document.addEventListener('keydown',function(e){ if(e.key === 'Escape') closeSidebar(); });
+		})();
+	</script>
+</body>
+</html>

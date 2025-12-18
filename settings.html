@@ -33,7 +33,8 @@
 		<header>
 			<div class="container">
 				<button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
-				<h2 style="margin:0;display:inline-block;margin-right:10px;">الإعدادات</h2>
+				<button id="langToggle" class="lang-toggle" style="margin-left:8px;padding:6px 8px;border-radius:6px;border:none;cursor:pointer">EN</button>
+				<h2 data-i18n="page_title_settings" style="margin:0;display:inline-block;margin-right:10px;">الإعدادات</h2>
 			</div>
 		</header>
 		<aside id="sidebar" class="sidebar" aria-label="القائمة الجانبية" aria-hidden="true">
@@ -50,7 +51,7 @@
 		<div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
 		<main class="container" role="main">
 			<section class="card">
-				<h3>الإعدادات العامة</h3>
+				<h3 data-i18n="page_title_settings">الإعدادات العامة</h3>
 				<p class="text-muted">ضبط تفضيلات الحساب والمظهر.</p>
 				<form id="settingsForm" onsubmit="return false;">
 					<div class="form-row">
@@ -88,6 +89,7 @@
 				<div class="footer">الإعدادات تُحفظ محليًا في هذا المثال (localStorage).</div>
 			</section>
 		</main>
+		<script src="lang.js"></script>
 		<script>
 			// load/save to localStorage
 			const form = document.getElementById('settingsForm');

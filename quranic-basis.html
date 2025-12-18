@@ -179,6 +179,21 @@
       text-decoration: none;
     }
 
+    /* Action button used on some pages */
+    .action-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s;
+      display: inline-block;
+      text-decoration: none;
+    }
+
     .download-btn:hover, .test-btn:hover {
       background-color: #a01552;
       transform: translateY(-2px);
@@ -297,7 +312,8 @@
 <body>
   <header>
     <button id="menuBtn">☰</button>
-    <h1>القاعدة النورانية</h1>
+    <button id="langToggle" class="lang-toggle" style="margin-left:8px;padding:6px 8px;border-radius:6px;border:none;cursor:pointer">EN</button>
+    <h1 data-i18n="page_title_quranic">القاعدة النورانية</h1>
   </header>
 
   <main>
@@ -389,10 +405,12 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 منصة التعليم العربية. جميع الحقوق محفوظة.</p>
+    <p data-i18n="footer_copyright">&copy; 2025 منصة التعليم العربية. جميع الحقوق محفوظة.</p>
   </footer>
 
   <button id="backToTop" title="العودة للأعلى">↑</button>
+
+  <script src="lang.js"></script>
 
   <aside id="sidebar">
     <nav>
@@ -412,24 +430,24 @@
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
 
-    function open() {
+    function openSidebar() {
       sidebar.classList.add('open');
       overlay.classList.add('open');
     }
 
-    function close() {
+    function closeSidebar() {
       sidebar.classList.remove('open');
       overlay.classList.remove('open');
     }
 
-    menuBtn.addEventListener('click', open);
-    overlay.addEventListener('click', close);
+    menuBtn.addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') closeSidebar();
     });
 
     sidebar.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', close);
+      link.addEventListener('click', closeSidebar);
     });
 
     // بيانات الدروس مع روابط YouTube
@@ -461,7 +479,7 @@
       }
       
       document.getElementById('videoTitle').textContent = lesson.title;
-      document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${lesson.videoId}?list=PLDGSJOlM3XL8aPMnm4riNMab33Jnra0hz&start=${lessonNumber - 1}`;
+      document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${lesson.videoId}?list=PLDGSJOlM3XL8aPMnm4riNMab33Jnra0hz`;
       document.getElementById('videoDescription').textContent = `شاهد هذا الدرس من القاعدة النورانية (الدرس ${lessonNumber}) وتعلم أحكام التجويد الأساسية. كل درس يحتوي على شرح مفصل مع أمثلة عملية.`;
       
       document.getElementById('videoModal').style.display = 'block';

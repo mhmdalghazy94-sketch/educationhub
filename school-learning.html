@@ -37,7 +37,8 @@
   <header>
     <div class="container">
       <button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
-      <h2 style="margin:0;display:inline-block;margin-right:10px;">مسار التعليم المدرسي</h2>
+      <button id="langToggle" class="lang-toggle" style="margin-left:8px;padding:6px 8px;border-radius:6px;border:none;cursor:pointer">EN</button>
+      <h2 data-i18n="page_title_school_learning" style="margin:0;display:inline-block;margin-right:10px;">مسار التعليم المدرسي</h2>
     </div>
   </header>
 
@@ -56,7 +57,7 @@
 
   <main class="container">
     <section class="card">
-      <h1>التعليم المدرسي — خطة مفصّلة</h1>
+      <h1 data-i18n="page_title_school_learning">التعليم المدرسي — خطة مفصّلة</h1>
       <p class="lead">خطة مركّزة على المناهج الرسمية، تنظيم الوقت، وأساليب المذاكرة الفعّالة.</p>
       <h2>أهداف المسار</h2>
       <ul>
@@ -105,17 +106,19 @@
     </section>
   </main>
 
+  <script src="lang.js"></script>
+
   <script>
     (function(){
       const menuBtn = document.getElementById('menuBtn');
       const sidebar = document.getElementById('sidebar');
       const overlay = document.getElementById('overlay');
       if(!menuBtn||!sidebar||!overlay) return;
-      function open(){sidebar.classList.add('open');overlay.classList.add('show');sidebar.setAttribute('aria-hidden','false')}
-      function close(){sidebar.classList.remove('open');overlay.classList.remove('show');sidebar.setAttribute('aria-hidden','true')}
-      menuBtn.addEventListener('click',()=>{ if(sidebar.classList.contains('open')) close(); else open(); });
-      overlay.addEventListener('click',close);
-      document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+      function openSidebar(){sidebar.classList.add('open');overlay.classList.add('show');sidebar.setAttribute('aria-hidden','false')}
+      function closeSidebar(){sidebar.classList.remove('open');overlay.classList.remove('show');sidebar.setAttribute('aria-hidden','true')}
+      menuBtn.addEventListener('click',()=>{ if(sidebar.classList.contains('open')) closeSidebar(); else openSidebar(); });
+      overlay.addEventListener('click',closeSidebar);
+      document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSidebar(); });
     })();
   </script>
 </body>

@@ -103,18 +103,19 @@
 	<header>
 		<div class="header-inner">
 			<button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
-			<div class="logo"><span class="mark" aria-hidden="true"></span><span>EduSite</span></div>
+			<button id="langToggle" class="lang-toggle" style="margin-left:8px;padding:6px 8px;border-radius:6px;border:none;cursor:pointer">EN</button>
+				<div class="logo"><span class="mark" aria-hidden="true"></span><span data-i18n="page_title_index">EduSite</span></div>
 			<div style="display:flex;align-items:center;gap:10px">
 				<div class="nav">
-					<a href="#lessons">الدروس</a>
-					<a href="#examples">أمثلة</a>
-					<a href="#quiz">اختبار سريع</a>
-					<a href="developer.html">مطور الموقع</a>
+					<a href="#lessons" data-i18n="nav_lessons">الدروس</a>
+					<a href="#examples" data-i18n="nav_examples">أمثلة</a>
+					<a href="#quiz" data-i18n="nav_quiz">اختبار سريع</a>
+					<a href="developer.html" data-i18n="nav_developer">مطور الموقع</a>
 				</div>
-				<div class="search" role="search" aria-label="بحث">
+								<div class="search" role="search" aria-label="بحث">
 					<input type="search" placeholder="ابحث عن درس أو مثال">
 				</div>
-				<a href="settings.html" class="nav cta">⚙️ إعدادات</a>
+				<a href="settings.html" class="nav cta" data-i18n="nav_settings">⚙️ إعدادات</a>
 			</div>
 		</div>
 		<div class="hero-wrap">
@@ -150,7 +151,7 @@
 		<div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
 		<main class="content" role="main">
 			<section id="lessons" class="card" style="margin-top:-40px">
-			<h2>مقدمة سريعة</h2>
+			<h2 data-i18n="page_title_index">مقدمة سريعة</h2>
 			<p>هذه صفحة تعليمية بسيطة باللغة العربية تعرض: دروس موجزة، أمثلة تنفيذية، واختبار تفاعلي قصير. يمكنك تعديل المحتوى أو إضافة دروس جديدة بسهولة.</p>
 		</section>
 
@@ -210,7 +211,7 @@
 			</div>
 
 		<section id="examples" class="card example" style="margin-top:12px">
-			<h2>أمثلة</h2>
+			<h2 data-i18n="nav_examples">أمثلة</h2>
 			<p>مثال شفرة صغير يوضح كيفية عرض رسالة في الصفحة:</p>
 			<pre>&lt;button id="sayHello"&gt;اضغط هنا&lt;/button&gt;
 &lt;script&gt;
@@ -220,7 +221,7 @@ document.getElementById('sayHello').addEventListener('click',()=>alert('مرحب
 		</section>
 
 		<section id="quiz" class="card quiz" style="margin-top:12px">
-			<h2>اختبار سريع</h2>
+			<h2 data-i18n="nav_quiz">اختبار سريع</h2>
 			<p>اختر الإجابة الصحيحة من بين الخيارات التالية:</p>
 			<div id="question">ما هي خاصية HTML المسؤولة عن اتجاه النص من اليمين إلى اليسار؟</div>
 			<div style="margin:12px 0">
@@ -260,10 +261,11 @@ document.getElementById('sayHello').addEventListener('click',()=>alert('مرحب
 
 	<footer>
 		<div class="container">
-			<small>صُمِّمت لأغراض تعليمية — يمكنك التعديل والانتشار.</small>
+			<small data-i18n="footer_copyright">صُمِّمت لأغراض تعليمية — يمكنك التعديل والانتشار.</small>
 		</div>
 	</footer>
-	<button id="backToTop" title="العودة للأعلى">↑</button>
+	<button id="backToTop" data-i18n-title="back_to_top" title="العودة للأعلى">↑</button>
+	<script src="lang.js"></script>
 	<script>
 		document.getElementById('submitBtn').addEventListener('click',function(){
 			const sel = document.querySelector('input[name="q1"]:checked');

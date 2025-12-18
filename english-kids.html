@@ -323,7 +323,8 @@
 <body>
   <header>
     <button id="menuBtn">☰</button>
-    <h1>الإنجليزية للأطفال</h1>
+    <button id="langToggle" class="lang-toggle" style="margin-left:8px;padding:6px 8px;border-radius:6px;border:none;cursor:pointer">EN</button>
+    <h1 data-i18n="page_title_english_kids">الإنجليزية للأطفال</h1>
   </header>
 
   <main>
@@ -432,28 +433,30 @@
   <div id="overlay"></div>
 
   <script>
+    // language loader
+    (function(){ var s=document.createElement('script'); s.src='lang.js'; document.body.appendChild(s); })();
     const menuBtn = document.getElementById('menuBtn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
 
-    function open() {
+    function openSidebar() {
       sidebar.classList.add('open');
       overlay.classList.add('open');
     }
 
-    function close() {
+    function closeSidebar() {
       sidebar.classList.remove('open');
       overlay.classList.remove('open');
     }
 
-    menuBtn.addEventListener('click', open);
-    overlay.addEventListener('click', close);
+    menuBtn.addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') closeSidebar();
     });
 
     sidebar.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', close);
+      link.addEventListener('click', closeSidebar);
     });
 
     // بيانات الدروس

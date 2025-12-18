@@ -236,7 +236,8 @@
 <body>
   <header>
     <button id="menuBtn">☰</button>
-    <h1>الروضة</h1>
+    <button id="langToggle" class="lang-toggle" style="margin-left:8px;padding:6px 8px;border-radius:6px;border:none;cursor:pointer">EN</button>
+    <h1 data-i18n="page_title_kindergarten">الروضة</h1>
   </header>
 
   <main>
@@ -261,7 +262,6 @@
               <span>(1.2K)</span>
             </div>
           </div>
-        </a>
         </a>
         <a href="english-kids.html" style="text-decoration: none; color: inherit;">
           <div class="subject-card">
@@ -295,6 +295,8 @@
 
   <button id="backToTop" title="العودة للأعلى">↑</button>
 
+  <script src="lang.js"></script>
+
   <aside id="sidebar">
     <nav>
       <a href="index.html">الصفحة الرئيسية</a>
@@ -313,25 +315,25 @@
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
 
-    function open() {
+    function openSidebar() {
       sidebar.classList.add('open');
       overlay.classList.add('open');
     }
 
-    function close() {
+    function closeSidebar() {
       sidebar.classList.remove('open');
       overlay.classList.remove('open');
     }
 
-    menuBtn.addEventListener('click', open);
-    overlay.addEventListener('click', close);
+    menuBtn.addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') closeSidebar();
     });
 
     // Close sidebar when clicking a nav link
     sidebar.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', close);
+      link.addEventListener('click', closeSidebar);
     });
 
     // Back to top button

@@ -435,34 +435,34 @@
     // بيانات الدروس مع روابط YouTube
     const lessons = {
       1: { title: 'الدرس 1: الحروف الهجائية الأساسية', videoId: 'wO2DRVC-g9w' },
-      2: { title: 'الدرس 2: الحركات', videoId: null },
-      3: { title: 'الدرس 3: السكون والتشديد', videoId: null },
-      4: { title: 'الدرس 4: الهمزة', videoId: null },
-      5: { title: 'الدرس 5: الألف الممدودة والمقصورة', videoId: null },
-      6: { title: 'الدرس 6: الراء والغنة', videoId: null },
-      7: { title: 'الدرس 7: الميم الساكنة', videoId: null },
-      8: { title: 'الدرس 8: النون الساكنة والتنوين', videoId: null },
-      9: { title: 'الدرس 9: المدود', videoId: null },
-      10: { title: 'الدرس 10: أحكام اللام الساكنة', videoId: null },
-      11: { title: 'الدرس 11: الإدغام', videoId: null },
-      12: { title: 'الدرس 12: القلب', videoId: null },
-      13: { title: 'الدرس 13: الإخفاء', videoId: null },
-      14: { title: 'الدرس 14: أحكام النون الساكنة والتنوين', videoId: null },
-      15: { title: 'الدرس 15: الفواصل والوقف', videoId: null },
-      16: { title: 'الدرس 16: تطبيقات عملية', videoId: null },
-      17: { title: 'الدرس 17: مراجعة شاملة', videoId: null }
+      2: { title: 'الدرس 2: الحركات', videoId: 'wO2DRVC-g9w' },
+      3: { title: 'الدرس 3: السكون والتشديد', videoId: 'wO2DRVC-g9w' },
+      4: { title: 'الدرس 4: الهمزة', videoId: 'wO2DRVC-g9w' },
+      5: { title: 'الدرس 5: الألف الممدودة والمقصورة', videoId: 'wO2DRVC-g9w' },
+      6: { title: 'الدرس 6: الراء والغنة', videoId: 'wO2DRVC-g9w' },
+      7: { title: 'الدرس 7: الميم الساكنة', videoId: 'wO2DRVC-g9w' },
+      8: { title: 'الدرس 8: النون الساكنة والتنوين', videoId: 'wO2DRVC-g9w' },
+      9: { title: 'الدرس 9: المدود', videoId: 'wO2DRVC-g9w' },
+      10: { title: 'الدرس 10: أحكام اللام الساكنة', videoId: 'wO2DRVC-g9w' },
+      11: { title: 'الدرس 11: الإدغام', videoId: 'wO2DRVC-g9w' },
+      12: { title: 'الدرس 12: القلب', videoId: 'wO2DRVC-g9w' },
+      13: { title: 'الدرس 13: الإخفاء', videoId: 'wO2DRVC-g9w' },
+      14: { title: 'الدرس 14: أحكام النون الساكنة والتنوين', videoId: 'wO2DRVC-g9w' },
+      15: { title: 'الدرس 15: الفواصل والوقف', videoId: 'wO2DRVC-g9w' },
+      16: { title: 'الدرس 16: تطبيقات عملية', videoId: 'wO2DRVC-g9w' },
+      17: { title: 'الدرس 17: مراجعة شاملة', videoId: 'wO2DRVC-g9w' }
     };
 
     function playLesson(lessonNumber) {
       const lesson = lessons[lessonNumber];
       if (!lesson || !lesson.videoId) {
-        alert(`الدرس ${lessonNumber} قريباً!\n\nسيتم إضافة الفيديو قريباً.`);
+        alert(`الدرس ${lessonNumber} قريباً!`);
         return;
       }
       
       document.getElementById('videoTitle').textContent = lesson.title;
-      document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${lesson.videoId}?list=PLDGSJOlM3XL8aPMnm4riNMab33Jnra0hz`;
-      document.getElementById('videoDescription').textContent = `شاهد هذا الدرس من القاعدة النورانية وتعلم أحكام التجويد الأساسية.`;
+      document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${lesson.videoId}?list=PLDGSJOlM3XL8aPMnm4riNMab33Jnra0hz&start=${lessonNumber - 1}`;
+      document.getElementById('videoDescription').textContent = `شاهد هذا الدرس من القاعدة النورانية (الدرس ${lessonNumber}) وتعلم أحكام التجويد الأساسية. كل درس يحتوي على شرح مفصل مع أمثلة عملية.`;
       
       document.getElementById('videoModal').style.display = 'block';
       window.scrollTo(0, document.getElementById('videoModal').offsetTop - 50);

@@ -9,38 +9,45 @@
     *{box-sizing:border-box}
     body{font-family:Inter,Segoe UI,Roboto,Tahoma,Arial;margin:0;background:var(--bg);color:#071126}
     header{background:linear-gradient(90deg,var(--accent),#36b3ff);color:#fff;padding:8px 12px;position:sticky;top:0}
+    header .container{max-width:1000px;margin:0 auto;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
     .container{max-width:1000px;margin:12px auto;padding:0 12px}
     .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.03)}
     h1,h2{margin:0 0 8px}
+    header h2{margin:0;flex:1;text-align:right;font-size:18px}
     .lead{color:var(--muted);margin-bottom:12px}
     .resource{background:#f9fafb;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,.03)}
     .back{display:inline-block;margin-top:12px;background:transparent;border:1px solid rgba(15,23,42,.06);padding:8px 12px;border-radius:8px;text-decoration:none;color:#071126}
 
     /* Stages cards */
-    .stages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px}
+    .stages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px;align-items:stretch}
     .stage-card{background:#fff;padding:10px;border-radius:10px;box-shadow:0 8px 20px rgba(2,8,23,0.04);border:1px solid rgba(7,32,42,0.03);text-align:center;transition:all 0.3s}
     .stage-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(30,144,255,0.15)}
-    .stage-card .thumb{width:100%;height:110px;display:block;border-radius:8px;object-fit:cover;background:linear-gradient(135deg,#e6f0ff,#f3f7ff)}
+    .stage-card .thumb{width:100%;aspect-ratio:16/9;height:auto;display:block;border-radius:8px;object-fit:cover;background:linear-gradient(135deg,#e6f0ff,#f3f7ff)}
     .stage-card h3{margin:10px 0 6px;font-size:16px;color:var(--accent)}
+    .stage-card .desc{font-size:13px;color:var(--muted);margin:6px 8px}
     .stage-card a{display:inline-block;margin-top:6px;background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;text-decoration:none;transition:all 0.3s}
     .stage-card a:hover{background:#1a80f0;transform:translateY(-2px)}
     /* sidebar */
     .menu-btn{background:transparent;border:0;color:#071126;font-size:20px;padding:6px;display:inline-block}
-    .sidebar{position:fixed;top:0;left:0;height:100%;width:260px;background:var(--card);box-shadow:2px 0 20px rgba(16,24,40,.08);transform:translateX(-110%);transition:transform .25s ease;z-index:60;padding:80px 16px 16px}
+    /* RTL-friendly sidebar: hidden to the right on small screens */
+    .sidebar{position:fixed;top:0;right:0;left:auto;height:100%;width:260px;background:var(--card);box-shadow:-2px 0 20px rgba(16,24,40,.08);transform:translateX(110%);transition:transform .25s ease;z-index:60;padding:80px 16px 16px}
     .sidebar.open{transform:translateX(0)}
     .overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
     .overlay.show{opacity:1;pointer-events:auto}
-    @media(min-width:800px){.sidebar{position:relative;transform:none;padding:24px}} 
+    @media(min-width:800px){.sidebar{position:relative;transform:none;padding:24px;right:auto;left:0}} 
+    @media(max-width:480px){
+      header h2{font-size:16px;text-align:right}
+      .stage-card h3{font-size:14px}
+      .stage-card .thumb{aspect-ratio:4/3}
+      .stage-card a{padding:6px 8px}
+    }
+    @media(min-width:481px) and (max-width:799px){
+      .stages-grid{grid-template-columns:repeat(2,1fr)}
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
-      <button id="langToggle" class="lang-toggle" style="margin-left:8px;padding:6px 8px;border-radius:6px;border:none;cursor:pointer">EN</button>
-      <h2 data-i18n="page_title_school_learning" style="margin:0;display:inline-block;margin-right:10px;">مسار التعليم المدرسي</h2>
-    </div>
-  </header>
+  <div class="site-header" data-include="header.html"></div>
 
   <aside id="sidebar" class="sidebar" aria-label="القائمة الجانبية" aria-hidden="true">
     <h3 style="margin-top:0">القائمة</h3>
@@ -78,27 +85,38 @@
         <div class="stage-card">
           <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='100%' height='100%' fill='%23ffe6f0'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='26' fill='%23be185d' font-family='Arial'>الروضة</text></svg>" alt="الروضة">
           <h3>الروضة</h3>
+          <p class="desc">مرحلة الطفولة المبكرة (الروضة): مرحلة تمهيدية تسبق التعليم الإلزامي، تركز على التهيئة النفسية والاجتماعية وتنمية المهارات الأساسية اللعبية.</p>
           <a href="kindergarten.html">فتح</a>
         </div>
         <div class="stage-card">
           <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='100%' height='100%' fill='%23e6f0ff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='26' fill='%234b22b8' font-family='Arial'>الابتدائي</text></svg>" alt="المرحلة الابتدائية">
           <h3>المرحلة الابتدائية</h3>
+          <p class="desc">المرحلة الابتدائية: القاعدة الأساسية للتعليم (عادةً 6 سنوات) حيث يتعلم الطالب القراءة، الكتابة، والحساب والمفاهيم الأساسية.</p>
           <a href="#">فتح</a>
         </div>
         <div class="stage-card">
           <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='100%' height='100%' fill='%23fff4e6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='26' fill='%23b45309' font-family='Arial'>المتوسطة</text></svg>" alt="المرحلة المتوسطة">
           <h3>المرحلة المتوسطة</h3>
+          <p class="desc">المرحلة المتوسطة (الإعدادية): تلي الابتدائية (عادة 3 سنوات)، وتزداد التخصصية في المواد مثل العلوم والرياضيات واللغة.</p>
           <a href="#">فتح</a>
         </div>
         <div class="stage-card">
           <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='100%' height='100%' fill='%23e8fff3'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='26' fill='%230965f4' font-family='Arial'>الثانوية</text></svg>" alt="المرحلة الثانوية">
           <h3>المرحلة الثانوية</h3>
+          <p class="desc">المرحلة الثانوية: المرحلة الختامية للتعليم العام (عادة 3 سنوات) حيث يختار الطالب مساراً يؤهله للجامعة أو لسوق العمل.</p>
           <a href="#">فتح</a>
         </div>
         <div class="stage-card">
           <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='100%' height='100%' fill='%23f0e6ff'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='26' fill='%237c3aed' font-family='Arial'>الجامعي</text></svg>" alt="المرحلة الجامعية">
           <h3>المرحلة الجامعية</h3>
+          <p class="desc">المرحلة الجامعية (البكالوريوس): التعليم العالي الأولي حيث يتخصص الطالب في مجال معين للحصول على درجة تؤهله مهنياً.</p>
           <a href="#">فتح</a>
+        </div>
+        <div class="stage-card">
+          <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='260'><rect width='100%' height='100%' fill='%23fff0f6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='22' fill='%23c026d3' font-family='Arial'>الدراسات العليا</text></svg>" alt="مرحلة الدراسات العليا">
+          <h3>مرحلة الدراسات العليا</h3>
+          <p class="desc">مرحلة الدراسات العليا: تشمل الماجستير والدكتوراه، وهي مراحل اختيارية للتخصص الدقيق والبحث العلمي الأكاديمي.</p>
+          <a href="graduate.html">فتح</a>
         </div>
       </div>
 
@@ -106,20 +124,24 @@
     </section>
   </main>
 
+  <script src="include.js"></script>
   <script src="lang.js"></script>
 
   <script>
-    (function(){
+    function initSidebar(){
       const menuBtn = document.getElementById('menuBtn');
       const sidebar = document.getElementById('sidebar');
       const overlay = document.getElementById('overlay');
       if(!menuBtn||!sidebar||!overlay) return;
-      function openSidebar(){sidebar.classList.add('open');overlay.classList.add('show');sidebar.setAttribute('aria-hidden','false')}
-      function closeSidebar(){sidebar.classList.remove('open');overlay.classList.remove('show');sidebar.setAttribute('aria-hidden','true')}
+      function openSidebar(){sidebar.classList.add('open');overlay.classList.add('show');sidebar.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true')}
+      function closeSidebar(){sidebar.classList.remove('open');overlay.classList.remove('show');sidebar.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false')}
       menuBtn.addEventListener('click',()=>{ if(sidebar.classList.contains('open')) closeSidebar(); else openSidebar(); });
       overlay.addEventListener('click',closeSidebar);
       document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSidebar(); });
-    })();
+      sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',function(){ if(window.innerWidth<800) closeSidebar(); }))
+    }
+    document.addEventListener('DOMContentLoaded', initSidebar);
+    document.addEventListener('includeLoaded', initSidebar);
   </script>
 </body>
 </html>

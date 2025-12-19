@@ -3,7 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>EduSite — الصفحة الرئيسية</title>
+		<title>EduSite — الصفحة الرئيسية</title>
+		<meta name="description" content="منصة تعليمية عربية: دروس، أمثلة، اختبارات قصيرة ومسارات تعلم منظمة.">
+		<meta name="robots" content="index,follow">
 	<style>
 		:root{
 			--primary:#6a2bd8;
@@ -86,38 +88,22 @@
 		/* Sidebar layout */
 		.menu-btn{background:transparent;border:0;color:#07202a;font-size:20px;padding:6px;display:inline-block;transition:all 0.3s}
 		.menu-btn:hover{transform:scale(1.2);color:var(--primary)}
-		.sidebar{position:fixed;top:0;left:0;height:100%;width:260px;background:var(--card);box-shadow:2px 0 20px rgba(16,24,40,.08);transform:translateX(-110%);transition:transform .25s ease;z-index:60;padding:80px 16px 16px}
+		/* RTL: sidebar slides from the right on small screens */
+		.sidebar{position:fixed;top:0;right:0;left:auto;height:100%;width:260px;background:var(--card);box-shadow:-2px 0 20px rgba(16,24,40,.08);transform:translateX(110%);transition:transform .25s ease;z-index:60;padding:80px 16px 16px}
 		.sidebar.open{transform:translateX(0)}
 		.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
 		.overlay.show{opacity:1;pointer-events:auto}
 		.layout{display:block}
 		@media (min-width:800px){
 			.layout{display:grid;grid-template-columns:260px 1fr;gap:20px}
-			.sidebar{position:relative;transform:none;box-shadow:none;padding:24px;top:auto;height:auto;width:auto}
+			.sidebar{position:relative;transform:none;box-shadow:none;padding:24px;top:auto;height:auto;width:auto;right:auto;left:0}
 			.overlay{display:none}
 			.menu-btn{display:none}
 		}
 	</style>
 </head>
 <body>
-	<header>
-		<div class="header-inner">
-			<button id="menuBtn" class="menu-btn" aria-label="قائمة">☰</button>
-			<button id="langToggle" class="lang-toggle" style="margin-left:8px;padding:6px 8px;border-radius:6px;border:none;cursor:pointer">EN</button>
-				<div class="logo"><span class="mark" aria-hidden="true"></span><span data-i18n="page_title_index">EduSite</span></div>
-			<div style="display:flex;align-items:center;gap:10px">
-				<div class="nav">
-					<a href="#lessons" data-i18n="nav_lessons">الدروس</a>
-					<a href="#examples" data-i18n="nav_examples">أمثلة</a>
-					<a href="#quiz" data-i18n="nav_quiz">اختبار سريع</a>
-					<a href="developer.html" data-i18n="nav_developer">مطور الموقع</a>
-				</div>
-								<div class="search" role="search" aria-label="بحث">
-					<input type="search" placeholder="ابحث عن درس أو مثال">
-				</div>
-				<a href="settings.html" class="nav cta" data-i18n="nav_settings">⚙️ إعدادات</a>
-			</div>
-		</div>
+	<div class="site-header" data-include="header.html"></div>
 		<div class="hero-wrap">
 			<section class="hero">
 				<h1>ابدأ رحلتك التعليمية</h1>
@@ -265,61 +251,63 @@ document.getElementById('sayHello').addEventListener('click',()=>alert('مرحب
 		</div>
 	</footer>
 	<button id="backToTop" data-i18n-title="back_to_top" title="العودة للأعلى">↑</button>
+	<script src="include.js"></script>
 	<script src="lang.js"></script>
 	<script>
-		document.getElementById('submitBtn').addEventListener('click',function(){
-			const sel = document.querySelector('input[name="q1"]:checked');
-			const out = document.getElementById('result');
-			if(!sel){ out.textContent = 'اختر إجابة أولًا.'; out.style.color='#b45309'; return }
-			if(sel.value === 'a'){ out.textContent='صحيح! الخاصية هي `dir`.'; out.style.color='#065f46' }
-			else{ out.textContent='خطأ — حاول مرة أخرى.'; out.style.color='#b91c1c' }
-		});
+	// Quiz handler (safe attach)
+	function initQuiz(){
+	  const submit = document.getElementById('submitBtn');
+	  if(!submit) return;
+	  submit.addEventListener('click', function(){
+	    const sel = document.querySelector('input[name="q1"]:checked');
+	    const out = document.getElementById('result');
+	    if(!sel){ out.textContent = 'اختر إجابة أولًا.'; out.style.color='#b45309'; return }
+	    if(sel.value === 'a'){ out.textContent='صحيح! الخاصية هي `dir`.'; out.style.color='#065f46' }
+	    else{ out.textContent='خطأ — حاول مرة أخرى.'; out.style.color='#b91c1c' }
+	  });
+	}
 
-		// Back to top button
-		window.addEventListener('scroll', () => {
-			const backToTop = document.getElementById('backToTop');
-			if (window.pageYOffset > 300) {
-				backToTop.classList.add('show');
-			} else {
-				backToTop.classList.remove('show');
-			}
-		});
+	// Back to top
+	function initBackToTop(){
+	  const backToTop = document.getElementById('backToTop');
+	  if(!backToTop) return;
+	  window.addEventListener('scroll', () => {
+	    if (window.pageYOffset > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show');
+	  });
+	  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+	}
 
-		document.getElementById('backToTop').addEventListener('click', () => {
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		});
+	// Search attach (depends on header include)
+	function attachSearch(){
+	  const input = document.querySelector('.search input');
+	  if(!input) return;
+	  input.addEventListener('input', function(e){
+	    const query = e.target.value.toLowerCase();
+	    const cards = document.querySelectorAll('.grid .card');
+	    cards.forEach(card => { const text = card.textContent.toLowerCase(); card.style.display = text.includes(query) ? 'block' : 'none'; });
+	  });
+	}
 
-		// Search functionality
-		document.querySelector('.search input').addEventListener('input', function(e) {
-			const query = e.target.value.toLowerCase();
-			const cards = document.querySelectorAll('.grid .card');
-			cards.forEach(card => {
-				const text = card.textContent.toLowerCase();
-				card.style.display = text.includes(query) ? 'block' : 'none';
-			});
-		});
+	// Sidebar init (depends on header include)
+	function initSidebar(){
+	  const menuBtn = document.getElementById('menuBtn');
+	  const sidebar = document.getElementById('sidebar');
+	  const overlay = document.getElementById('overlay');
+	  if(!menuBtn || !sidebar || !overlay) return;
+	  function openSidebar(){ sidebar.classList.add('open'); overlay.classList.add('show'); sidebar.setAttribute('aria-hidden','false'); overlay.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true') }
+	  function closeSidebar(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); sidebar.setAttribute('aria-hidden','true'); overlay.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false') }
+	  menuBtn.addEventListener('click',function(e){ if(sidebar.classList.contains('open')) closeSidebar(); else openSidebar(); });
+	  overlay.addEventListener('click',closeSidebar);
+	  document.addEventListener('keydown',function(e){ if(e.key === 'Escape') closeSidebar(); });
+	  sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',function(){ if(window.innerWidth<980) closeSidebar(); }));
+	  function setActiveFromHash(){ const hash = location.hash || '#lessons'; sidebar.querySelectorAll('a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===hash)); }
+	  window.addEventListener('hashchange', setActiveFromHash);
+	  setActiveFromHash();
+	}
 
-		// Sidebar toggle behavior
-		(function(){
-			const menuBtn = document.getElementById('menuBtn');
-			const sidebar = document.getElementById('sidebar');
-			const overlay = document.getElementById('overlay');
-			if(!menuBtn || !sidebar || !overlay) return;
-			function openSidebar(){ sidebar.classList.add('open'); overlay.classList.add('show'); sidebar.setAttribute('aria-hidden','false'); overlay.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true') }
-			function closeSidebar(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); sidebar.setAttribute('aria-hidden','true'); overlay.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false') }
-			menuBtn.addEventListener('click',function(e){
-				if(sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
-			});
-			overlay.addEventListener('click',closeSidebar);
-			document.addEventListener('keydown',function(e){ if(e.key === 'Escape') closeSidebar(); });
-			sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',function(){ if(window.innerWidth<980) closeSidebar(); }))
-			function setActiveFromHash(){
-				const hash = location.hash || '#lessons';
-				sidebar.querySelectorAll('a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===hash));
-			}
-			window.addEventListener('hashchange', setActiveFromHash);
-			setActiveFromHash();
-		})();
+	// init on DOMContentLoaded and after includes
+	document.addEventListener('DOMContentLoaded', function(){ initQuiz(); initBackToTop(); initSidebar(); attachSearch(); });
+	document.addEventListener('includeLoaded', function(){ initSidebar(); attachSearch(); });
 	</script>
 </body>
 </html>

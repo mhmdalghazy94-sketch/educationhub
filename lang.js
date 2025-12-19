@@ -95,5 +95,20 @@
     }
   });
 
+  // Re-apply translations after dynamic includes (header/footer) are loaded
+  document.addEventListener('includeLoaded', ()=>{
+    const stored = localStorage.getItem('site_lang') || 'ar';
+    applyLang(stored);
+    // reattach lang toggle handler if header was injected
+    const toggle = document.getElementById('langToggle');
+    if(toggle){
+      toggle.addEventListener('click', ()=>{
+        const cur = document.documentElement.lang || 'ar';
+        const next = (cur === 'ar') ? 'en' : 'ar';
+        applyLang(next);
+      });
+    }
+  });
+
   window.applySiteLang = applyLang;
 })();

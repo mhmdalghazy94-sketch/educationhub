@@ -1,0 +1,17 @@
+/* Styles for kindergarten interactive features */
+:root{--kg-primary:#be185d;--kg-card:#2a2a2a;--kg-accent:#ffe6f0;--kg-text:#fff}
+#kg-features{margin-top:18px}
+.level-box{background-color:var(--kg-card);padding:16px;border-radius:8px;margin-bottom:14px;border-right:4px solid var(--kg-primary)}
+.level-box h3{color:var(--kg-accent);margin-bottom:8px}
+#badgesArea .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+.badge .star{color:#f6c85f;font-size:20px}
+.subject-card{background:var(--kg-accent);color:var(--kg-primary);border-radius:6px;border:none;cursor:pointer}
+#drawCanvas{max-width:100%;height:auto;border-radius:6px}
+#quizArea button{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:#fff;cursor:pointer}
+#songsList audio{display:block;margin-top:8px;width:100%}
+#reportArea{font-size:13px}
+
+@media (max-width:800px){
+  #drawCanvas{width:100%;height:200px}
+  .level-box{padding:12px}
+}

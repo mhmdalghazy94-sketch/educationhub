@@ -234,6 +234,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="kindergarten-features.css">
 </head>
 <body>
   <div class="site-header" data-include="header.html"></div>
@@ -284,6 +285,85 @@
     <div style="background-color: var(--card); padding: 15px; border-radius: 6px; color: var(--muted); text-align: center;">
       <p>الفصل الدراسي الثاني قريباً...</p>
     </div>
+
+    <!-- Interactive Features Start -->
+    <section id="kg-features" style="margin-top:20px">
+      <h2>ميزات تفاعلية لمرحلة الروضة</h2>
+
+      <div class="level-box" id="gamification">
+        <h3>نظام التلعيب (لوحة النجوم والأوسمة)</h3>
+        <p>اجمع النجوم عند إتمام الأنشطة؛ يمكن لولي الأمر رؤية تقرير التقدم.</p>
+        <div id="badgesArea" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"></div>
+        <div style="margin-top:10px">
+          <button id="awardStarBtn" class="subject-card" style="display:inline-block;padding:8px 12px;">منح نجمة</button>
+          <button id="resetBadges" class="subject-card" style="display:inline-block;padding:8px 12px;background:#ffdddd;color:#900;margin-left:8px">إعادة تعيين النجوم</button>
+        </div>
+      </div>
+
+      <div class="level-box" id="drawingBoard">
+        <h3>السبورة التفاعلية</h3>
+        <p>ارسم هنا باستخدام الماوس أو اللمس. اضغط مسح للحذف.</p>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <canvas id="drawCanvas" width="600" height="300" style="border:2px dashed rgba(255,255,255,0.06);border-radius:6px;background:#fff"></canvas>
+          <div>
+            <button id="clearCanvas" class="subject-card" style="padding:6px 10px;">مسح</button>
+            <button id="saveCanvas" class="subject-card" style="padding:6px 10px;">حفظ كصورة</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="level-box" id="ttsBox">
+        <h3>قارئ النصوص الذكي (TTS)</h3>
+        <p>اضغط على أي كلمة أو استخدم الحقل لقراءة نص بصوت مسموع.</p>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <div>
+            <button class="tts-btn subject-card" data-tts="أ" style="padding:8px 10px">أ</button>
+            <button class="tts-btn subject-card" data-tts="ب" style="padding:8px 10px">ب</button>
+            <button class="tts-btn subject-card" data-tts="تفاحة" style="padding:8px 10px">تفاحة</button>
+          </div>
+          <div style="flex:1">
+            <input id="ttsInput" placeholder="اكتب نصاً ثم اضغط تشغيل" style="width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:#fff;color:#000">
+            <div style="margin-top:8px">
+              <button id="speakBtn" class="subject-card" style="padding:6px 10px">تشغيل</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="level-box" id="songsLibrary">
+        <h3>مكتبة الأناشيد التعليمية</h3>
+        <p>يمكن رفع ملفات صوتية أو إضافة روابط لتشغيل أناشيد الأرقام والألوان.</p>
+        <div id="songsList"></div>
+        <div style="margin-top:8px">
+          <input id="songUrl" placeholder="لصق رابط صوتي أو اكتب اسم ملف محلي" style="width:70%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:#fff;color:#000">
+          <button id="addSong" class="subject-card" style="padding:6px 10px">إضافة</button>
+        </div>
+      </div>
+
+      <div class="level-box" id="imageQuiz">
+        <h3>اختبارات الصور (اختيار صورة)</h3>
+        <p>اختر الصورة الصحيحة من بين الخيارات؛ الإجابة الصحيحة تكافئ النجمة!</p>
+        <div id="quizArea" style="display:flex;gap:12px;align-items:center"></div>
+        <div id="quizMsg" style="margin-top:10px;color:var(--accent);"></div>
+      </div>
+
+      <div class="level-box" id="parentsCorner">
+        <h3>ركن أولياء الأمور</h3>
+        <p>نصائح تربوية وتقارير متابعة سريعة.</p>
+        <div id="parentTips" style="margin-bottom:8px">
+          <ul>
+            <li>خصص 10 دقائق يومياً للقراءة معه بتركيز.</li>
+            <li>امدحه عند محاولته ولا تركز على الأخطاء فقط.</li>
+            <li>استخدم الألعاب الحسية لتقوية الحواس.</li>
+          </ul>
+        </div>
+        <div>
+          <button id="downloadReport" class="subject-card" style="padding:6px 10px">تنزيل تقرير التقدم</button>
+        </div>
+        <div id="reportArea" style="margin-top:12px;color:var(--muted)"></div>
+      </div>
+    </section>
+    <!-- Interactive Features End -->
     <section class="card" style="margin-top:18px">
       <h2>مراحل رياض الأطفال (التنظيم المدرسي)</h2>
       <p class="lead">تعتمد معظم النظم التعليمية التقسيم الثلاثي التالي بناءً على الفئة العمرية:</p>
@@ -367,6 +447,7 @@
 
   <script src="include.js"></script>
   <script src="lang.js"></script>
+  <script src="kindergarten-features.js"></script>
 
   <aside id="sidebar">
     <nav>
